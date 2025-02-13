@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm21nbrg6aclu"]
+
+[ext_resource type="Script" path="res://scripts/controllers/player_controller.gd" id="1_0bvfg"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_4y24u"]
+
+[node name="main" type="Node2D"]
+
+[node name="camera" type="Camera2D" parent="."]
+
+[node name="player" type="CharacterBody2D" parent="."]
+script = ExtResource("1_0bvfg")
+
+[node name="body" type="Sprite2D" parent="player"]
+texture = SubResource("ImageTexture_4y24u")
+
+[node name="Node" type="Node" parent="."]
