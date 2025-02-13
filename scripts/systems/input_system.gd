@@ -1,4 +1,7 @@
 extends Node
+class_name InputSystem
+
+var event_system
 
 
 # Dictionary storing custom key bindings
@@ -11,9 +14,7 @@ var key_bindings := {
     }
 }
 
-func detect_movement(_delta):
-    var event_system = $/root/scene/event_system
-
+func detect_movement():
     var directions := []
     for direction in key_bindings["movement"]:
         if Input.is_key_pressed(key_bindings["movement"][direction]):
@@ -30,9 +31,12 @@ func detect_movement(_delta):
     #if not directions.is_empty():
     event_system.emit("input::movement", {
             "directions": directions,
-            "_delta": _delta
         })
 
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+    event_system = $/root/scene/event_system
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-    detect_movement(_delta)
+func _process(delta: float) -> void:
+    detect_movement()

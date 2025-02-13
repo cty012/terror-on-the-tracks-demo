@@ -1,4 +1,5 @@
-extends Node
+extends RefCounted
+class_name Util
 
 
 func create_white_circle_texture(size: int = 128) -> ImageTexture:

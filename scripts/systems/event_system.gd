@@ -1,5 +1,6 @@
 extends Node
-## System: Event
+class_name EventSystem
+## Event System
 ## Description: Manages listening and emitting events.
 ##
 ## Events are useful for decoupling systems and controllers. To listen

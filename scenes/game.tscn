@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dm21nbrg6aclu"]
+[gd_scene load_steps=14 format=3 uid="uid://dm21nbrg6aclu"]
 
 [ext_resource type="Script" path="res://scripts/controllers/player_controller.gd" id="1_0bvfg"]
 [ext_resource type="Script" path="res://scripts/systems/input_system.gd" id="1_nh1b4"]
 [ext_resource type="Script" path="res://scripts/systems/event_system.gd" id="2_c3i0d"]
 [ext_resource type="Script" path="res://scripts/systems/ui_system.gd" id="3_px7o7"]
+[ext_resource type="Script" path="res://scripts/controllers/camera_controller.gd" id="4_57u3r"]
+[ext_resource type="Script" path="res://scripts/systems/debug_system.gd" id="4_glw46"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cdq3x"]
 radius = 27.0
@@ -36,7 +38,11 @@ script = ExtResource("3_px7o7")
 [node name="input_system" type="Node" parent="."]
 script = ExtResource("1_nh1b4")
 
+[node name="debug" type="Node" parent="."]
+script = ExtResource("4_glw46")
+
 [node name="camera" type="Camera2D" parent="."]
+script = ExtResource("4_57u3r")
 
 [node name="player" type="CharacterBody2D" parent="."]
 script = ExtResource("1_0bvfg")
