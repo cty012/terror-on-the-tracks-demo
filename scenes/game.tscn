@@ -1,17 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://dm21nbrg6aclu"]
+[gd_scene load_steps=5 format=3 uid="uid://dm21nbrg6aclu"]
 
 [ext_resource type="Script" path="res://scripts/controllers/player_controller.gd" id="1_0bvfg"]
+[ext_resource type="Script" path="res://scripts/systems/input_system.gd" id="1_nh1b4"]
+[ext_resource type="Script" path="res://scripts/systems/event_system.gd" id="2_c3i0d"]
+[ext_resource type="Script" path="res://scripts/systems/ui_system.gd" id="3_px7o7"]
 
-[sub_resource type="ImageTexture" id="ImageTexture_4y24u"]
+[node name="scene" type="Node2D"]
 
-[node name="main" type="Node2D"]
+[node name="event_system" type="Node" parent="."]
+script = ExtResource("2_c3i0d")
+
+[node name="ui_system" type="Node" parent="."]
+script = ExtResource("3_px7o7")
+
+[node name="input_system" type="Node" parent="."]
+script = ExtResource("1_nh1b4")
 
 [node name="camera" type="Camera2D" parent="."]
 
-[node name="player" type="CharacterBody2D" parent="."]
+[node name="player" type="Sprite2D" parent="."]
 script = ExtResource("1_0bvfg")
-
-[node name="body" type="Sprite2D" parent="player"]
-texture = SubResource("ImageTexture_4y24u")
-
-[node name="Node" type="Node" parent="."]

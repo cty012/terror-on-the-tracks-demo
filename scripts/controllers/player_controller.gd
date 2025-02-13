@@ -1,13 +1,34 @@
-extends CharacterBody2D
+extends Sprite2D
+
+var util_texture = preload("res://scripts/common/texture.gd").new()
 
 
-var texture = load("res://scripts/common/texture.gd").new()
+var movement_listener := 0
+var speed := 500.0
 
+func on_movement(event):
+    var displacement := Vector2.ZERO
+    for direction in event["directions"]:
+        if direction == "up":
+            displacement.y -= 1.0
+        elif direction == "left":
+            displacement.x -= 1.0
+        elif direction == "down":
+            displacement.y += 1.0
+        elif direction == "right":
+            displacement.x += 1.0
+    self.position += displacement.normalized() * speed * event["_delta"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    self.get_node("body").texture = texture.create_white_circle_texture(50)
+    var event_system = $"/root/scene/event_system"
 
+    self.texture = util_texture.create_white_circle_texture(50)
+    movement_listener = event_system.add_listener("input::movement", on_movement)
+
+func _exit_tree():
+    var event_system = $"/root/scene/event_system"
+    event_system.remove_listener(movement_listener)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
