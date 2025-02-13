@@ -1,9 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://dm21nbrg6aclu"]
+[gd_scene load_steps=12 format=3 uid="uid://dm21nbrg6aclu"]
 
 [ext_resource type="Script" path="res://scripts/controllers/player_controller.gd" id="1_0bvfg"]
 [ext_resource type="Script" path="res://scripts/systems/input_system.gd" id="1_nh1b4"]
 [ext_resource type="Script" path="res://scripts/systems/event_system.gd" id="2_c3i0d"]
 [ext_resource type="Script" path="res://scripts/systems/ui_system.gd" id="3_px7o7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cdq3x"]
+radius = 27.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_m8dqi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kyfkv"]
+size = Vector2(50, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0bk5v"]
+size = Vector2(50, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bw75c"]
+size = Vector2(1100, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ysf1"]
+size = Vector2(1100, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2l2je"]
+size = Vector2(200, 100)
 
 [node name="scene" type="Node2D"]
 
@@ -18,5 +38,112 @@ script = ExtResource("1_nh1b4")
 
 [node name="camera" type="Camera2D" parent="."]
 
-[node name="player" type="Sprite2D" parent="."]
+[node name="player" type="CharacterBody2D" parent="."]
 script = ExtResource("1_0bvfg")
+
+[node name="sprite" type="Sprite2D" parent="player"]
+
+[node name="collision" type="CollisionShape2D" parent="player"]
+shape = SubResource("CircleShape2D_cdq3x")
+
+[node name="classroom" type="Node" parent="."]
+
+[node name="westwall" type="StaticBody2D" parent="classroom"]
+position = Vector2(-550, 0)
+
+[node name="sprite" type="Sprite2D" parent="classroom/westwall"]
+scale = Vector2(50, 720)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision" type="CollisionShape2D" parent="classroom/westwall"]
+shape = SubResource("RectangleShape2D_kyfkv")
+
+[node name="ostwall" type="StaticBody2D" parent="classroom"]
+position = Vector2(550, 0)
+
+[node name="sprite" type="Sprite2D" parent="classroom/ostwall"]
+scale = Vector2(50, 720)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision" type="CollisionShape2D" parent="classroom/ostwall"]
+shape = SubResource("RectangleShape2D_0bk5v")
+
+[node name="nordwall" type="StaticBody2D" parent="classroom"]
+position = Vector2(0, -335)
+
+[node name="sprite" type="Sprite2D" parent="classroom/nordwall"]
+scale = Vector2(1100, 50)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision" type="CollisionShape2D" parent="classroom/nordwall"]
+shape = SubResource("RectangleShape2D_bw75c")
+
+[node name="sudwall" type="StaticBody2D" parent="classroom"]
+position = Vector2(0, 335)
+
+[node name="sprite" type="Sprite2D" parent="classroom/sudwall"]
+scale = Vector2(1100, 50)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision" type="CollisionShape2D" parent="classroom/sudwall"]
+shape = SubResource("RectangleShape2D_0ysf1")
+
+[node name="table1" type="StaticBody2D" parent="classroom"]
+position = Vector2(-300, -100)
+
+[node name="sprite" type="Sprite2D" parent="classroom/table1"]
+scale = Vector2(200, 100)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision" type="CollisionShape2D" parent="classroom/table1"]
+shape = SubResource("RectangleShape2D_2l2je")
+
+[node name="table2" type="StaticBody2D" parent="classroom"]
+position = Vector2(0, -100)
+
+[node name="sprite" type="Sprite2D" parent="classroom/table2"]
+scale = Vector2(200, 100)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision" type="CollisionShape2D" parent="classroom/table2"]
+shape = SubResource("RectangleShape2D_2l2je")
+
+[node name="table3" type="StaticBody2D" parent="classroom"]
+position = Vector2(300, -100)
+
+[node name="sprite" type="Sprite2D" parent="classroom/table3"]
+scale = Vector2(200, 100)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision" type="CollisionShape2D" parent="classroom/table3"]
+shape = SubResource("RectangleShape2D_2l2je")
+
+[node name="table4" type="StaticBody2D" parent="classroom"]
+position = Vector2(-300, 100)
+
+[node name="sprite" type="Sprite2D" parent="classroom/table4"]
+scale = Vector2(200, 100)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision" type="CollisionShape2D" parent="classroom/table4"]
+shape = SubResource("RectangleShape2D_2l2je")
+
+[node name="table5" type="StaticBody2D" parent="classroom"]
+position = Vector2(0, 100)
+
+[node name="sprite" type="Sprite2D" parent="classroom/table5"]
+scale = Vector2(200, 100)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision" type="CollisionShape2D" parent="classroom/table5"]
+shape = SubResource("RectangleShape2D_2l2je")
+
+[node name="table6" type="StaticBody2D" parent="classroom"]
+position = Vector2(300, 100)
+
+[node name="sprite" type="Sprite2D" parent="classroom/table6"]
+scale = Vector2(200, 100)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision" type="CollisionShape2D" parent="classroom/table6"]
+shape = SubResource("RectangleShape2D_2l2je")

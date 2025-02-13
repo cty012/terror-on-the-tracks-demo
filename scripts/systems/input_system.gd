@@ -12,7 +12,7 @@ var key_bindings := {
 }
 
 func detect_movement(_delta):
-    var event_system = $"/root/scene/event_system"
+    var event_system = $/root/scene/event_system
 
     var directions := []
     for direction in key_bindings["movement"]:
@@ -27,11 +27,11 @@ func detect_movement(_delta):
         directions.erase("left")
         directions.erase("right")
 
-    if not directions.is_empty():
-        event_system.emit("input::movement", {
-                "directions": directions,
-                "_delta": _delta
-            })
+    #if not directions.is_empty():
+    event_system.emit("input::movement", {
+            "directions": directions,
+            "_delta": _delta
+        })
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
