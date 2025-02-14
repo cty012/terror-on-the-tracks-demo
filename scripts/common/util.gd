@@ -2,7 +2,7 @@ extends RefCounted
 class_name Util
 
 
-func create_white_circle_texture(size: int = 128) -> ImageTexture:
+func create_circle_texture(size: int = 128, color: Color = Color.WHITE) -> ImageTexture:
     var image := Image.create(size, size, false, Image.FORMAT_RGBA8)
     image.fill(Color(0, 0, 0, 0))  # Transparent background
 
@@ -19,8 +19,9 @@ func create_white_circle_texture(size: int = 128) -> ImageTexture:
             
             if dist <= radius:
                 # Interpolate color with the calculated alpha
-                var color := Color(1, 1, 1, alpha)
-                image.set_pixel(x, y, color)
+                var color_interpolated := color
+                color_interpolated.a = alpha
+                image.set_pixel(x, y, color_interpolated)
 
     var texture := ImageTexture.create_from_image(image)
     return texture
