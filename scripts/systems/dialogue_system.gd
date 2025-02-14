@@ -1,19 +1,28 @@
 extends Node
 class_name DialogueSystem
 
-var event_system
+var event_system: EventSystem
 
 
-var player
+var player: CharacterBody2D
 var npc_in_range := []
-var npc_in_dialogue
-var lsid_dialogue_detect
+var npc_in_dialogue: CharacterBody2D
+var ui_dialogue: Control
+var dialogue_tree: Dictionary  ## Actually a graph, not a tree
+var state: String
+
+var lsid_dialogue_detect := 0
+var lsid_dialogue_start := 0
+var lsid_dialogue_end := 0
+var lsid_dialogue_continue := 0
+var lsid_dialogue_choose := 0
+
 
 # Helper
-func get_closest_npc() -> Node:
-    var closest_npc: Node = null
+func get_closest_npc() -> CharacterBody2D:
+    var closest_npc: CharacterBody2D = null
     var min_distance = INF
-    
+
     for npc in npc_in_range:
         var distance = player.global_position.distance_to(npc.global_position)
         if distance < min_distance:
@@ -22,48 +31,82 @@ func get_closest_npc() -> Node:
 
     return closest_npc
 
+
 func in_dialogue() -> bool:
     return npc_in_dialogue != null
 
-# Player starts a dialogue with an NPC
-func on_dialogue_start(event):
-    # Skip if already in dialogue
-    if in_dialogue():
-        print("Already talking to " + npc_in_dialogue.name)
-        return
-
-    # Skip if nobody to talk to
-    if npc_in_range.is_empty():
-        print("Nobody to talk to")
-        return
-
-    # Otherwise talk with the closest NPC
-    npc_in_dialogue = get_closest_npc()
-    print("Talking to " + npc_in_dialogue.name)
-    # TODO: ui
-
-func on_dialogue_finish(event):
-    if in_dialogue():
-        print("Finished talking to " + npc_in_dialogue.name)
-    npc_in_dialogue = null
-    # TODO: ui
 
 # Automatically called when an NPC announces that the player is inside/outside its dialogue range
-func on_dialogue_detect(event):
+func on_dialogue_detect(event) -> void:
     var idx = npc_in_range.find(event["npc"])
     if idx != -1:
         npc_in_range.remove_at(idx)
     if event["in-range"]:
         npc_in_range.append(event["npc"])
 
+
+# Player starts a dialogue with an NPC
+func on_dialogue_start(event) -> void:
+    # Skip if already in dialogue
+    if in_dialogue():
+        return
+
+    # Skip if nobody to talk to
+    if npc_in_range.is_empty():
+        return
+
+    # Otherwise talk with the closest NPC
+    npc_in_dialogue = get_closest_npc()
+
+    # Update UI
+    dialogue_tree = npc_in_dialogue.get_dialogue_tree()
+    state = dialogue_tree["_start"]
+    ui_dialogue.update_speech(dialogue_tree[state])
+    ui_dialogue.visible = true
+
+
+func on_dialogue_end(event) -> void:
+    npc_in_dialogue = null
+
+    # Update UI
+    ui_dialogue.visible = false
+
+
+func on_dialogue_continue(event) -> void:
+    if not dialogue_tree[state]["choices"].is_empty():
+        return
+    state = dialogue_tree[state]["result"]
+    if state == "_end":
+        on_dialogue_end({})
+    else:
+        ui_dialogue.update_speech(dialogue_tree[state])
+
+
+func on_dialogue_choose(event) -> void:
+    var i: int = event["choice"]
+    if i < 0 or i >= len(dialogue_tree[state]["choices"]):
+        return
+    state = dialogue_tree[state]["choices"][i]["result"]
+    # TODO: execute effects
+    ui_dialogue.update_speech(dialogue_tree[state])
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     event_system = $/root/scene/event_system
     player = $/root/scene/player
+    ui_dialogue = $/root/scene/hud/dialogue
+    on_dialogue_end({})
     lsid_dialogue_detect = event_system.add_listener("game::dialogue-detect", on_dialogue_detect)
-    lsid_dialogue_detect = event_system.add_listener("game::dialogue-start", on_dialogue_start)
-    lsid_dialogue_detect = event_system.add_listener("game::dialogue-finish", on_dialogue_finish)
+    lsid_dialogue_start = event_system.add_listener("game::dialogue-start", on_dialogue_start)
+    lsid_dialogue_end = event_system.add_listener("game::dialogue-end", on_dialogue_end)
+    lsid_dialogue_continue = event_system.add_listener("game::dialogue-continue", on_dialogue_continue)
+    lsid_dialogue_choose = event_system.add_listener("game::dialogue-choose", on_dialogue_choose)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-    pass
+
+func _exit_tree() -> void:
+    event_system.remove_listener(lsid_dialogue_detect)
+    event_system.remove_listener(lsid_dialogue_start)
+    event_system.remove_listener(lsid_dialogue_end)
+    event_system.remove_listener(lsid_dialogue_continue)
+    event_system.remove_listener(lsid_dialogue_choose)

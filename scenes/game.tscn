@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://scripts/controllers/player_controller.gd" id="1_0bvfg"]
 [ext_resource type="Script" path="res://scripts/systems/input_system.gd" id="1_nh1b4"]
 [ext_resource type="Script" path="res://scripts/systems/event_system.gd" id="2_c3i0d"]
-[ext_resource type="Script" path="res://scripts/systems/ui_system.gd" id="3_px7o7"]
 [ext_resource type="Script" path="res://scripts/controllers/camera_controller.gd" id="4_57u3r"]
 [ext_resource type="Script" path="res://scripts/systems/dialogue_system.gd" id="4_ghhox"]
 [ext_resource type="Script" path="res://scripts/systems/debug_system.gd" id="4_glw46"]
+[ext_resource type="Script" path="res://scripts/controllers/ui_dialogue_controller.gd" id="7_sxfur"]
 [ext_resource type="Script" path="res://scripts/controllers/professor_controller.gd" id="7_x2f58"]
 [ext_resource type="Script" path="res://scripts/controllers/dialogue_range_controller.gd" id="9_6tywj"]
 
@@ -38,9 +38,6 @@ size = Vector2(200, 100)
 [node name="event_system" type="Node" parent="."]
 script = ExtResource("2_c3i0d")
 
-[node name="ui_system" type="Node" parent="."]
-script = ExtResource("3_px7o7")
-
 [node name="dialogue_system" type="Node" parent="."]
 script = ExtResource("4_ghhox")
 
@@ -52,6 +49,73 @@ script = ExtResource("4_glw46")
 
 [node name="camera" type="Camera2D" parent="."]
 script = ExtResource("4_57u3r")
+
+[node name="hud" type="Control" parent="."]
+z_index = 10
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="dialogue" type="Control" parent="hud"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_sxfur")
+
+[node name="speech_panel" type="Panel" parent="hud/dialogue"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 200.0
+offset_top = -150.0
+offset_right = 1200.0
+grow_vertical = 0
+
+[node name="character_name" type="Label" parent="hud/dialogue/speech_panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 220.0
+offset_bottom = 33.0
+text = "[CHARACTER NAME]"
+
+[node name="character_speech" type="Label" parent="hud/dialogue/speech_panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 40.0
+offset_right = 980.0
+offset_bottom = 141.0
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+autowrap_mode = 3
+
+[node name="choice_list" type="VBoxContainer" parent="hud/dialogue"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -360.0
+offset_right = 300.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+alignment = 1
 
 [node name="player" type="CharacterBody2D" parent="."]
 position = Vector2(-450, -250)

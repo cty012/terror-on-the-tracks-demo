@@ -20,10 +20,12 @@ var listeners := {}
 var listener_id_counter := 0  # Starts from 1
 var listener_map := {}
 
-func emit(event_type: String, event):
+
+func emit(event_type: String, event) -> void:
     if event_type in listeners:
         for listener_id in listeners[event_type].keys():
             listeners[event_type][listener_id].call(event)
+
 
 func add_listener(event_type: String, callback: Callable) -> int:
     listener_id_counter += 1
@@ -33,7 +35,8 @@ func add_listener(event_type: String, callback: Callable) -> int:
     listener_map[listener_id_counter] = event_type
     return listener_id_counter
 
-func remove_listener(listener_id: int):
+
+func remove_listener(listener_id: int) -> void:
     # 0 is not used
     if listener_id == 0:
         return

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://4stcvr5q4a0j"]
+
+[ext_resource type="Script" path="res://scripts/controllers/ui_dialogue_choice_controller.gd" id="1_xb56u"]
+
+[node name="dialogue_choice" type="Button"]
+custom_minimum_size = Vector2(600, 60)
+offset_left = -300.0
+offset_top = -30.0
+offset_right = 300.0
+offset_bottom = 30.0
+text = "[CHOICE]"
+script = ExtResource("1_xb56u")
