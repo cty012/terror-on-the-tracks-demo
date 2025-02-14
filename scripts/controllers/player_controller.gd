@@ -30,14 +30,9 @@ func _ready() -> void:
     lsid_movement = event_system.add_listener("game::movement", on_move)
 
 
-func _exit_tree():
+func _exit_tree() -> void:
     event_system.remove_listener(lsid_movement)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-    pass
-
-
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
     move_and_slide()

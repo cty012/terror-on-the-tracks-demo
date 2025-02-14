@@ -105,7 +105,27 @@ As introduced in the folder structre section, there are three types of scripts: 
 - System scripts set up singleton systems that can be accessed anywhere in the scene. If controllers are independent vertices, systems would be the lines that connect them together.
 
 ### Controllers:
-    TODO: introduce extends, _ready(), and _process(delta)
+
+We use the `player_controller.gd` as the example. This script (and all other controller scripts) is centered on a special type of function called the lifecycle callbacks, as listed below:
+```godot
+# This function is called once when is node enter's the scene tree
+func _ready() -> void:
+    pass
+
+# This function is called once when the node exits from the scene tree
+func _exit_tree() -> void:
+    pass
+
+# This function is called every frame
+func _process(delta: float) -> void:
+    pass
+
+# This function is called every physics frame
+# The physics system updates at a different frequency
+func _physics_process(delta: float) -> void:
+    pass
+```
+There are more lifecycle callbacks but the demo used only these four. In `player_controller.gd`, a event listener is added in `_ready()` and removed in `_exit_tree()`. The listener listens to `game::movement` type events and calls the `on_move(event)` function, which updates the velocity of the player. The `_physics_process(event)` function calls the `move_and_slide()` function so the player can move and collide with other obstacles. Without this the player won't move.
 
 ### Systems:
 
@@ -194,4 +214,32 @@ There are four systems in the demo:
     As the name suggests, this system is purely used for debugging. It defines a single debug feature, which is to move the camera between "cars". The script itself is very simple and self-explanatory: it emits a `game::switch-car` event, which is listened in the file `camera_controller.gd`.
 
 ### Utilities:
-    TODO
+
+You can create a utility script simply by creating a new script and not attach it to any node.
+
+`script1.gd`: utility script
+```gdscript
+# RefCounted scripts are properly memory-manage
+# Also more lightweight than Node since it doesn't have a lifecycle
+extends RefCounted
+
+var example_util_parameter := 1
+
+func example_util_function(a: int, b: int) -> int:
+    return a + b
+```
+
+`script2.gd`: uses the utility script
+```gdscript
+extends Node
+
+# Loads and instanciates the utility script
+var util := preload("res://path/to/script1.gd").new()
+
+util.example_util_parameter += 1
+print(util.example_util_parameter)  # prints 2
+# Note: each script uses a separate instance of the utility script
+# If you import script1.gd in another script3.gd, util.example_util_parameter would still be 1
+
+print(util.example_util_function(1, 2))  # prints 3
+```
