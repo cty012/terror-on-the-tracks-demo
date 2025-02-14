@@ -36,6 +36,24 @@ func in_dialogue() -> bool:
     return npc_in_dialogue != null
 
 
+func update_speech(dialogue) -> void:
+    ui_dialogue.get_node("speech_panel/character_name").text = dialogue["character-name"]
+    ui_dialogue.get_node("speech_panel/character_speech").text = dialogue["speech"]
+    var choice_list = ui_dialogue.get_node("choice_list")
+
+    # Clear existing choices
+    for child in choice_list.get_children():
+        child.queue_free()
+
+    # Add new choices
+    var item_prefab = preload("res://prefabs/ui/dialogue_choice.tscn")
+    for i in range(len(dialogue["choices"])):
+        var item := item_prefab.instantiate()
+        item.index = i
+        item.text = dialogue["choices"][i]["speech"]
+        choice_list.add_child(item)
+
+
 # Automatically called when an NPC announces that the player is inside/outside its dialogue range
 func on_dialogue_detect(event) -> void:
     var idx = npc_in_range.find(event["npc"])
@@ -61,7 +79,7 @@ func on_dialogue_start(event) -> void:
     # Update UI
     dialogue_tree = npc_in_dialogue.get_dialogue_tree()
     state = dialogue_tree["_start"]
-    ui_dialogue.update_speech(dialogue_tree[state])
+    update_speech(dialogue_tree[state])
     ui_dialogue.visible = true
 
 
@@ -79,7 +97,7 @@ func on_dialogue_continue(event) -> void:
     if state == "_end":
         on_dialogue_end({})
     else:
-        ui_dialogue.update_speech(dialogue_tree[state])
+        update_speech(dialogue_tree[state])
 
 
 func on_dialogue_choose(event) -> void:
@@ -88,7 +106,7 @@ func on_dialogue_choose(event) -> void:
         return
     state = dialogue_tree[state]["choices"][i]["result"]
     # TODO: execute effects
-    ui_dialogue.update_speech(dialogue_tree[state])
+    update_speech(dialogue_tree[state])
 
 
 # Called when the node enters the scene tree for the first time.

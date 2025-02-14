@@ -6,9 +6,29 @@
 [ext_resource type="Script" path="res://scripts/controllers/camera_controller.gd" id="4_57u3r"]
 [ext_resource type="Script" path="res://scripts/systems/dialogue_system.gd" id="4_ghhox"]
 [ext_resource type="Script" path="res://scripts/systems/debug_system.gd" id="4_glw46"]
-[ext_resource type="Script" path="res://scripts/controllers/ui_dialogue_controller.gd" id="7_sxfur"]
 [ext_resource type="Script" path="res://scripts/controllers/professor_controller.gd" id="7_x2f58"]
 [ext_resource type="Script" path="res://scripts/controllers/dialogue_range_controller.gd" id="9_6tywj"]
+
+[sub_resource type="GDScript" id="GDScript_palwq"]
+script/source = "extends Control
+
+
+func update_speech(dialogue) -> void:
+    self.get_node(\"speech_panel/character_name\").text = dialogue[\"character-name\"]
+    self.get_node(\"speech_panel/character_speech\").text = dialogue[\"speech\"]
+
+    # Clear existing choices
+    for child in $choice_list.get_children():
+        child.queue_free()
+
+    # Add new choices
+    var item_prefab = preload(\"res://prefabs/ui/dialogue_choice.tscn\")
+    for i in range(len(dialogue[\"choices\"])):
+        var item := item_prefab.instantiate()
+        item.index = i
+        item.text = dialogue[\"choices\"][i][\"speech\"]
+        $choice_list.add_child(item)
+"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cdq3x"]
 radius = 27.0
@@ -72,7 +92,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("7_sxfur")
+script = SubResource("GDScript_palwq")
 
 [node name="speech_panel" type="Panel" parent="hud/dialogue"]
 layout_mode = 1

@@ -11,7 +11,7 @@ func get_dialogue_tree() -> Dictionary:
         "_start": "welcome",
         "welcome": {
             "character-name": character_name,
-            "speech": "Welcome to GSD 405! How can I help you?",
+            "speech": "Welcome to GSD 405! I am the professor of this course. How can I help you?",
             "choices": [
                 {
                     "speech": "Where can I find the syllabus?",
@@ -49,7 +49,7 @@ func get_dialogue_tree() -> Dictionary:
         },
         "favorite-game": {
             "character-name": character_name,
-            "speech": "My favorite game is Terror in the Classroom.",
+            "speech": "My favorite game is Horror in the Classroom.",
             "choices": [],
             "result": "more-q",
         },
