@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dm21nbrg6aclu"]
+[gd_scene load_steps=23 format=3 uid="uid://dm21nbrg6aclu"]
 
 [ext_resource type="Script" path="res://scripts/controllers/player_controller.gd" id="1_0bvfg"]
 [ext_resource type="Script" path="res://scripts/systems/input_system.gd" id="1_nh1b4"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/controllers/ui_sus_meter.gd" id="8_4duxu"]
 [ext_resource type="Script" path="res://scripts/controllers/dialogue_range_controller.gd" id="9_6tywj"]
 [ext_resource type="PackedScene" path="res://prefabs/ui/action_label.tscn" id="9_wm34p"]
+[ext_resource type="Script" path="res://scripts/controllers/welcome_mat_controller.gd" id="12_xbvkw"]
 
 [sub_resource type="GDScript" id="GDScript_palwq"]
 script/source = "extends Control
@@ -55,6 +56,9 @@ size = Vector2(1100, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2l2je"]
 size = Vector2(200, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3p5u8"]
+size = Vector2(40, 200)
 
 [node name="scene" type="Node2D"]
 
@@ -293,3 +297,17 @@ texture = SubResource("PlaceholderTexture2D_m8dqi")
 
 [node name="collision" type="CollisionShape2D" parent="classroom/table6"]
 shape = SubResource("RectangleShape2D_2l2je")
+
+[node name="welcome-mat1" type="Area2D" parent="classroom"]
+position = Vector2(-530, 0)
+script = ExtResource("12_xbvkw")
+
+[node name="collision" type="CollisionShape2D" parent="classroom/welcome-mat1"]
+shape = SubResource("RectangleShape2D_3p5u8")
+
+[node name="welcome-mat2" type="Area2D" parent="classroom"]
+position = Vector2(530, 0)
+script = ExtResource("12_xbvkw")
+
+[node name="collision" type="CollisionShape2D" parent="classroom/welcome-mat2"]
+shape = SubResource("RectangleShape2D_3p5u8")
