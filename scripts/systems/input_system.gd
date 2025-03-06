@@ -3,6 +3,7 @@ class_name InputSystem
 
 var event_system: EventSystem
 var dialogue_system: DialogueSystem
+var actions_system: ActionsSystem
 
 
 # Dictionary storing custom key bindings
@@ -89,14 +90,24 @@ func detect_dialogue_action() -> bool:
 func _ready() -> void:
     event_system = $/root/scene/event_system
     dialogue_system = $/root/scene/dialogue_system
+    actions_system = $/root/scene/actions_system
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+    var actions := []
     if dialogue_system.in_dialogue():
+        actions.push_back("[code]E[/code] Continue conversation")
         detect_dialogue_action()
     else:
+        actions.push_back("[code]WASD[/code] Walk")
+        var closest_npc := dialogue_system.get_closest_npc()
+        if closest_npc != null:
+            actions.push_back("[code]E[/code] Talk to " + closest_npc.character_name)
         detect_dialogue_start() or detect_movement()  # Detect movement iff dialogue doesn't start
+
+    actions_system.update_action_list(actions)
+
     key_just_pressed = []
     key_just_released = []
 
