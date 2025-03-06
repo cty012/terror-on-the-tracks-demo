@@ -3,7 +3,7 @@ extends Area2D
 var event_system: EventSystem
 
 
-var index := 0
+@export var index := 0
 
 
 func _on_body_entered(body: Node) -> void:
