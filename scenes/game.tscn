@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dm21nbrg6aclu"]
+[gd_scene load_steps=21 format=3 uid="uid://dm21nbrg6aclu"]
 
 [ext_resource type="Script" path="res://scripts/controllers/player_controller.gd" id="1_0bvfg"]
 [ext_resource type="Script" path="res://scripts/systems/input_system.gd" id="1_nh1b4"]
@@ -8,8 +8,9 @@
 [ext_resource type="Script" path="res://scripts/systems/dialogue_system.gd" id="4_ghhox"]
 [ext_resource type="Script" path="res://scripts/systems/debug_system.gd" id="4_glw46"]
 [ext_resource type="Script" path="res://scripts/controllers/professor_controller.gd" id="7_x2f58"]
+[ext_resource type="Script" path="res://scripts/controllers/ui_sus_meter.gd" id="8_4duxu"]
 [ext_resource type="Script" path="res://scripts/controllers/dialogue_range_controller.gd" id="9_6tywj"]
-[ext_resource type="PackedScene" uid="uid://d1gtcvhspy8ya" path="res://prefabs/ui/action_label.tscn" id="9_wm34p"]
+[ext_resource type="PackedScene" path="res://prefabs/ui/action_label.tscn" id="9_wm34p"]
 
 [sub_resource type="GDScript" id="GDScript_palwq"]
 script/source = "extends Control
@@ -31,6 +32,9 @@ func update_speech(dialogue) -> void:
         item.text = dialogue[\"choices\"][i][\"speech\"]
         $choice_list.add_child(item)
 "
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_olloi"]
+bg_color = Color(0.752941, 0, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cdq3x"]
 radius = 27.0
@@ -63,11 +67,11 @@ script = ExtResource("4_ghhox")
 [node name="actions_system" type="Node" parent="."]
 script = ExtResource("3_8fg7i")
 
-[node name="input_system" type="Node" parent="."]
-script = ExtResource("1_nh1b4")
-
 [node name="debug_system" type="Node" parent="."]
 script = ExtResource("4_glw46")
+
+[node name="input_system" type="Node" parent="."]
+script = ExtResource("1_nh1b4")
 
 [node name="camera" type="Camera2D" parent="."]
 script = ExtResource("4_57u3r")
@@ -153,6 +157,15 @@ alignment = 2
 
 [node name="action_label" parent="hud/action_list" instance=ExtResource("9_wm34p")]
 layout_mode = 2
+
+[node name="sus-meter" type="ProgressBar" parent="hud"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 20.0
+offset_right = 230.0
+offset_bottom = 47.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_olloi")
+script = ExtResource("8_4duxu")
 
 [node name="player" type="CharacterBody2D" parent="."]
 position = Vector2(-450, -250)
