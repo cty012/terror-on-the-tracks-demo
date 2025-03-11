@@ -8,10 +8,10 @@
 [ext_resource type="Script" path="res://scripts/systems/dialogue_system.gd" id="4_ghhox"]
 [ext_resource type="Script" path="res://scripts/systems/debug_system.gd" id="4_glw46"]
 [ext_resource type="Script" path="res://scripts/controllers/professor_controller.gd" id="7_x2f58"]
-[ext_resource type="Script" path="res://scripts/controllers/ui_sus_meter.gd" id="8_4duxu"]
 [ext_resource type="Script" path="res://scripts/controllers/dialogue_range_controller.gd" id="9_6tywj"]
-[ext_resource type="PackedScene" path="res://prefabs/ui/action_label.tscn" id="9_wm34p"]
-[ext_resource type="Script" path="res://scripts/controllers/welcome_mat_controller.gd" id="12_xbvkw"]
+[ext_resource type="PackedScene" uid="uid://d1gtcvhspy8ya" path="res://prefabs/ui/action_label.tscn" id="9_wm34p"]
+[ext_resource type="Script" path="res://scripts/controllers/welcome_mat_controller.gd" id="11_k3sqm"]
+[ext_resource type="Shape2D" uid="uid://c7aojc7q6al28" path="res://shapes/mat.tres" id="12_hpof6"]
 
 [sub_resource type="GDScript" id="GDScript_palwq"]
 script/source = "extends Control
@@ -34,9 +34,6 @@ func update_speech(dialogue) -> void:
         $choice_list.add_child(item)
 "
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_olloi"]
-bg_color = Color(0.752941, 0, 0, 1)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_cdq3x"]
 radius = 27.0
 
@@ -45,8 +42,11 @@ radius = 50.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_m8dqi"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kyfkv"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_avum2"]
 size = Vector2(50, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kyfkv"]
+size = Vector2(50, 320)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bw75c"]
 size = Vector2(1100, 50)
@@ -54,11 +54,11 @@ size = Vector2(1100, 50)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ysf1"]
 size = Vector2(1100, 50)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t8w3m"]
+size = Vector2(100, 30)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2l2je"]
 size = Vector2(200, 100)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3p5u8"]
-size = Vector2(40, 200)
 
 [node name="scene" type="Node2D"]
 
@@ -162,15 +162,6 @@ alignment = 2
 [node name="action_label" parent="hud/action_list" instance=ExtResource("9_wm34p")]
 layout_mode = 2
 
-[node name="sus-meter" type="ProgressBar" parent="hud"]
-layout_mode = 0
-offset_left = 30.0
-offset_top = 20.0
-offset_right = 230.0
-offset_bottom = 47.0
-theme_override_styles/fill = SubResource("StyleBoxFlat_olloi")
-script = ExtResource("8_4duxu")
-
 [node name="player" type="CharacterBody2D" parent="."]
 position = Vector2(-450, -250)
 script = ExtResource("1_0bvfg")
@@ -198,117 +189,329 @@ script = ExtResource("9_6tywj")
 [node name="collision" type="CollisionShape2D" parent="npc/professor/dialogue_range"]
 shape = SubResource("CircleShape2D_01ogc")
 
-[node name="classroom" type="Node" parent="."]
+[node name="car0" type="Node" parent="."]
 
-[node name="westwall" type="StaticBody2D" parent="classroom"]
-position = Vector2(-550, 0)
+[node name="westwall" type="StaticBody2D" parent="car0"]
+position = Vector2(-1750, 0)
 
-[node name="sprite" type="Sprite2D" parent="classroom/westwall"]
+[node name="sprite" type="Sprite2D" parent="car0/westwall"]
 scale = Vector2(50, 720)
 texture = SubResource("PlaceholderTexture2D_m8dqi")
 
-[node name="collision" type="CollisionShape2D" parent="classroom/westwall"]
-shape = SubResource("RectangleShape2D_kyfkv")
+[node name="edgewall" type="CollisionShape2D" parent="car0/westwall"]
+shape = SubResource("RectangleShape2D_avum2")
 
-[node name="ostwall" type="StaticBody2D" parent="classroom"]
-position = Vector2(550, 0)
+[node name="ostwall" type="StaticBody2D" parent="car0"]
+position = Vector2(-650, 0)
 
-[node name="sprite" type="Sprite2D" parent="classroom/ostwall"]
-scale = Vector2(50, 720)
+[node name="sprite" type="Sprite2D" parent="car0/ostwall"]
+position = Vector2(0, -200)
+scale = Vector2(50, 320)
 texture = SubResource("PlaceholderTexture2D_m8dqi")
 
-[node name="collision" type="CollisionShape2D" parent="classroom/ostwall"]
+[node name="collision" type="CollisionShape2D" parent="car0/ostwall"]
+position = Vector2(0, -200)
 shape = SubResource("RectangleShape2D_kyfkv")
 
-[node name="nordwall" type="StaticBody2D" parent="classroom"]
-position = Vector2(0, -335)
+[node name="sprite2" type="Sprite2D" parent="car0/ostwall"]
+position = Vector2(0, 200)
+scale = Vector2(50, 320)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
 
-[node name="sprite" type="Sprite2D" parent="classroom/nordwall"]
+[node name="collision2" type="CollisionShape2D" parent="car0/ostwall"]
+position = Vector2(0, 200)
+shape = SubResource("RectangleShape2D_kyfkv")
+
+[node name="nordwall" type="StaticBody2D" parent="car0"]
+position = Vector2(-1200, -335)
+
+[node name="sprite" type="Sprite2D" parent="car0/nordwall"]
 scale = Vector2(1100, 50)
 texture = SubResource("PlaceholderTexture2D_m8dqi")
 
-[node name="collision" type="CollisionShape2D" parent="classroom/nordwall"]
+[node name="collision" type="CollisionShape2D" parent="car0/nordwall"]
 shape = SubResource("RectangleShape2D_bw75c")
 
-[node name="sudwall" type="StaticBody2D" parent="classroom"]
-position = Vector2(0, 335)
+[node name="sudwall" type="StaticBody2D" parent="car0"]
+position = Vector2(-1200, 335)
 
-[node name="sprite" type="Sprite2D" parent="classroom/sudwall"]
+[node name="sprite" type="Sprite2D" parent="car0/sudwall"]
 scale = Vector2(1100, 50)
 texture = SubResource("PlaceholderTexture2D_m8dqi")
 
-[node name="collision" type="CollisionShape2D" parent="classroom/sudwall"]
+[node name="collision" type="CollisionShape2D" parent="car0/sudwall"]
 shape = SubResource("RectangleShape2D_0ysf1")
 
-[node name="table1" type="StaticBody2D" parent="classroom"]
+[node name="mat0" type="Area2D" parent="car0"]
+position = Vector2(-1750, 0)
+script = ExtResource("11_k3sqm")
+index = -1
+
+[node name="collision" type="CollisionShape2D" parent="car0/mat0"]
+shape = ExtResource("12_hpof6")
+
+[node name="mat1" type="Area2D" parent="car0"]
+position = Vector2(-650, 0)
+script = ExtResource("11_k3sqm")
+index = -1
+
+[node name="collision" type="CollisionShape2D" parent="car0/mat1"]
+shape = ExtResource("12_hpof6")
+
+[node name="car1" type="Node" parent="."]
+
+[node name="westwall" type="StaticBody2D" parent="car1"]
+position = Vector2(-550, 0)
+
+[node name="sprite" type="Sprite2D" parent="car1/westwall"]
+position = Vector2(0, -200)
+scale = Vector2(50, 320)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision" type="CollisionShape2D" parent="car1/westwall"]
+position = Vector2(0, -200)
+shape = SubResource("RectangleShape2D_kyfkv")
+
+[node name="sprite2" type="Sprite2D" parent="car1/westwall"]
+position = Vector2(0, 200)
+scale = Vector2(50, 320)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision2" type="CollisionShape2D" parent="car1/westwall"]
+position = Vector2(0, 200)
+shape = SubResource("RectangleShape2D_kyfkv")
+
+[node name="ostwall" type="StaticBody2D" parent="car1"]
+position = Vector2(550, 0)
+
+[node name="sprite" type="Sprite2D" parent="car1/ostwall"]
+position = Vector2(0, -200)
+scale = Vector2(50, 320)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision" type="CollisionShape2D" parent="car1/ostwall"]
+position = Vector2(0, -200)
+shape = SubResource("RectangleShape2D_kyfkv")
+
+[node name="sprite2" type="Sprite2D" parent="car1/ostwall"]
+position = Vector2(0, 200)
+scale = Vector2(50, 320)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision2" type="CollisionShape2D" parent="car1/ostwall"]
+position = Vector2(0, 200)
+shape = SubResource("RectangleShape2D_kyfkv")
+
+[node name="nordwall" type="StaticBody2D" parent="car1"]
+position = Vector2(0, -335)
+
+[node name="sprite" type="Sprite2D" parent="car1/nordwall"]
+scale = Vector2(1100, 50)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision" type="CollisionShape2D" parent="car1/nordwall"]
+shape = SubResource("RectangleShape2D_bw75c")
+
+[node name="sudwall" type="StaticBody2D" parent="car1"]
+position = Vector2(0, 335)
+
+[node name="sprite" type="Sprite2D" parent="car1/sudwall"]
+scale = Vector2(1100, 50)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision" type="CollisionShape2D" parent="car1/sudwall"]
+shape = SubResource("RectangleShape2D_0ysf1")
+
+[node name="hall1" type="StaticBody2D" parent="car1"]
+position = Vector2(600, 0)
+
+[node name="sprite" type="Sprite2D" parent="car1/hall1"]
+position = Vector2(0, 55)
+scale = Vector2(100, 30)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision" type="CollisionShape2D" parent="car1/hall1"]
+position = Vector2(0, 55)
+shape = SubResource("RectangleShape2D_t8w3m")
+
+[node name="sprite2" type="Sprite2D" parent="car1/hall1"]
+position = Vector2(0, -55)
+scale = Vector2(100, 30)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision2" type="CollisionShape2D" parent="car1/hall1"]
+position = Vector2(0, -55)
+shape = SubResource("RectangleShape2D_t8w3m")
+
+[node name="hall2" type="StaticBody2D" parent="car1"]
+position = Vector2(-600, 0)
+
+[node name="sprite" type="Sprite2D" parent="car1/hall2"]
+position = Vector2(0, 55)
+scale = Vector2(100, 30)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision" type="CollisionShape2D" parent="car1/hall2"]
+position = Vector2(0, 55)
+shape = SubResource("RectangleShape2D_t8w3m")
+
+[node name="sprite2" type="Sprite2D" parent="car1/hall2"]
+position = Vector2(0, -55)
+scale = Vector2(100, 30)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision2" type="CollisionShape2D" parent="car1/hall2"]
+position = Vector2(0, -55)
+shape = SubResource("RectangleShape2D_t8w3m")
+
+[node name="table1" type="StaticBody2D" parent="car1"]
 position = Vector2(-300, 0)
 
-[node name="sprite" type="Sprite2D" parent="classroom/table1"]
+[node name="sprite" type="Sprite2D" parent="car1/table1"]
 scale = Vector2(200, 100)
 texture = SubResource("PlaceholderTexture2D_m8dqi")
 
-[node name="collision" type="CollisionShape2D" parent="classroom/table1"]
+[node name="collision" type="CollisionShape2D" parent="car1/table1"]
 shape = SubResource("RectangleShape2D_2l2je")
 
-[node name="table2" type="StaticBody2D" parent="classroom"]
+[node name="table2" type="StaticBody2D" parent="car1"]
 
-[node name="sprite" type="Sprite2D" parent="classroom/table2"]
+[node name="sprite" type="Sprite2D" parent="car1/table2"]
 scale = Vector2(200, 100)
 texture = SubResource("PlaceholderTexture2D_m8dqi")
 
-[node name="collision" type="CollisionShape2D" parent="classroom/table2"]
+[node name="collision" type="CollisionShape2D" parent="car1/table2"]
 shape = SubResource("RectangleShape2D_2l2je")
 
-[node name="table3" type="StaticBody2D" parent="classroom"]
+[node name="table3" type="StaticBody2D" parent="car1"]
 position = Vector2(300, 0)
 
-[node name="sprite" type="Sprite2D" parent="classroom/table3"]
+[node name="sprite" type="Sprite2D" parent="car1/table3"]
 scale = Vector2(200, 100)
 texture = SubResource("PlaceholderTexture2D_m8dqi")
 
-[node name="collision" type="CollisionShape2D" parent="classroom/table3"]
+[node name="collision" type="CollisionShape2D" parent="car1/table3"]
 shape = SubResource("RectangleShape2D_2l2je")
 
-[node name="table4" type="StaticBody2D" parent="classroom"]
+[node name="table4" type="StaticBody2D" parent="car1"]
 position = Vector2(-300, 200)
 
-[node name="sprite" type="Sprite2D" parent="classroom/table4"]
+[node name="sprite" type="Sprite2D" parent="car1/table4"]
 scale = Vector2(200, 100)
 texture = SubResource("PlaceholderTexture2D_m8dqi")
 
-[node name="collision" type="CollisionShape2D" parent="classroom/table4"]
+[node name="collision" type="CollisionShape2D" parent="car1/table4"]
 shape = SubResource("RectangleShape2D_2l2je")
 
-[node name="table5" type="StaticBody2D" parent="classroom"]
+[node name="table5" type="StaticBody2D" parent="car1"]
 position = Vector2(0, 200)
 
-[node name="sprite" type="Sprite2D" parent="classroom/table5"]
+[node name="sprite" type="Sprite2D" parent="car1/table5"]
 scale = Vector2(200, 100)
 texture = SubResource("PlaceholderTexture2D_m8dqi")
 
-[node name="collision" type="CollisionShape2D" parent="classroom/table5"]
+[node name="collision" type="CollisionShape2D" parent="car1/table5"]
 shape = SubResource("RectangleShape2D_2l2je")
 
-[node name="table6" type="StaticBody2D" parent="classroom"]
+[node name="table6" type="StaticBody2D" parent="car1"]
 position = Vector2(300, 200)
 
-[node name="sprite" type="Sprite2D" parent="classroom/table6"]
+[node name="sprite" type="Sprite2D" parent="car1/table6"]
 scale = Vector2(200, 100)
 texture = SubResource("PlaceholderTexture2D_m8dqi")
 
-[node name="collision" type="CollisionShape2D" parent="classroom/table6"]
+[node name="collision" type="CollisionShape2D" parent="car1/table6"]
 shape = SubResource("RectangleShape2D_2l2je")
 
-[node name="welcome-mat1" type="Area2D" parent="classroom"]
-position = Vector2(-530, 0)
-script = ExtResource("12_xbvkw")
+[node name="nordwall2" type="StaticBody2D" parent="car1"]
+position = Vector2(0, -335)
 
-[node name="collision" type="CollisionShape2D" parent="classroom/welcome-mat1"]
-shape = SubResource("RectangleShape2D_3p5u8")
+[node name="sprite" type="Sprite2D" parent="car1/nordwall2"]
+scale = Vector2(1100, 50)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
 
-[node name="welcome-mat2" type="Area2D" parent="classroom"]
-position = Vector2(530, 0)
-script = ExtResource("12_xbvkw")
+[node name="collision" type="CollisionShape2D" parent="car1/nordwall2"]
+shape = SubResource("RectangleShape2D_bw75c")
 
-[node name="collision" type="CollisionShape2D" parent="classroom/welcome-mat2"]
-shape = SubResource("RectangleShape2D_3p5u8")
+[node name="mat0" type="Area2D" parent="car1"]
+position = Vector2(-550, 0)
+script = ExtResource("11_k3sqm")
+
+[node name="collision" type="CollisionShape2D" parent="car1/mat0"]
+shape = ExtResource("12_hpof6")
+
+[node name="mat1" type="Area2D" parent="car1"]
+position = Vector2(550, 0)
+script = ExtResource("11_k3sqm")
+
+[node name="collision" type="CollisionShape2D" parent="car1/mat1"]
+shape = ExtResource("12_hpof6")
+
+[node name="car2" type="Node" parent="."]
+
+[node name="westwall" type="StaticBody2D" parent="car2"]
+position = Vector2(650, 0)
+
+[node name="sprite" type="Sprite2D" parent="car2/westwall"]
+position = Vector2(0, -200)
+scale = Vector2(50, 320)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision" type="CollisionShape2D" parent="car2/westwall"]
+position = Vector2(0, -200)
+shape = SubResource("RectangleShape2D_kyfkv")
+
+[node name="sprite2" type="Sprite2D" parent="car2/westwall"]
+position = Vector2(0, 200)
+scale = Vector2(50, 320)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision2" type="CollisionShape2D" parent="car2/westwall"]
+position = Vector2(0, 200)
+shape = SubResource("RectangleShape2D_kyfkv")
+
+[node name="ostwall" type="StaticBody2D" parent="car2"]
+position = Vector2(1750, 0)
+
+[node name="sprite" type="Sprite2D" parent="car2/ostwall"]
+scale = Vector2(50, 720)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="edgewall" type="CollisionShape2D" parent="car2/ostwall"]
+shape = SubResource("RectangleShape2D_avum2")
+
+[node name="nordwall" type="StaticBody2D" parent="car2"]
+position = Vector2(1200, -335)
+
+[node name="sprite" type="Sprite2D" parent="car2/nordwall"]
+scale = Vector2(1100, 50)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision" type="CollisionShape2D" parent="car2/nordwall"]
+shape = SubResource("RectangleShape2D_bw75c")
+
+[node name="sudwall" type="StaticBody2D" parent="car2"]
+position = Vector2(1200, 335)
+
+[node name="sprite" type="Sprite2D" parent="car2/sudwall"]
+scale = Vector2(1100, 50)
+texture = SubResource("PlaceholderTexture2D_m8dqi")
+
+[node name="collision" type="CollisionShape2D" parent="car2/sudwall"]
+shape = SubResource("RectangleShape2D_0ysf1")
+
+[node name="mat0" type="Area2D" parent="car2"]
+position = Vector2(650, 0)
+script = ExtResource("11_k3sqm")
+index = 1
+
+[node name="collision" type="CollisionShape2D" parent="car2/mat0"]
+shape = ExtResource("12_hpof6")
+
+[node name="mat1" type="Area2D" parent="car2"]
+position = Vector2(1750, 0)
+script = ExtResource("11_k3sqm")
+index = 1
+
+[node name="collision" type="CollisionShape2D" parent="car2/mat1"]
+shape = ExtResource("12_hpof6")

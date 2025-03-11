@@ -7,7 +7,8 @@ var event_system: EventSystem
 
 
 func _on_body_entered(body: Node) -> void:
-    event_system.emit("game::switch-car", { "index": index })
+    if body.name == "player":
+        event_system.emit("game::switch-car", { "index": index })
 
 
 func _ready() -> void:
