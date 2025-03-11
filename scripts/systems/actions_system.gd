@@ -25,4 +25,4 @@ func update_action_list(new_actions):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    action_list = $/root/scene/hud/action_list
+    action_list = $/root/scene/camera/hud/action_list
