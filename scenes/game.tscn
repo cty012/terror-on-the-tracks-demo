@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dm21nbrg6aclu"]
+[gd_scene load_steps=23 format=3 uid="uid://dm21nbrg6aclu"]
 
 [ext_resource type="Script" path="res://scripts/controllers/player_controller.gd" id="1_0bvfg"]
 [ext_resource type="Script" path="res://scripts/systems/input_system.gd" id="1_nh1b4"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" path="res://scripts/controllers/professor_controller.gd" id="7_x2f58"]
 [ext_resource type="Script" path="res://scripts/controllers/dialogue_range_controller.gd" id="9_6tywj"]
 [ext_resource type="PackedScene" uid="uid://d1gtcvhspy8ya" path="res://prefabs/ui/action_label.tscn" id="9_wm34p"]
+[ext_resource type="Script" path="res://scripts/controllers/welcome_mat_controller.gd" id="11_k3sqm"]
+[ext_resource type="Shape2D" uid="uid://c7aojc7q6al28" path="res://shapes/mat.tres" id="12_hpof6"]
 
 [sub_resource type="GDScript" id="GDScript_palwq"]
 script/source = "extends Control
@@ -69,11 +71,11 @@ script = ExtResource("4_ghhox")
 [node name="actions_system" type="Node" parent="."]
 script = ExtResource("3_8fg7i")
 
-[node name="input_system" type="Node" parent="."]
-script = ExtResource("1_nh1b4")
-
 [node name="debug_system" type="Node" parent="."]
 script = ExtResource("4_glw46")
+
+[node name="input_system" type="Node" parent="."]
+script = ExtResource("1_nh1b4")
 
 [node name="camera" type="Camera2D" parent="."]
 script = ExtResource("4_57u3r")
@@ -174,6 +176,7 @@ shape = SubResource("CircleShape2D_cdq3x")
 [node name="professor" type="CharacterBody2D" parent="npc"]
 position = Vector2(0, -220)
 script = ExtResource("7_x2f58")
+character_name = "Professor"
 
 [node name="sprite" type="Sprite2D" parent="npc/professor"]
 
@@ -238,6 +241,22 @@ texture = SubResource("PlaceholderTexture2D_m8dqi")
 
 [node name="collision" type="CollisionShape2D" parent="car0/sudwall"]
 shape = SubResource("RectangleShape2D_0ysf1")
+
+[node name="mat0" type="Area2D" parent="car0"]
+position = Vector2(-1750, 0)
+script = ExtResource("11_k3sqm")
+index = -1
+
+[node name="collision" type="CollisionShape2D" parent="car0/mat0"]
+shape = ExtResource("12_hpof6")
+
+[node name="mat1" type="Area2D" parent="car0"]
+position = Vector2(-650, 0)
+script = ExtResource("11_k3sqm")
+index = -1
+
+[node name="collision" type="CollisionShape2D" parent="car0/mat1"]
+shape = ExtResource("12_hpof6")
 
 [node name="car1" type="Node" parent="."]
 
@@ -414,6 +433,20 @@ texture = SubResource("PlaceholderTexture2D_m8dqi")
 [node name="collision" type="CollisionShape2D" parent="car1/nordwall2"]
 shape = SubResource("RectangleShape2D_bw75c")
 
+[node name="mat0" type="Area2D" parent="car1"]
+position = Vector2(-550, 0)
+script = ExtResource("11_k3sqm")
+
+[node name="collision" type="CollisionShape2D" parent="car1/mat0"]
+shape = ExtResource("12_hpof6")
+
+[node name="mat1" type="Area2D" parent="car1"]
+position = Vector2(550, 0)
+script = ExtResource("11_k3sqm")
+
+[node name="collision" type="CollisionShape2D" parent="car1/mat1"]
+shape = ExtResource("12_hpof6")
+
 [node name="car2" type="Node" parent="."]
 
 [node name="westwall" type="StaticBody2D" parent="car2"]
@@ -466,3 +499,19 @@ texture = SubResource("PlaceholderTexture2D_m8dqi")
 
 [node name="collision" type="CollisionShape2D" parent="car2/sudwall"]
 shape = SubResource("RectangleShape2D_0ysf1")
+
+[node name="mat0" type="Area2D" parent="car2"]
+position = Vector2(650, 0)
+script = ExtResource("11_k3sqm")
+index = 1
+
+[node name="collision" type="CollisionShape2D" parent="car2/mat0"]
+shape = ExtResource("12_hpof6")
+
+[node name="mat1" type="Area2D" parent="car2"]
+position = Vector2(1750, 0)
+script = ExtResource("11_k3sqm")
+index = 1
+
+[node name="collision" type="CollisionShape2D" parent="car2/mat1"]
+shape = ExtResource("12_hpof6")
