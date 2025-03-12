@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://scripts/systems/debug_system.gd" id="4_glw46"]
 [ext_resource type="Script" path="res://scripts/controllers/professor_controller.gd" id="7_x2f58"]
 [ext_resource type="Script" path="res://scripts/controllers/dialogue_range_controller.gd" id="9_6tywj"]
-[ext_resource type="StyleBox" uid="uid://bwwcxqxroxego" path="res://shapes/sus-meter-fill.tres" id="9_r3q3p"]
+[ext_resource type="StyleBox" uid="uid://bwwcxqxroxego" path="res://styleboxes/sus-meter-fill.tres" id="9_r3q3p"]
 [ext_resource type="PackedScene" uid="uid://d1gtcvhspy8ya" path="res://prefabs/ui/action_label.tscn" id="9_wm34p"]
 [ext_resource type="Script" path="res://scripts/controllers/ui_sus_meter_controller.gd" id="10_u7f2y"]
 [ext_resource type="Script" path="res://scripts/controllers/welcome_mat_controller.gd" id="11_k3sqm"]
@@ -542,7 +542,7 @@ offset_right = 640.0
 offset_bottom = 1720.0
 script = ExtResource("13_ncycx")
 
-[node name="lock1" type="ProgressBar" parent="minigame-lockpick"]
+[node name="pin1" type="ProgressBar" parent="minigame-lockpick"]
 layout_mode = 0
 offset_left = 300.0
 offset_top = 110.0
@@ -551,7 +551,7 @@ offset_bottom = 610.0
 fill_mode = 3
 show_percentage = false
 
-[node name="lock2" type="ProgressBar" parent="minigame-lockpick"]
+[node name="pin2" type="ProgressBar" parent="minigame-lockpick"]
 layout_mode = 0
 offset_left = 500.0
 offset_top = 110.0
@@ -560,7 +560,7 @@ offset_bottom = 610.0
 fill_mode = 3
 show_percentage = false
 
-[node name="lock3" type="ProgressBar" parent="minigame-lockpick"]
+[node name="pin3" type="ProgressBar" parent="minigame-lockpick"]
 layout_mode = 0
 offset_left = 700.0
 offset_top = 110.0
@@ -569,7 +569,7 @@ offset_bottom = 610.0
 fill_mode = 3
 show_percentage = false
 
-[node name="lock4" type="ProgressBar" parent="minigame-lockpick"]
+[node name="pin4" type="ProgressBar" parent="minigame-lockpick"]
 layout_mode = 0
 offset_left = 900.0
 offset_top = 110.0

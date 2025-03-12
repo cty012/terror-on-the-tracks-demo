@@ -1,26 +1,33 @@
 extends Node
+class_name MinigameSystem
 
 var event_system: EventSystem
 
 
 var default_camera: Camera2D
-var is_minigame_active := false
+var current_minigame: Node = null
 var lsid_minigame_start := 0
 var lsid_minigame_end := 0
 
 
 func on_minigame_start(event):
-    print("Minigame start")
-    is_minigame_active = true
-    var cameras = event["node"].find_children("", "Camera2D")
+    # Must not have a currently active minigame
+    if current_minigame != null:
+        return
+
+    current_minigame = event["node"]
+    var cameras = current_minigame.find_children("", "Camera2D")
     if not cameras.is_empty():
         cameras[0].make_current()
-        event["node"].start()
+        current_minigame.start()
 
 
 func on_minigame_end(event):
-    print("Minigame end")
-    is_minigame_active = false
+    current_minigame = null
+    if event["win"]:
+        print("You win the minigame")
+    else:
+        print("You lose the minigame")
     default_camera.make_current()
 
 
@@ -39,4 +46,5 @@ func _exit_tree() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-    pass
+    if current_minigame != null:
+        current_minigame.run(delta)
