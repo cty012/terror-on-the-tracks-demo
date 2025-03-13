@@ -1,15 +1,21 @@
-[gd_scene load_steps=21 format=3 uid="uid://dm21nbrg6aclu"]
+[gd_scene load_steps=27 format=3 uid="uid://dm21nbrg6aclu"]
 
 [ext_resource type="Script" path="res://scripts/controllers/player_controller.gd" id="1_0bvfg"]
 [ext_resource type="Script" path="res://scripts/systems/input_system.gd" id="1_nh1b4"]
 [ext_resource type="Script" path="res://scripts/systems/event_system.gd" id="2_c3i0d"]
+[ext_resource type="Script" path="res://scripts/systems/minigame_system.gd" id="3_7al2g"]
 [ext_resource type="Script" path="res://scripts/systems/actions_system.gd" id="3_8fg7i"]
 [ext_resource type="Script" path="res://scripts/controllers/camera_controller.gd" id="4_57u3r"]
 [ext_resource type="Script" path="res://scripts/systems/dialogue_system.gd" id="4_ghhox"]
 [ext_resource type="Script" path="res://scripts/systems/debug_system.gd" id="4_glw46"]
 [ext_resource type="Script" path="res://scripts/controllers/professor_controller.gd" id="7_x2f58"]
 [ext_resource type="Script" path="res://scripts/controllers/dialogue_range_controller.gd" id="9_6tywj"]
+[ext_resource type="StyleBox" uid="uid://bwwcxqxroxego" path="res://styleboxes/sus-meter-fill.tres" id="9_r3q3p"]
 [ext_resource type="PackedScene" uid="uid://d1gtcvhspy8ya" path="res://prefabs/ui/action_label.tscn" id="9_wm34p"]
+[ext_resource type="Script" path="res://scripts/controllers/ui_sus_meter_controller.gd" id="10_u7f2y"]
+[ext_resource type="Script" path="res://scripts/controllers/welcome_mat_controller.gd" id="11_k3sqm"]
+[ext_resource type="Shape2D" uid="uid://c7aojc7q6al28" path="res://shapes/mat.tres" id="12_hpof6"]
+[ext_resource type="Script" path="res://scripts/controllers/minigames/lockpick.gd" id="13_ncycx"]
 
 [sub_resource type="GDScript" id="GDScript_palwq"]
 script/source = "extends Control
@@ -66,19 +72,22 @@ script = ExtResource("2_c3i0d")
 [node name="dialogue_system" type="Node" parent="."]
 script = ExtResource("4_ghhox")
 
+[node name="minigame_system" type="Node" parent="."]
+script = ExtResource("3_7al2g")
+
 [node name="actions_system" type="Node" parent="."]
 script = ExtResource("3_8fg7i")
-
-[node name="input_system" type="Node" parent="."]
-script = ExtResource("1_nh1b4")
 
 [node name="debug_system" type="Node" parent="."]
 script = ExtResource("4_glw46")
 
+[node name="input_system" type="Node" parent="."]
+script = ExtResource("1_nh1b4")
+
 [node name="camera" type="Camera2D" parent="."]
 script = ExtResource("4_57u3r")
 
-[node name="hud" type="Control" parent="."]
+[node name="hud" type="Control" parent="camera"]
 z_index = 10
 layout_mode = 3
 anchors_preset = 8
@@ -93,7 +102,7 @@ offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="dialogue" type="Control" parent="hud"]
+[node name="dialogue" type="Control" parent="camera/hud"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -102,7 +111,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_palwq")
 
-[node name="speech_panel" type="Panel" parent="hud/dialogue"]
+[node name="speech_panel" type="Panel" parent="camera/hud/dialogue"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -112,7 +121,7 @@ offset_top = -150.0
 offset_right = 1200.0
 grow_vertical = 0
 
-[node name="character_name" type="Label" parent="hud/dialogue/speech_panel"]
+[node name="character_name" type="Label" parent="camera/hud/dialogue/speech_panel"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 10.0
@@ -120,7 +129,7 @@ offset_right = 220.0
 offset_bottom = 33.0
 text = "[CHARACTER NAME]"
 
-[node name="character_speech" type="Label" parent="hud/dialogue/speech_panel"]
+[node name="character_speech" type="Label" parent="camera/hud/dialogue/speech_panel"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 40.0
@@ -129,7 +138,7 @@ offset_bottom = 141.0
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
 autowrap_mode = 3
 
-[node name="choice_list" type="VBoxContainer" parent="hud/dialogue"]
+[node name="choice_list" type="VBoxContainer" parent="camera/hud/dialogue"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -145,7 +154,7 @@ grow_vertical = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="action_list" type="VBoxContainer" parent="hud"]
+[node name="action_list" type="VBoxContainer" parent="camera/hud"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -157,8 +166,18 @@ offset_bottom = -10.0
 grow_vertical = 0
 alignment = 2
 
-[node name="action_label" parent="hud/action_list" instance=ExtResource("9_wm34p")]
+[node name="action_label" parent="camera/hud/action_list" instance=ExtResource("9_wm34p")]
 layout_mode = 2
+
+[node name="sus-meter" type="ProgressBar" parent="camera/hud"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 30.0
+offset_right = 240.0
+offset_bottom = 60.0
+theme_override_styles/fill = ExtResource("9_r3q3p")
+show_percentage = false
+script = ExtResource("10_u7f2y")
 
 [node name="player" type="CharacterBody2D" parent="."]
 position = Vector2(-450, -250)
@@ -174,6 +193,7 @@ shape = SubResource("CircleShape2D_cdq3x")
 [node name="professor" type="CharacterBody2D" parent="npc"]
 position = Vector2(0, -220)
 script = ExtResource("7_x2f58")
+character_name = "Professor"
 
 [node name="sprite" type="Sprite2D" parent="npc/professor"]
 
@@ -238,6 +258,22 @@ texture = SubResource("PlaceholderTexture2D_m8dqi")
 
 [node name="collision" type="CollisionShape2D" parent="car0/sudwall"]
 shape = SubResource("RectangleShape2D_0ysf1")
+
+[node name="mat0" type="Area2D" parent="car0"]
+position = Vector2(-1750, 0)
+script = ExtResource("11_k3sqm")
+index = -1
+
+[node name="collision" type="CollisionShape2D" parent="car0/mat0"]
+shape = ExtResource("12_hpof6")
+
+[node name="mat1" type="Area2D" parent="car0"]
+position = Vector2(-650, 0)
+script = ExtResource("11_k3sqm")
+index = -1
+
+[node name="collision" type="CollisionShape2D" parent="car0/mat1"]
+shape = ExtResource("12_hpof6")
 
 [node name="car1" type="Node" parent="."]
 
@@ -414,6 +450,20 @@ texture = SubResource("PlaceholderTexture2D_m8dqi")
 [node name="collision" type="CollisionShape2D" parent="car1/nordwall2"]
 shape = SubResource("RectangleShape2D_bw75c")
 
+[node name="mat0" type="Area2D" parent="car1"]
+position = Vector2(-550, 0)
+script = ExtResource("11_k3sqm")
+
+[node name="collision" type="CollisionShape2D" parent="car1/mat0"]
+shape = ExtResource("12_hpof6")
+
+[node name="mat1" type="Area2D" parent="car1"]
+position = Vector2(550, 0)
+script = ExtResource("11_k3sqm")
+
+[node name="collision" type="CollisionShape2D" parent="car1/mat1"]
+shape = ExtResource("12_hpof6")
+
 [node name="car2" type="Node" parent="."]
 
 [node name="westwall" type="StaticBody2D" parent="car2"]
@@ -466,3 +516,67 @@ texture = SubResource("PlaceholderTexture2D_m8dqi")
 
 [node name="collision" type="CollisionShape2D" parent="car2/sudwall"]
 shape = SubResource("RectangleShape2D_0ysf1")
+
+[node name="mat0" type="Area2D" parent="car2"]
+position = Vector2(650, 0)
+script = ExtResource("11_k3sqm")
+index = 1
+
+[node name="collision" type="CollisionShape2D" parent="car2/mat0"]
+shape = ExtResource("12_hpof6")
+
+[node name="mat1" type="Area2D" parent="car2"]
+position = Vector2(1750, 0)
+script = ExtResource("11_k3sqm")
+index = 1
+
+[node name="collision" type="CollisionShape2D" parent="car2/mat1"]
+shape = ExtResource("12_hpof6")
+
+[node name="minigame-lockpick" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -640.0
+offset_top = 1000.0
+offset_right = 640.0
+offset_bottom = 1720.0
+script = ExtResource("13_ncycx")
+
+[node name="pin1" type="ProgressBar" parent="minigame-lockpick"]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 110.0
+offset_right = 380.0
+offset_bottom = 610.0
+fill_mode = 3
+show_percentage = false
+
+[node name="pin2" type="ProgressBar" parent="minigame-lockpick"]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 110.0
+offset_right = 580.0
+offset_bottom = 610.0
+fill_mode = 3
+show_percentage = false
+
+[node name="pin3" type="ProgressBar" parent="minigame-lockpick"]
+layout_mode = 0
+offset_left = 700.0
+offset_top = 110.0
+offset_right = 780.0
+offset_bottom = 610.0
+fill_mode = 3
+show_percentage = false
+
+[node name="pin4" type="ProgressBar" parent="minigame-lockpick"]
+layout_mode = 0
+offset_left = 900.0
+offset_top = 110.0
+offset_right = 980.0
+offset_bottom = 610.0
+fill_mode = 3
+show_percentage = false
+
+[node name="camera" type="Camera2D" parent="minigame-lockpick"]
+position = Vector2(640, 360)
