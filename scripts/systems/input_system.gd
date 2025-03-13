@@ -3,6 +3,7 @@ class_name InputSystem
 
 var event_system: EventSystem
 var dialogue_system: DialogueSystem
+var minigame_system: MinigameSystem
 var actions_system: ActionsSystem
 
 
@@ -90,12 +91,20 @@ func detect_dialogue_action() -> bool:
 func _ready() -> void:
     event_system = $/root/scene/event_system
     dialogue_system = $/root/scene/dialogue_system
+    minigame_system = $/root/scene/minigame_system
     actions_system = $/root/scene/actions_system
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
     var actions := []
+    # If minigame is active, no actions are performed
+    # Minigame actions are managed by the minigame script
+    if minigame_system.current_minigame != null:
+        key_just_pressed = []
+        key_just_released = []
+        return
+
     if dialogue_system.in_dialogue():
         actions.push_back("[code]E[/code] Continue conversation")
         detect_dialogue_action()

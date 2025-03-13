@@ -113,7 +113,7 @@ func on_dialogue_choose(event) -> void:
 func _ready() -> void:
     event_system = $/root/scene/event_system
     player = $/root/scene/player
-    ui_dialogue = $/root/scene/hud/dialogue
+    ui_dialogue = $/root/scene/camera/hud/dialogue
     on_dialogue_end({})
     lsid_dialogue_detect = event_system.add_listener("game::dialogue-detect", on_dialogue_detect)
     lsid_dialogue_start = event_system.add_listener("game::dialogue-start", on_dialogue_start)
