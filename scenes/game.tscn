@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://dm21nbrg6aclu"]
+[gd_scene load_steps=29 format=3 uid="uid://dm21nbrg6aclu"]
 
 [ext_resource type="Script" path="res://scripts/controllers/player_controller.gd" id="1_0bvfg"]
 [ext_resource type="Script" path="res://scripts/systems/input_system.gd" id="1_nh1b4"]
+[ext_resource type="Script" path="res://scripts/systems/timer_system.gd" id="2_20y6c"]
 [ext_resource type="Script" path="res://scripts/systems/event_system.gd" id="2_c3i0d"]
 [ext_resource type="Script" path="res://scripts/systems/minigame_system.gd" id="3_7al2g"]
 [ext_resource type="Script" path="res://scripts/systems/actions_system.gd" id="3_8fg7i"]
@@ -69,6 +70,10 @@ size = Vector2(200, 100)
 
 [node name="event_system" type="Node" parent="."]
 script = ExtResource("2_c3i0d")
+
+[node name="timer_system" type="Node" parent="."]
+script = ExtResource("2_20y6c")
+time_limit_in_seconds = 20.0
 
 [node name="dialogue_system" type="Node" parent="."]
 script = ExtResource("4_ghhox")
@@ -173,11 +178,21 @@ alignment = 2
 [node name="action_label" parent="camera/hud/action_list" instance=ExtResource("9_wm34p")]
 layout_mode = 2
 
+[node name="timer" type="Label" parent="camera/hud"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 30.0
+offset_right = 140.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 18
+text = "00 : 00"
+vertical_alignment = 1
+
 [node name="sus-meter" type="ProgressBar" parent="camera/hud"]
 layout_mode = 0
-offset_left = 40.0
+offset_left = 140.0
 offset_top = 30.0
-offset_right = 240.0
+offset_right = 340.0
 offset_bottom = 60.0
 theme_override_styles/fill = ExtResource("9_r3q3p")
 show_percentage = false
