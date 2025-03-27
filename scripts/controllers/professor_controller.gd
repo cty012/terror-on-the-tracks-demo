@@ -3,7 +3,7 @@ extends Node
 var util := preload("res://scripts/common/util.gd").new()
 
 
-@export var character_name := ""
+var character_name := "Professor"
 
 
 func get_dialogue_tree() -> Dictionary:
