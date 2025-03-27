@@ -82,8 +82,8 @@ func run(delta: float):
 
 
 func _ready() -> void:
-    event_system = $/root/scene/event_system
-    input_system = $/root/scene/input_system
+    event_system = $/root/game_scene/event_system
+    input_system = $/root/game_scene/input_system
     pins.append($pin1)
     pins.append($pin2)
     pins.append($pin3)

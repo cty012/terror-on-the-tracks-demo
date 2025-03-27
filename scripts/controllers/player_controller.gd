@@ -25,7 +25,7 @@ func on_move(event) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    event_system = $/root/scene/event_system
+    event_system = $/root/game_scene/event_system
     $sprite.texture = util.create_circle_texture(50, Color.WHITE)
     lsid_movement = event_system.add_listener("game::movement", on_move)
 

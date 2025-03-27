@@ -17,8 +17,8 @@ func on_switch_car(event) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    event_system = $/root/scene/event_system
-    player = $/root/scene/player
+    event_system = $/root/game_scene/event_system
+    player = $/root/game_scene/player
     lsid_switch_car = event_system.add_listener("game::switch-car", on_switch_car)
 
 

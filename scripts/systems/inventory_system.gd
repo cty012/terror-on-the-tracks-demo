@@ -1,5 +1,4 @@
 extends Node
-
 class_name InventorySystem
 
 
@@ -19,5 +18,5 @@ func clear():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    inventory = $/root/scene/camera/hud/inventory
+    inventory = $/root/game_scene/camera/hud/inventory
     inventory.get_node("button").pressed.connect(on_button_pressed)

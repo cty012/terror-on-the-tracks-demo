@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dm21nbrg6aclu"]
+[gd_scene load_steps=30 format=3 uid="uid://dm21nbrg6aclu"]
 
 [ext_resource type="Script" path="res://scripts/controllers/player_controller.gd" id="1_0bvfg"]
 [ext_resource type="Script" path="res://scripts/systems/input_system.gd" id="1_nh1b4"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/systems/minigame_system.gd" id="3_7al2g"]
 [ext_resource type="Script" path="res://scripts/systems/actions_system.gd" id="3_8fg7i"]
 [ext_resource type="Script" path="res://scripts/systems/inventory_system.gd" id="3_ebimh"]
+[ext_resource type="Script" path="res://scripts/systems/game_state_system.gd" id="3_s2ld2"]
 [ext_resource type="Script" path="res://scripts/controllers/camera_controller.gd" id="4_57u3r"]
 [ext_resource type="Script" path="res://scripts/systems/dialogue_system.gd" id="4_ghhox"]
 [ext_resource type="Script" path="res://scripts/systems/debug_system.gd" id="4_glw46"]
@@ -66,10 +67,13 @@ size = Vector2(100, 30)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2l2je"]
 size = Vector2(200, 100)
 
-[node name="scene" type="Node2D"]
+[node name="game_scene" type="Node2D"]
 
 [node name="event_system" type="Node" parent="."]
 script = ExtResource("2_c3i0d")
+
+[node name="game_state_system" type="Node" parent="."]
+script = ExtResource("3_s2ld2")
 
 [node name="timer_system" type="Node" parent="."]
 script = ExtResource("2_20y6c")
@@ -652,7 +656,7 @@ index = 1
 [node name="collision" type="CollisionShape2D" parent="car2/mat1"]
 shape = ExtResource("12_hpof6")
 
-[node name="minigame-lockpick" type="Control" parent="."]
+[node name="minigame_lockpick" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -640.0
@@ -661,7 +665,7 @@ offset_right = 640.0
 offset_bottom = 1720.0
 script = ExtResource("13_ncycx")
 
-[node name="pin1" type="ProgressBar" parent="minigame-lockpick"]
+[node name="pin1" type="ProgressBar" parent="minigame_lockpick"]
 layout_mode = 0
 offset_left = 300.0
 offset_top = 110.0
@@ -670,7 +674,7 @@ offset_bottom = 610.0
 fill_mode = 3
 show_percentage = false
 
-[node name="pin2" type="ProgressBar" parent="minigame-lockpick"]
+[node name="pin2" type="ProgressBar" parent="minigame_lockpick"]
 layout_mode = 0
 offset_left = 500.0
 offset_top = 110.0
@@ -679,7 +683,7 @@ offset_bottom = 610.0
 fill_mode = 3
 show_percentage = false
 
-[node name="pin3" type="ProgressBar" parent="minigame-lockpick"]
+[node name="pin3" type="ProgressBar" parent="minigame_lockpick"]
 layout_mode = 0
 offset_left = 700.0
 offset_top = 110.0
@@ -688,7 +692,7 @@ offset_bottom = 610.0
 fill_mode = 3
 show_percentage = false
 
-[node name="pin4" type="ProgressBar" parent="minigame-lockpick"]
+[node name="pin4" type="ProgressBar" parent="minigame_lockpick"]
 layout_mode = 0
 offset_left = 900.0
 offset_top = 110.0
@@ -697,5 +701,5 @@ offset_bottom = 610.0
 fill_mode = 3
 show_percentage = false
 
-[node name="camera" type="Camera2D" parent="minigame-lockpick"]
+[node name="camera" type="Camera2D" parent="minigame_lockpick"]
 position = Vector2(640, 360)
