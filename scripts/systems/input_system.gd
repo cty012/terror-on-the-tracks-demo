@@ -89,10 +89,10 @@ func detect_dialogue_action() -> bool:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    event_system = $/root/scene/event_system
-    dialogue_system = $/root/scene/dialogue_system
-    minigame_system = $/root/scene/minigame_system
-    actions_system = $/root/scene/actions_system
+    event_system = $/root/game_scene/event_system
+    dialogue_system = $/root/game_scene/dialogue_system
+    minigame_system = $/root/game_scene/minigame_system
+    actions_system = $/root/game_scene/actions_system
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

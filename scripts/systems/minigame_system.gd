@@ -33,8 +33,8 @@ func on_minigame_end(event):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    event_system = $/root/scene/event_system
-    default_camera = $/root/scene/camera
+    event_system = $/root/game_scene/event_system
+    default_camera = $/root/game_scene/camera
     lsid_minigame_start = event_system.add_listener("game::minigame::start", on_minigame_start)
     lsid_minigame_end = event_system.add_listener("game::minigame::end", on_minigame_end)
 

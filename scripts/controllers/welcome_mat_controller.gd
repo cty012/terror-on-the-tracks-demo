@@ -12,5 +12,5 @@ func _on_body_entered(body: Node) -> void:
 
 
 func _ready() -> void:
-    event_system = $/root/scene/event_system
+    event_system = $/root/game_scene/event_system
     body_entered.connect(_on_body_entered)

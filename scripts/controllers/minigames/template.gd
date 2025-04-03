@@ -30,6 +30,6 @@ func run(delta: float):
 # This function is called once when the game (not the minigame) starts
 # Exclusively used for initializing variables that persist between different minigame sessions
 func _ready() -> void:
-    event_system = $/root/scene/event_system
-    input_system = $/root/scene/input_system
+    event_system = $/root/game_scene/event_system
+    input_system = $/root/game_scene/input_system
     # Initialize your variables here

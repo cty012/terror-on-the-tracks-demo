@@ -12,5 +12,5 @@ func _on_button_pressed() -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    event_system = $/root/scene/event_system
+    event_system = $/root/game_scene/event_system
     pressed.connect(_on_button_pressed)
