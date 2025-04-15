@@ -14,7 +14,6 @@ func game_over(data):
         return
     game_state = 0 if data["win"] else 1
     var new_scene = game_over_scene.instantiate()
-    print("Initializing data...")
     new_scene.init(data)
     get_tree().root.add_child(new_scene)
     get_tree().current_scene.queue_free()
