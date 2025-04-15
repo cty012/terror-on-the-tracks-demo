@@ -11,6 +11,7 @@ Format of `data`:
 """
 
 var data
+var label: Label
 var restart_btn: Button
 var quit_btn: Button
 
@@ -28,7 +29,9 @@ func _on_quit():
 
 
 func _ready():
+    label = $/root/game_over_scene/label
     restart_btn = $/root/game_over_scene/restart/button
     quit_btn = $/root/game_over_scene/quit/button
+    label.text = data["msg"]
     restart_btn.pressed.connect(_on_restart)
     quit_btn.pressed.connect(_on_quit)
