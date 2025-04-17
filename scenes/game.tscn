@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dm21nbrg6aclu"]
+[gd_scene load_steps=37 format=3 uid="uid://dm21nbrg6aclu"]
 
 [ext_resource type="Script" path="res://scripts/controllers/player_controller.gd" id="1_0bvfg"]
 [ext_resource type="Script" path="res://scripts/systems/input_system.gd" id="1_nh1b4"]
@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://scripts/controllers/camera_controller.gd" id="4_57u3r"]
 [ext_resource type="Script" path="res://scripts/systems/dialogue_system.gd" id="4_ghhox"]
 [ext_resource type="Script" path="res://scripts/systems/debug_system.gd" id="4_glw46"]
-[ext_resource type="Script" path="res://scripts/controllers/professor_controller.gd" id="7_x2f58"]
+[ext_resource type="Script" path="res://scripts/controllers/npc_controller.gd" id="7_x2f58"]
 [ext_resource type="Script" path="res://scripts/controllers/dialogue_range_controller.gd" id="9_6tywj"]
 [ext_resource type="StyleBox" uid="uid://bwwcxqxroxego" path="res://styleboxes/sus-meter-fill.tres" id="9_r3q3p"]
 [ext_resource type="PackedScene" uid="uid://d1gtcvhspy8ya" path="res://prefabs/ui/action_label.tscn" id="9_wm34p"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://scripts/controllers/welcome_mat_controller.gd" id="11_k3sqm"]
 [ext_resource type="Shape2D" uid="uid://c7aojc7q6al28" path="res://shapes/mat.tres" id="12_hpof6"]
 [ext_resource type="Script" path="res://scripts/controllers/minigames/lockpick.gd" id="13_ncycx"]
+[ext_resource type="Script" path="res://scripts/dialogue_trees/alfred.gd" id="16_wwcb4"]
 
 [sub_resource type="GDScript" id="GDScript_palwq"]
 script/source = "extends Control
@@ -227,6 +228,7 @@ offset_left = 700.0
 offset_top = 10.0
 offset_right = 1100.0
 offset_bottom = 230.0
+mouse_filter = 2
 
 [node name="button" type="Button" parent="camera/hud/inventory"]
 layout_mode = 0
@@ -336,6 +338,7 @@ shape = SubResource("CircleShape2D_cdq3x")
 position = Vector2(250, -250)
 script = ExtResource("7_x2f58")
 character_name = "Alfred"
+dialogue_tree_script = ExtResource("16_wwcb4")
 
 [node name="sprite" type="Sprite2D" parent="npc/alfred"]
 

@@ -71,7 +71,7 @@ func detect_dialogue_action() -> bool:
     if is_key_just_pressed(key_bindings["interaction"]["cancel"]):
         event_system.emit("game::dialogue-end", {})
     elif is_key_just_pressed(key_bindings["interaction"]["dialogue"]):
-        event_system.emit("game::dialogue-continue", {})
+        event_system.emit("game::dialogue-next", {})
     elif is_key_just_pressed(key_bindings["temp"]["dialogue-op1"]):
         event_system.emit("game::dialogue-choose", { "choice": 0 })
     elif is_key_just_pressed(key_bindings["temp"]["dialogue-op2"]):

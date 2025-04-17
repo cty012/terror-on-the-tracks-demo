@@ -14,7 +14,7 @@ var state: String
 var lsid_dialogue_detect := 0
 var lsid_dialogue_start := 0
 var lsid_dialogue_end := 0
-var lsid_dialogue_continue := 0
+var lsid_dialogue_next := 0
 var lsid_dialogue_choose := 0
 
 
@@ -36,9 +36,9 @@ func in_dialogue() -> bool:
     return npc_in_dialogue != null
 
 
-func update_speech(dialogue) -> void:
-    ui_dialogue.get_node("speech_panel/character_name").text = dialogue["character-name"]
-    ui_dialogue.get_node("speech_panel/character_speech").text = dialogue["speech"]
+func update_speech(character_name: String, dialogue_tree: DialogueTree) -> void:
+    ui_dialogue.get_node("speech_panel/character_name").text = character_name
+    ui_dialogue.get_node("speech_panel/character_speech").text = dialogue_tree.get_speech()
     var choice_list = ui_dialogue.get_node("choice_list")
 
     # Clear existing choices
@@ -47,10 +47,11 @@ func update_speech(dialogue) -> void:
 
     # Add new choices
     var item_prefab = preload("res://prefabs/ui/dialogue_choice.tscn")
-    for i in range(len(dialogue["choices"])):
+    var choices = dialogue_tree.get_choices()
+    for i in range(len(choices)):
         var item := item_prefab.instantiate()
         item.index = i
-        item.text = dialogue["choices"][i]["speech"]
+        item.text = choices[i]
         choice_list.add_child(item)
 
 
@@ -75,11 +76,10 @@ func on_dialogue_start(event) -> void:
 
     # Otherwise talk with the closest NPC
     npc_in_dialogue = get_closest_npc()
+    npc_in_dialogue.dialogue_tree.reset()
 
     # Update UI
-    dialogue_tree = npc_in_dialogue.get_dialogue_tree()
-    state = dialogue_tree["_start"]
-    update_speech(dialogue_tree[state])
+    update_speech(npc_in_dialogue.character_name, npc_in_dialogue.dialogue_tree)
     ui_dialogue.visible = true
 
 
@@ -90,23 +90,21 @@ func on_dialogue_end(event) -> void:
     ui_dialogue.visible = false
 
 
-func on_dialogue_continue(event) -> void:
-    if not dialogue_tree[state]["choices"].is_empty():
-        return
-    state = dialogue_tree[state]["result"]
-    if state == "_end":
+func on_dialogue_next(event) -> void:
+    npc_in_dialogue.dialogue_tree.next()
+    if npc_in_dialogue.dialogue_tree.has_ended():
         on_dialogue_end({})
     else:
-        update_speech(dialogue_tree[state])
+        update_speech(npc_in_dialogue.character_name, npc_in_dialogue.dialogue_tree)
 
 
 func on_dialogue_choose(event) -> void:
-    var i: int = event["choice"]
-    if i < 0 or i >= len(dialogue_tree[state]["choices"]):
-        return
-    state = dialogue_tree[state]["choices"][i]["result"]
-    # TODO: execute effects
-    update_speech(dialogue_tree[state])
+    var choice = clamp(event["choice"], 0, len(npc_in_dialogue.dialogue_tree.get_choices()) - 1)
+    npc_in_dialogue.dialogue_tree.choose(choice)
+    if npc_in_dialogue.dialogue_tree.has_ended():
+        on_dialogue_end({})
+    else:
+        update_speech(npc_in_dialogue.character_name, npc_in_dialogue.dialogue_tree)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -118,7 +116,7 @@ func _ready() -> void:
     lsid_dialogue_detect = event_system.add_listener("game::dialogue-detect", on_dialogue_detect)
     lsid_dialogue_start = event_system.add_listener("game::dialogue-start", on_dialogue_start)
     lsid_dialogue_end = event_system.add_listener("game::dialogue-end", on_dialogue_end)
-    lsid_dialogue_continue = event_system.add_listener("game::dialogue-continue", on_dialogue_continue)
+    lsid_dialogue_next = event_system.add_listener("game::dialogue-next", on_dialogue_next)
     lsid_dialogue_choose = event_system.add_listener("game::dialogue-choose", on_dialogue_choose)
 
 
@@ -126,5 +124,5 @@ func _exit_tree() -> void:
     event_system.remove_listener(lsid_dialogue_detect)
     event_system.remove_listener(lsid_dialogue_start)
     event_system.remove_listener(lsid_dialogue_end)
-    event_system.remove_listener(lsid_dialogue_continue)
+    event_system.remove_listener(lsid_dialogue_next)
     event_system.remove_listener(lsid_dialogue_choose)
