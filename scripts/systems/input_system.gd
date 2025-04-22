@@ -110,7 +110,7 @@ func _process(delta: float) -> void:
         detect_dialogue_action()
     else:
         actions.push_back("[code]WASD[/code] Walk")
-        var closest_npc := dialogue_system.get_closest_npc()
+        var closest_npc := dialogue_system.get_closest_talkable_npc()
         if closest_npc != null:
             actions.push_back("[code]E[/code] Talk to " + closest_npc.character_name)
         detect_dialogue_start() or detect_movement()  # Detect movement iff dialogue doesn't start

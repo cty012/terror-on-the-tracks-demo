@@ -5,7 +5,7 @@ var event_system: EventSystem
 
 
 var player: CharacterBody2D
-var npc_in_range := []
+var npc_in_range: Array[CharacterBody2D] = []
 var npc_in_dialogue: CharacterBody2D
 var ui_dialogue: Control
 var dialogue_tree: Dictionary  ## Actually a graph, not a tree
@@ -19,11 +19,15 @@ var lsid_dialogue_choose := 0
 
 
 # Helper
-func get_closest_npc() -> CharacterBody2D:
+func get_closest_talkable_npc() -> CharacterBody2D:
     var closest_npc: CharacterBody2D = null
     var min_distance = INF
 
     for npc in npc_in_range:
+        # Skip if cannot talk to npc
+        if npc.dialogue_tree == null:
+            continue
+        # Otherwise check if they are closer
         var distance = player.global_position.distance_to(npc.global_position)
         if distance < min_distance:
             min_distance = distance
@@ -75,7 +79,9 @@ func on_dialogue_start(event) -> void:
         return
 
     # Otherwise talk with the closest NPC
-    npc_in_dialogue = get_closest_npc()
+    npc_in_dialogue = get_closest_talkable_npc()
+    if npc_in_dialogue == null:
+        return
     npc_in_dialogue.dialogue_tree.reset()
 
     # Update UI

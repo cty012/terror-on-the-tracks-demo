@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dm21nbrg6aclu"]
+[gd_scene load_steps=42 format=3 uid="uid://dm21nbrg6aclu"]
 
 [ext_resource type="Script" path="res://scripts/controllers/player_controller.gd" id="1_0bvfg"]
 [ext_resource type="Script" path="res://scripts/systems/input_system.gd" id="1_nh1b4"]
@@ -20,8 +20,9 @@
 [ext_resource type="Shape2D" uid="uid://c7aojc7q6al28" path="res://shapes/mat.tres" id="12_hpof6"]
 [ext_resource type="Script" path="res://scripts/controllers/minigames/lockpick.gd" id="13_ncycx"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_alfred.gd" id="16_tdev3"]
-[ext_resource type="Script" path="res://scripts/controllers/walking_npc.gd" id="17_qtyjp"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_will.gd" id="18_bgcwb"]
+[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_walker.gd" id="19_8h2pq"]
+[ext_resource type="Script" path="res://scripts/behaviors/movement_walker.gd" id="19_fld4r"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_thomas.gd" id="20_gfysw"]
 
 [sub_resource type="GDScript" id="GDScript_palwq"]
@@ -99,7 +100,7 @@ script = ExtResource("3_s2ld2")
 
 [node name="timer_system" type="Node" parent="."]
 script = ExtResource("2_20y6c")
-time_limit_in_seconds = 20.0
+time_limit_in_seconds = 1200.0
 
 [node name="dialogue_system" type="Node" parent="."]
 script = ExtResource("4_ghhox")
@@ -374,19 +375,22 @@ script = ExtResource("9_6tywj")
 [node name="collision" type="CollisionShape2D" parent="npc/will/dialogue_range"]
 shape = SubResource("CircleShape2D_01ogc")
 
-[node name="walking npc" type="CharacterBody2D" parent="npc"]
+[node name="walker" type="CharacterBody2D" parent="npc"]
 position = Vector2(1000, 60)
-script = ExtResource("17_qtyjp")
+script = ExtResource("7_x2f58")
+character_name = "Walker"
+dialogue_tree_script = ExtResource("19_8h2pq")
+movement_script = ExtResource("19_fld4r")
 
-[node name="sprite" type="Sprite2D" parent="npc/walking npc"]
+[node name="sprite" type="Sprite2D" parent="npc/walker"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="npc/walking npc"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npc/walker"]
 shape = SubResource("CircleShape2D_rbhma")
 
-[node name="dialogue_range" type="Area2D" parent="npc/walking npc"]
+[node name="dialogue_range" type="Area2D" parent="npc/walker"]
 script = ExtResource("9_6tywj")
 
-[node name="collision" type="CollisionShape2D" parent="npc/walking npc/dialogue_range"]
+[node name="collision" type="CollisionShape2D" parent="npc/walker/dialogue_range"]
 shape = SubResource("CircleShape2D_01ogc")
 
 [node name="thomas" type="CharacterBody2D" parent="npc"]
