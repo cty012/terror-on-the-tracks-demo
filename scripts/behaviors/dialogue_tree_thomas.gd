@@ -1,50 +1,54 @@
 extends DialogueTree
 
-
+var talked = false
 var current = "welcome"
 var tree = {
-    "welcome": {
-        "speech": "Welcome to GSD 405! I am the professor of this course. How can I help you?",
+   "welcome": {
+        "speech": "You encounter an antsy scientist, Thomas Clark, sitting in the dining car.",
+        "choices": [],
+        "result": "intro",
+    },
+    "intro": {
+        "speech": "\"Hello my good sir! Do you need anything? Perhaps a coffee, or a pen? Perhaps even a hug? Forgive me, sir, the current events have me on edge just a bit.\"",
         "choices": [
             {
-                "speech": "Where can I find the syllabus?",
-                "result": "syllabus",
+                "speech": "\"No... I am good, but if you do not mind me asking why are you riled up?\"",
+                "result": "nerves",
             },
             {
-                "speech": "What is your favorite game?",
-                "result": "favorite-game",
+                "speech": "\"No worries Thomas, I know there is a lot going on right now with the murder of Mr. Barnes and the approaching expo.\"",
+                "result": "distracted",
+            },
+            {
+                "speech": "\"Why are you so nervous, Thomas? Do you have something to feel guilty about?\"",
+                "result": "bothered",
             },
         ],
     },
-    "more-q": {
-        "speech": "Any more questions?",
-        "choices": [
-            {
-                "speech": "Where can I find the syllabus?",
-                "result": "syllabus",
-            },
-            {
-                "speech": "What is your favorite game?",
-                "result": "favorite-game",
-            },
-            {
-                "speech": "No.",
-                "result": "end",
-            },
-        ],
-    },
-    "syllabus": {
-        "speech": "On Canvas, obviously.",
+    "nerves": {
+        "speech": "\"Well, for one, there’s a murderer on this very train! Two, this is my very first expo! I have a lot of pressure on showcasing our innovation, the telephone.\"",
         "choices": [],
-        "result": "more-q",
+        "result": "end",
     },
-    "favorite-game": {
-        "speech": "My favorite game is Horror in the Classroom.",
+    "distracted": {
+        "speech": "\"Yes, it is true that this is my first time attending this prestigious celebration of worldwide innovation showcasing our innovation, the telephone, and it is already starting off horrifically.\"",
         "choices": [],
-        "result": "more-q",
+        "result": "end",
+        "sus":-25
+    },
+    "bothered": {
+        "speech": "\"W-What? No! I-I just... I didn’t do anything, why are you accusing me? I promise it was not me!\"",
+        "choices": [],
+        "result": "shaken",
+    },
+    "shaken": {
+        "speech": "\"Thomas starts fidgeting even more and is clearly visibly shaken by your accusation.\"",
+        "choices": [],
+        "result": "end",
+        "sus":25
     },
     "end": {
-        "speech": "Hope you have a wonderful day!",
+        "speech": "It doesn't seem like you'll get much more out of Thomas now as he starts to mumble to himself worrying.",
         "choices": [],
         "result": null,
     },
@@ -52,16 +56,25 @@ var tree = {
 
 
 func reset():
-    current = "welcome"
-
+    match talked:
+        false:
+            current = "welcome"
+        true:
+            current = "end"
 
 func has_ended():
+    talked = true
     return current == null;
 
 
 func get_speech():
     return tree[current]["speech"]
 
+func get_sus():
+    if tree[current].has("sus"):
+        return tree[current]["sus"]
+    else:
+        return 0
 
 func get_choices():
     return tree[current]["choices"].map(func (choice): return choice["speech"])
