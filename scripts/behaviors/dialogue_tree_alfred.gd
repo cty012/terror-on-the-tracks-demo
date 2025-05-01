@@ -1,50 +1,52 @@
 extends DialogueTree
 
-
+var talked = false
 var current = "welcome"
+var event_system: EventSystem
+
 var tree = {
     "welcome": {
-        "speech": "Welcome to GSD 405! I am the professor of this course. How can I help you?",
+        "speech": "You encounter an old scientist, Alfred Miller, sitting in the dining car and stirring his coffee thoughtfully.",
+        "choices": [],
+        "result": "intro",
+    },
+    "intro": {
+        "speech": "\"Quite an unsettling morning, isn’t it? Certainly more excitement than I bargained for.\"",
         "choices": [
             {
-                "speech": "Where can I find the syllabus?",
-                "result": "syllabus",
-            },
-            {
-                "speech": "What is your favorite game?",
-                "result": "favorite-game",
-            },
+                "speech": "\"Yes, what a tragic loss. He was a great fellow investor.\"",
+                "result": "piqued",
+            }
         ],
     },
-    "more-q": {
-        "speech": "Any more questions?",
+    "piqued": {
+        "speech": "\"Fellow Investor? Interesting. Well, when the time comes, I've got a knack for getting things one might need.\"",
+        "choices": [],
+        "result": "poke",
+        "sus": 25
+    },
+    "poke": {
+        "speech": "You notice as Alfred winks at you and starts to smile.",
+        "choices": [],
+        "result": "detective",
+    },
+    "detective": {
+        "speech": "\"Let me know if I can be of help to you ... Detective.\"",
         "choices": [
             {
-                "speech": "Where can I find the syllabus?",
-                "result": "syllabus",
-            },
-            {
-                "speech": "What is your favorite game?",
-                "result": "favorite-game",
-            },
-            {
-                "speech": "No.",
-                "result": "end",
-            },
+                "speech": "\"Detective? I'm not quite sure what you mean.\"",
+                "result": "advice",
+            }
         ],
     },
-    "syllabus": {
-        "speech": "On Canvas, obviously.",
+    "advice": {
+        "speech": "\"When you get as old as me, you learn a few things about people. Don't worry, I won't be sharing secrets anytime soon.\"",
         "choices": [],
-        "result": "more-q",
-    },
-    "favorite-game": {
-        "speech": "My favorite game is Horror in the Classroom.",
-        "choices": [],
-        "result": "more-q",
+        "result": "end",
+        "sus":-25
     },
     "end": {
-        "speech": "Hope you have a wonderful day!",
+        "speech": "It may be useful to come back to Alfred if you need something later. There must be more to find around the train.",
         "choices": [],
         "result": null,
     },
@@ -52,16 +54,25 @@ var tree = {
 
 
 func reset():
-    current = "welcome"
-
+    match talked:
+        false:
+            current = "welcome"
+        true:
+            current = "end"
 
 func has_ended():
+    talked = true
     return current == null;
 
 
 func get_speech():
     return tree[current]["speech"]
 
+func get_sus():
+    if tree[current].has("sus"):
+        return tree[current]["sus"]
+    else:
+        return 0
 
 func get_choices():
     return tree[current]["choices"].map(func (choice): return choice["speech"])
@@ -74,3 +85,4 @@ func next():
 
 func choose(index: int):
     current = tree[current]["choices"][index]["result"]
+    

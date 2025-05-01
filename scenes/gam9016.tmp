@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://dm21nbrg6aclu"]
+[gd_scene load_steps=57 format=3 uid="uid://dm21nbrg6aclu"]
 
 [ext_resource type="Script" path="res://scripts/controllers/player_controller.gd" id="1_0bvfg"]
 [ext_resource type="Script" path="res://scripts/systems/input_system.gd" id="1_nh1b4"]
@@ -30,6 +30,7 @@
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_walter.gd" id="22_b24bu"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_amelia.gd" id="24_4udyb"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_victoria.gd" id="24_46r2n"]
+[ext_resource type="Script" path="res://scripts/controllers/interactable_range_controller.gd" id="30_ycg23"]
 
 [sub_resource type="GDScript" id="GDScript_palwq"]
 script/source = "extends Control
@@ -937,9 +938,9 @@ shape = SubResource("RectangleShape2D_5185o")
 scale = Vector2(80, 40)
 texture = SubResource("CanvasTexture_18old")
 
-[node name="doorreal" type="CharacterBody2D" parent="car2/room3"]
+[node name="doorreal" type="StaticBody2D" parent="car2/room3"]
 position = Vector2(0, 180)
-disable_mode = 1
+script = ExtResource("3_7al2g")
 
 [node name="collision" type="CollisionShape2D" parent="car2/room3/doorreal"]
 shape = SubResource("RectangleShape2D_oxbuo")
@@ -949,6 +950,7 @@ scale = Vector2(100, 40)
 texture = SubResource("CanvasTexture_18old")
 
 [node name="minigamebox" type="Area2D" parent="car2/room3/doorreal"]
+script = ExtResource("30_ycg23")
 
 [node name="collision" type="CollisionShape2D" parent="car2/room3/doorreal/minigamebox"]
 shape = SubResource("CircleShape2D_e2fs2")

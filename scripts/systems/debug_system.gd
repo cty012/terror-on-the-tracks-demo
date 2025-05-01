@@ -16,7 +16,3 @@ func _process(delta: float) -> void:
         event_system.emit("game::minigame::start", {
             "node": $/root/game_scene/minigame_lockpick,
         })
-    elif input_system.is_key_just_pressed(KEY_EQUAL):
-        event_system.emit("game::sus-change", { "amount": 10 })
-    elif input_system.is_key_just_pressed(KEY_MINUS):
-        event_system.emit("game::sus-change", { "amount": -10 })

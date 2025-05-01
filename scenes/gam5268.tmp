@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://dm21nbrg6aclu"]
+[gd_scene load_steps=50 format=3 uid="uid://dm21nbrg6aclu"]
 
 [ext_resource type="Script" path="res://scripts/controllers/player_controller.gd" id="1_0bvfg"]
 [ext_resource type="Script" path="res://scripts/systems/input_system.gd" id="1_nh1b4"]
@@ -21,15 +21,11 @@
 [ext_resource type="Script" path="res://scripts/controllers/minigames/lockpick.gd" id="13_ncycx"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_alfred.gd" id="16_tdev3"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_will.gd" id="18_bgcwb"]
+[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_walker.gd" id="19_8h2pq"]
 [ext_resource type="Script" path="res://scripts/behaviors/movement_walter.gd" id="19_fld4r"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_attendant.gd" id="20_fayim"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_thomas.gd" id="20_gfysw"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_lucy.gd" id="21_7xi0l"]
 [ext_resource type="Script" path="res://scripts/behaviors/movement_amelia.gd" id="22_6ysmg"]
 [ext_resource type="Script" path="res://scripts/behaviors/movement_victoria.gd" id="22_8psrm"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_walter.gd" id="22_b24bu"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_amelia.gd" id="24_4udyb"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_victoria.gd" id="24_46r2n"]
 
 [sub_resource type="GDScript" id="GDScript_palwq"]
 script/source = "extends Control
@@ -109,14 +105,8 @@ size = Vector2(80, 40)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_18old"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oxbuo"]
-size = Vector2(100, 40)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5185o"]
 size = Vector2(80, 40)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_e2fs2"]
-radius = 60.0
 
 [node name="game_scene" type="Node2D"]
 
@@ -247,7 +237,7 @@ theme_override_font_sizes/font_size = 18
 text = "00 : 00"
 vertical_alignment = 1
 
-[node name="sus_meter" type="ProgressBar" parent="camera/hud"]
+[node name="sus-meter" type="ProgressBar" parent="camera/hud"]
 layout_mode = 0
 offset_left = 140.0
 offset_top = 30.0
@@ -422,8 +412,8 @@ shape = SubResource("CircleShape2D_01ogc")
 [node name="attendant" type="CharacterBody2D" parent="npc"]
 position = Vector2(750, -250)
 script = ExtResource("7_x2f58")
-character_name = "Train Attendant"
-dialogue_tree_script = ExtResource("20_fayim")
+character_name = "Thomas"
+dialogue_tree_script = ExtResource("20_gfysw")
 
 [node name="sprite" type="Sprite2D" parent="npc/attendant"]
 
@@ -437,10 +427,10 @@ script = ExtResource("9_6tywj")
 shape = SubResource("CircleShape2D_01ogc")
 
 [node name="lucy" type="CharacterBody2D" parent="npc"]
-position = Vector2(1390, 10)
+position = Vector2(1400, 0)
 script = ExtResource("7_x2f58")
-character_name = "Lucy"
-dialogue_tree_script = ExtResource("21_7xi0l")
+character_name = "Thomas"
+dialogue_tree_script = ExtResource("20_gfysw")
 
 [node name="sprite" type="Sprite2D" parent="npc/lucy"]
 
@@ -451,19 +441,18 @@ shape = SubResource("CircleShape2D_cdq3x")
 script = ExtResource("9_6tywj")
 
 [node name="collision" type="CollisionShape2D" parent="npc/lucy/dialogue_range"]
-position = Vector2(-90, 80)
 shape = SubResource("CircleShape2D_01ogc")
 
 [node name="walter" type="CharacterBody2D" parent="npc"]
 position = Vector2(-1200, 120)
 script = ExtResource("7_x2f58")
-character_name = "Walter"
-dialogue_tree_script = ExtResource("22_b24bu")
+character_name = "Walker"
+dialogue_tree_script = ExtResource("19_8h2pq")
 movement_script = ExtResource("19_fld4r")
 
 [node name="sprite" type="Sprite2D" parent="npc/walter"]
 
-[node name="collision" type="CollisionShape2D" parent="npc/walter"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npc/walter"]
 shape = SubResource("CircleShape2D_rbhma")
 
 [node name="dialogue_range" type="Area2D" parent="npc/walter"]
@@ -475,13 +464,13 @@ shape = SubResource("CircleShape2D_01ogc")
 [node name="victoria" type="CharacterBody2D" parent="npc"]
 position = Vector2(-400, 250)
 script = ExtResource("7_x2f58")
-character_name = "Victoria"
-dialogue_tree_script = ExtResource("24_46r2n")
+character_name = "Walker"
+dialogue_tree_script = ExtResource("19_8h2pq")
 movement_script = ExtResource("22_8psrm")
 
 [node name="sprite" type="Sprite2D" parent="npc/victoria"]
 
-[node name="collision" type="CollisionShape2D" parent="npc/victoria"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npc/victoria"]
 shape = SubResource("CircleShape2D_rbhma")
 
 [node name="dialogue_range" type="Area2D" parent="npc/victoria"]
@@ -493,8 +482,8 @@ shape = SubResource("CircleShape2D_01ogc")
 [node name="amelia" type="CharacterBody2D" parent="npc"]
 position = Vector2(1650, 200)
 script = ExtResource("7_x2f58")
-character_name = "Amelia"
-dialogue_tree_script = ExtResource("24_4udyb")
+character_name = "Walker"
+dialogue_tree_script = ExtResource("19_8h2pq")
 movement_script = ExtResource("22_6ysmg")
 
 [node name="sprite" type="Sprite2D" parent="npc/amelia"]
@@ -859,55 +848,12 @@ shape = SubResource("RectangleShape2D_jifwn")
 scale = Vector2(80, 40)
 texture = SubResource("CanvasTexture_18old")
 
-[node name="doorreal" type="CollisionShape2D" parent="car2/room1"]
-position = Vector2(0, 180)
-shape = SubResource("RectangleShape2D_oxbuo")
-
-[node name="drtex" type="Sprite2D" parent="car2/room1/doorreal"]
-scale = Vector2(100, 40)
-texture = SubResource("CanvasTexture_18old")
-
 [node name="doorright" type="CollisionShape2D" parent="car2/room1"]
 position = Vector2(90, 180)
 shape = SubResource("RectangleShape2D_5185o")
 
 [node name="drtex" type="Sprite2D" parent="car2/room1/doorright"]
 scale = Vector2(80, 40)
-texture = SubResource("CanvasTexture_18old")
-
-[node name="room2" type="StaticBody2D" parent="car2"]
-position = Vector2(1300, -110)
-
-[node name="rightwall" type="CollisionShape2D" parent="car2/room2"]
-position = Vector2(150, 0)
-shape = SubResource("RectangleShape2D_nhh0p")
-
-[node name="lwalltex" type="Sprite2D" parent="car2/room2/rightwall"]
-scale = Vector2(40, 400)
-texture = SubResource("CanvasTexture_8apc3")
-
-[node name="doorleft" type="CollisionShape2D" parent="car2/room2"]
-position = Vector2(-90, 180)
-shape = SubResource("RectangleShape2D_jifwn")
-
-[node name="dltex" type="Sprite2D" parent="car2/room2/doorleft"]
-scale = Vector2(80, 40)
-texture = SubResource("CanvasTexture_18old")
-
-[node name="doorright" type="CollisionShape2D" parent="car2/room2"]
-position = Vector2(90, 180)
-shape = SubResource("RectangleShape2D_5185o")
-
-[node name="drtex" type="Sprite2D" parent="car2/room2/doorright"]
-scale = Vector2(80, 40)
-texture = SubResource("CanvasTexture_18old")
-
-[node name="doorreal" type="CollisionShape2D" parent="car2/room2"]
-position = Vector2(0, 180)
-shape = SubResource("RectangleShape2D_oxbuo")
-
-[node name="drtex" type="Sprite2D" parent="car2/room2/doorreal"]
-scale = Vector2(100, 40)
 texture = SubResource("CanvasTexture_18old")
 
 [node name="room3" type="StaticBody2D" parent="car2"]
@@ -937,21 +883,32 @@ shape = SubResource("RectangleShape2D_5185o")
 scale = Vector2(80, 40)
 texture = SubResource("CanvasTexture_18old")
 
-[node name="doorreal" type="CharacterBody2D" parent="car2/room3"]
-position = Vector2(0, 180)
-disable_mode = 1
+[node name="room2" type="StaticBody2D" parent="car2"]
+position = Vector2(1300, -110)
 
-[node name="collision" type="CollisionShape2D" parent="car2/room3/doorreal"]
-shape = SubResource("RectangleShape2D_oxbuo")
+[node name="rightwall" type="CollisionShape2D" parent="car2/room2"]
+position = Vector2(150, 0)
+shape = SubResource("RectangleShape2D_nhh0p")
 
-[node name="drtex" type="Sprite2D" parent="car2/room3/doorreal"]
-scale = Vector2(100, 40)
+[node name="lwalltex" type="Sprite2D" parent="car2/room2/rightwall"]
+scale = Vector2(40, 400)
+texture = SubResource("CanvasTexture_8apc3")
+
+[node name="doorleft" type="CollisionShape2D" parent="car2/room2"]
+position = Vector2(-90, 180)
+shape = SubResource("RectangleShape2D_jifwn")
+
+[node name="dltex" type="Sprite2D" parent="car2/room2/doorleft"]
+scale = Vector2(80, 40)
 texture = SubResource("CanvasTexture_18old")
 
-[node name="minigamebox" type="Area2D" parent="car2/room3/doorreal"]
+[node name="doorright" type="CollisionShape2D" parent="car2/room2"]
+position = Vector2(90, 180)
+shape = SubResource("RectangleShape2D_5185o")
 
-[node name="collision" type="CollisionShape2D" parent="car2/room3/doorreal/minigamebox"]
-shape = SubResource("CircleShape2D_e2fs2")
+[node name="drtex" type="Sprite2D" parent="car2/room2/doorright"]
+scale = Vector2(80, 40)
+texture = SubResource("CanvasTexture_18old")
 
 [node name="mat0" type="Area2D" parent="car2"]
 position = Vector2(650, 0)

@@ -2,7 +2,8 @@ extends Node
 class_name DialogueSystem
 
 var event_system: EventSystem
-
+var game_state_system: GameStateSystem
+var sus_bar: ProgressBar
 
 var player: CharacterBody2D
 var npc_in_range: Array[CharacterBody2D] = []
@@ -58,6 +59,8 @@ func update_speech(character_name: String, dialogue_tree: DialogueTree) -> void:
         item.text = choices[i]
         choice_list.add_child(item)
 
+func update_sus(dialogue_tree: DialogueTree) -> void:
+    event_system.emit("game::sus-change", { "amount": dialogue_tree.get_sus() })
 
 # Automatically called when an NPC announces that the player is inside/outside its dialogue range
 func on_dialogue_detect(event) -> void:
@@ -94,6 +97,12 @@ func on_dialogue_end(event) -> void:
 
     # Update UI
     ui_dialogue.visible = false
+    
+    if (sus_bar.get_sus_value() >= 100):
+        game_state_system.game_over({
+        "win": false,
+        "msg": "You were detected, you failed."
+        })
 
 
 func on_dialogue_next(event) -> void:
@@ -102,6 +111,7 @@ func on_dialogue_next(event) -> void:
         on_dialogue_end({})
     else:
         update_speech(npc_in_dialogue.character_name, npc_in_dialogue.dialogue_tree)
+        update_sus(npc_in_dialogue.dialogue_tree)
 
 
 func on_dialogue_choose(event) -> void:
@@ -111,11 +121,14 @@ func on_dialogue_choose(event) -> void:
         on_dialogue_end({})
     else:
         update_speech(npc_in_dialogue.character_name, npc_in_dialogue.dialogue_tree)
+        update_sus(npc_in_dialogue.dialogue_tree)
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     event_system = $/root/game_scene/event_system
+    game_state_system = $/root/game_scene/game_state_system
+    sus_bar = $/root/game_scene/camera/hud/sus_meter
     player = $/root/game_scene/player
     ui_dialogue = $/root/game_scene/camera/hud/dialogue
     on_dialogue_end({})

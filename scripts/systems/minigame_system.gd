@@ -3,12 +3,13 @@ class_name MinigameSystem
 
 var event_system: EventSystem
 
+var player: CharacterBody2D
+var obj_in_range: Array[StaticBody2D] = []
 
 var default_camera: Camera2D
 var current_minigame: Node = null
 var lsid_minigame_start := 0
 var lsid_minigame_end := 0
-
 
 func on_minigame_start(event):
     # Must not have a currently active minigame
@@ -35,6 +36,7 @@ func on_minigame_end(event):
 func _ready() -> void:
     event_system = $/root/game_scene/event_system
     default_camera = $/root/game_scene/camera
+    player = $/root/game_scene/player
     lsid_minigame_start = event_system.add_listener("game::minigame::start", on_minigame_start)
     lsid_minigame_end = event_system.add_listener("game::minigame::end", on_minigame_end)
 
