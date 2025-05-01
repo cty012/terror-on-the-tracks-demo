@@ -17,6 +17,9 @@ func has_ended() -> bool:
 func get_speech() -> String:
     return ""
 
+func get_sus() -> int:
+    return 0
+    
 
 ## Returns the list of replies to the character's speech.
 ## If nothing to reply, return empty array.

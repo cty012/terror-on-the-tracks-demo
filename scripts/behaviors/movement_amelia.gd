@@ -6,8 +6,8 @@ enum MOVEMENT_STATE {
     RIGHT = 2, RIGHT_IDLE = 3,
 }
 
-const SPEED := 4.0
-const MOVING_TIME := 3.9
+const SPEED := 3.0
+const MOVING_TIME := 5.2
 const IDLE_TIME := 0.5
 const MOVING_STATES = [
     MOVEMENT_STATE.LEFT,

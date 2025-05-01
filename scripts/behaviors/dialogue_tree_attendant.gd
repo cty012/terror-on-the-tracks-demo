@@ -4,46 +4,46 @@ var talked = false
 var current = "welcome"
 var tree = {
    "welcome": {
-        "speech": "You encounter a quiet, stoic scientist, Will Dalton, sitting in the dining car.",
+        "speech": "You encounter the train attendant busy with one of his tasks.",
         "choices": [],
         "result": "intro",
     },
     "intro": {
-        "speech": "\"Hello...\"",
+        "speech": "\"Hello sir, how can I help you?\"",
         "choices": [
             {
-                "speech": "\"Was Mr. Barnes close to you?\"",
-                "result": "sad",
+                "speech": "\"Certainly! Here you go. Let me know if anything seems out of place.\"",
+                "result": "duty",
             },
             {
-                "speech": "\"Hey, do you know anything about the man who died, Mr. Barnes?\"",
-                "result": "shame",
+                "speech": "\"Is everything okay with the cargo? I want to make sure nothing valuable is missing.\"",
+                "result": "checking",
             },
             {
-                "speech": "\"You’re very quiet for a man who is on a train with a murderer.\"",
-                "result": "bothered",
+                "speech": "\"I need the cargo list immediately. Hand it over now!\"",
+                "result": "taken aback",
             },
         ],
     },
-    "sad": {
-        "speech": "\"No, not particularly... He was a great business man, smart enough to invest in our invention, the telephone. Too bad he died before he could see the end product.\"",
+    "duty": {
+        "speech": "\"Certainly! Here you go. Let me know if anything seems out of place.\"",
         "choices": [],
         "result": "end",
         "sus":-25
     },
-    "shame": {
-        "speech": "\"All I know is that man was interested in investing in our invention, the telephone. A shame he died, we could have used that extra money.\"",
-        "choices": [],
-        "result": "end",
-    },
-    "bothered": {
-        "speech": "\"And you are quite a nosy young man. I would prefer if you would leave me alone now.\"",
+    "taken aback": {
+        "speech": "\"That is a very odd request, but I guess you can take a look.\"",
         "choices": [],
         "result": "end",
         "sus":25
     },
+    "checking": {
+        "speech": "\"The cargo inventory seems to be in order, but here is the list if you would like to double check.\"",
+        "choices": [],
+        "result": "end",
+    },
     "end": {
-        "speech": "Will doesn't seem like he wants to say any more as he turns to look out the window.",
+        "speech": "The train attendant has let you take a copy of the cargo inventory list. It may come in handy later.",
         "choices": [],
         "result": null,
     },
@@ -64,7 +64,7 @@ func has_ended():
 
 func get_speech():
     return tree[current]["speech"]
-    
+
 func get_sus():
     if tree[current].has("sus"):
         return tree[current]["sus"]

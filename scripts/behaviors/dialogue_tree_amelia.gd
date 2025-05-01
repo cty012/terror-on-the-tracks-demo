@@ -4,46 +4,46 @@ var talked = false
 var current = "welcome"
 var tree = {
    "welcome": {
-        "speech": "You encounter a quiet, stoic scientist, Will Dalton, sitting in the dining car.",
+        "speech": "You encounter Amelia Brown, the young woman who found the dead body. She's trying her best to cope with her recent traumatic experiences.",
         "choices": [],
         "result": "intro",
     },
     "intro": {
-        "speech": "\"Hello...\"",
+        "speech": "\"Oh hi... um... sorry... I’m not really up for chatting right now\"",
         "choices": [
             {
-                "speech": "\"Was Mr. Barnes close to you?\"",
-                "result": "sad",
+                "speech": "\"Why? Are you hurt?\"",
+                "result": "blood",
             },
             {
-                "speech": "\"Hey, do you know anything about the man who died, Mr. Barnes?\"",
-                "result": "shame",
+                "speech": "\"It was only a little blood…\"",
+                "result": "crying",
             },
             {
-                "speech": "\"You’re very quiet for a man who is on a train with a murderer.\"",
-                "result": "bothered",
+                "speech": "\"That’s okay, I understand that it's been difficult. Let me know if I can help you with anything.\"",
+                "result": "relief",
             },
         ],
     },
-    "sad": {
-        "speech": "\"No, not particularly... He was a great business man, smart enough to invest in our invention, the telephone. Too bad he died before he could see the end product.\"",
+    "relief": {
+        "speech": "\"Thank you sir, I am just really frightened. I’ve never seen a dead body before.\"",
         "choices": [],
         "result": "end",
         "sus":-25
     },
-    "shame": {
-        "speech": "\"All I know is that man was interested in investing in our invention, the telephone. A shame he died, we could have used that extra money.\"",
+    "blood": {
+        "speech": "\"No... I just... there was so much blood... I think I'm going to be sick.\"",
         "choices": [],
         "result": "end",
     },
-    "bothered": {
-        "speech": "\"And you are quite a nosy young man. I would prefer if you would leave me alone now.\"",
+    "crying": {
+        "speech": "Amelia doesn't even respond to you. She quickly turns away and it's clear to you that she's holding back tears.",
         "choices": [],
         "result": "end",
         "sus":25
     },
     "end": {
-        "speech": "Will doesn't seem like he wants to say any more as he turns to look out the window.",
+        "speech": "Amelia looks like she just wants to go back to pacing the halls. It's probably best that you don't ask any more questions for now.",
         "choices": [],
         "result": null,
     },
@@ -64,7 +64,7 @@ func has_ended():
 
 func get_speech():
     return tree[current]["speech"]
-    
+
 func get_sus():
     if tree[current].has("sus"):
         return tree[current]["sus"]
