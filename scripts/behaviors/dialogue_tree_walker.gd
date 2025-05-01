@@ -1,5 +1,4 @@
-extends Resource
-class_name DialogueTree
+extends DialogueTree
 
 
 # 0: start, 1: end
