@@ -41,6 +41,10 @@ func in_dialogue() -> bool:
     return npc_in_dialogue != null
 
 
+func update_image(npc_image: Texture2D) -> void:
+    ui_dialogue.get_node("npc-image").texture = npc_image
+
+
 func update_speech(character_name: String, dialogue_tree: DialogueTree) -> void:
     ui_dialogue.get_node("speech_panel/character_name").text = character_name
     ui_dialogue.get_node("speech_panel/character_speech").text = dialogue_tree.get_speech()
@@ -59,8 +63,10 @@ func update_speech(character_name: String, dialogue_tree: DialogueTree) -> void:
         item.text = choices[i]
         choice_list.add_child(item)
 
+
 func update_sus(dialogue_tree: DialogueTree) -> void:
     event_system.emit("game::sus-change", { "amount": dialogue_tree.get_sus() })
+
 
 # Automatically called when an NPC announces that the player is inside/outside its dialogue range
 func on_dialogue_detect(event) -> void:
@@ -88,6 +94,7 @@ func on_dialogue_start(event) -> void:
     npc_in_dialogue.dialogue_tree.reset()
 
     # Update UI
+    update_image(npc_in_dialogue.character_image)
     update_speech(npc_in_dialogue.character_name, npc_in_dialogue.dialogue_tree)
     ui_dialogue.visible = true
 
@@ -97,6 +104,7 @@ func on_dialogue_end(event) -> void:
 
     # Update UI
     ui_dialogue.visible = false
+    update_image(null)
     
     if (sus_bar.get_sus_value() >= 100):
         game_state_system.game_over({
