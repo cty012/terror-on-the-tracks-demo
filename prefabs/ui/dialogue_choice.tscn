@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://4stcvr5q4a0j"]
+[gd_scene load_steps=3 format=3 uid="uid://4stcvr5q4a0j"]
 
+[ext_resource type="FontFile" uid="uid://bm5nfnlcmuv7r" path="res://resources/fonts/VCR_OSD_MONO_1.001.ttf" id="1_foka8"]
 [ext_resource type="Script" path="res://scripts/controllers/ui_dialogue_choice_controller.gd" id="1_xb56u"]
 
 [node name="dialogue_choice" type="Button"]
@@ -8,5 +9,6 @@ offset_left = -300.0
 offset_top = -30.0
 offset_right = 300.0
 offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("1_foka8")
 text = "[CHOICE]"
 script = ExtResource("1_xb56u")
