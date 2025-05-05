@@ -4,6 +4,7 @@ var util := preload("res://scripts/common/util.gd").new()
 
 
 @export var character_name := ""
+@export var character_image: Texture2D
 @export var dialogue_tree_script: GDScript = null
 @export var movement_script: GDScript = null
 

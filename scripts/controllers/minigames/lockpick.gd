@@ -1,4 +1,4 @@
-extends Node
+extends Minigame
 
 
 ## Minigame: Lockpicking
@@ -54,9 +54,11 @@ func start():
 # All minigame controllers need this too
 # Called every frame after the minigame is enabled
 func run(delta: float):
-    # Check if player gives up
+    # Debug
+    if input_system.is_key_just_pressed(KEY_M):
+        event_system.emit("game::minigame-end", { "win": true })
     if input_system.is_key_just_pressed(KEY_N):
-        event_system.emit("game::minigame::end", { "win": false })
+        event_system.emit("game::minigame-end", { "win": false })
 
     # Push the pins
     var previous_locks_correct = true
@@ -78,7 +80,7 @@ func run(delta: float):
     # Check if SPACE is pressed
     if input_system.is_key_just_pressed(KEY_SPACE):
         if previous_locks_correct:
-            event_system.emit("game::minigame::end", { "win": true })
+            event_system.emit("game::minigame-end", { "win": true })
 
 
 func _ready() -> void:

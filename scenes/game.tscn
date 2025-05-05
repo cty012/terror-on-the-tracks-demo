@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://dm21nbrg6aclu"]
+[gd_scene load_steps=64 format=3 uid="uid://dm21nbrg6aclu"]
 
 [ext_resource type="Script" path="res://scripts/controllers/player_controller.gd" id="1_0bvfg"]
 [ext_resource type="Script" path="res://scripts/systems/input_system.gd" id="1_nh1b4"]
@@ -17,19 +17,27 @@
 [ext_resource type="PackedScene" uid="uid://d1gtcvhspy8ya" path="res://prefabs/ui/action_label.tscn" id="9_wm34p"]
 [ext_resource type="Script" path="res://scripts/controllers/ui_sus_meter_controller.gd" id="10_u7f2y"]
 [ext_resource type="Script" path="res://scripts/controllers/welcome_mat_controller.gd" id="11_k3sqm"]
+[ext_resource type="Texture2D" uid="uid://cct0w0qhp8pa2" path="res://resources/images/otto.png" id="11_xq84h"]
+[ext_resource type="Texture2D" uid="uid://dhmlx0rjmpc0d" path="res://resources/images/amelia.png" id="12_2wkwq"]
 [ext_resource type="Shape2D" uid="uid://c7aojc7q6al28" path="res://shapes/mat.tres" id="12_hpof6"]
 [ext_resource type="Script" path="res://scripts/controllers/minigames/lockpick.gd" id="13_ncycx"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_alfred.gd" id="16_tdev3"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_will.gd" id="18_bgcwb"]
-[ext_resource type="Script" path="res://scripts/behaviors/movement_walter.gd" id="19_fld4r"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_attendant.gd" id="20_fayim"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_thomas.gd" id="20_gfysw"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_lucy.gd" id="21_7xi0l"]
-[ext_resource type="Script" path="res://scripts/behaviors/movement_amelia.gd" id="22_6ysmg"]
-[ext_resource type="Script" path="res://scripts/behaviors/movement_victoria.gd" id="22_8psrm"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_walter.gd" id="22_b24bu"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_amelia.gd" id="24_4udyb"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_victoria.gd" id="24_46r2n"]
+[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_alfred.gd" id="16_tdev3"]
+[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_will.gd" id="18_bgcwb"]
+[ext_resource type="Texture2D" uid="uid://c3on3b3ljc5sx" path="res://resources/images/willDalton.png" id="19_5a7pe"]
+[ext_resource type="Script" path="res://scripts/behaviors/movement/movement_walter.gd" id="19_fld4r"]
+[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_attendant.gd" id="20_fayim"]
+[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_thomas.gd" id="20_gfysw"]
+[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_lucy.gd" id="21_7xi0l"]
+[ext_resource type="Script" path="res://scripts/behaviors/movement/movement_amelia.gd" id="22_6ysmg"]
+[ext_resource type="Script" path="res://scripts/behaviors/movement/movement_victoria.gd" id="22_8psrm"]
+[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_walter.gd" id="22_b24bu"]
+[ext_resource type="Texture2D" uid="uid://oej3l0kyfn35" path="res://resources/images/attendant.png" id="22_bth0l"]
+[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_amelia.gd" id="24_4udyb"]
+[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_victoria.gd" id="24_46r2n"]
+[ext_resource type="Texture2D" uid="uid://chs254a054atg" path="res://resources/images/lucy.png" id="24_ptwwg"]
+[ext_resource type="Texture2D" uid="uid://dy58isv7c7t0b" path="res://resources/images/WalterGrimm.png" id="26_j8biy"]
+[ext_resource type="Script" path="res://scripts/controllers/minigame_trigger_controller.gd" id="36_se64d"]
+[ext_resource type="Script" path="res://scripts/behaviors/minigame_trigger_callbacks/door_lock_in_third_car.gd" id="37_widnv"]
 
 [sub_resource type="GDScript" id="GDScript_palwq"]
 script/source = "extends Control
@@ -171,10 +179,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 51.0
-offset_top = -48.0
-offset_right = 51.0
-offset_bottom = -48.0
 grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_palwq")
@@ -184,9 +188,9 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 200.0
+offset_left = 190.0
 offset_top = -150.0
-offset_right = 1200.0
+offset_right = 1090.0
 grow_vertical = 0
 
 [node name="character_name" type="Label" parent="camera/hud/dialogue/speech_panel"]
@@ -201,7 +205,7 @@ text = "[CHARACTER NAME]"
 layout_mode = 0
 offset_left = 20.0
 offset_top = 40.0
-offset_right = 980.0
+offset_right = 880.0
 offset_bottom = 141.0
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
 autowrap_mode = 3
@@ -221,6 +225,25 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 30
 alignment = 1
+
+[node name="main-character-image" type="TextureRect" parent="camera/hud/dialogue"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 450.0
+offset_right = 320.0
+offset_bottom = 750.0
+texture = ExtResource("11_xq84h")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="npc-image" type="TextureRect" parent="camera/hud/dialogue"]
+layout_mode = 0
+offset_left = 960.0
+offset_top = 450.0
+offset_right = 1260.0
+offset_bottom = 750.0
+expand_mode = 2
+stretch_mode = 4
 
 [node name="action_list" type="VBoxContainer" parent="camera/hud"]
 layout_mode = 1
@@ -389,6 +412,7 @@ shape = SubResource("CircleShape2D_01ogc")
 position = Vector2(400, 250)
 script = ExtResource("7_x2f58")
 character_name = "Will"
+character_image = ExtResource("19_5a7pe")
 dialogue_tree_script = ExtResource("18_bgcwb")
 
 [node name="sprite" type="Sprite2D" parent="npc/will"]
@@ -423,6 +447,7 @@ shape = SubResource("CircleShape2D_01ogc")
 position = Vector2(750, -250)
 script = ExtResource("7_x2f58")
 character_name = "Train Attendant"
+character_image = ExtResource("22_bth0l")
 dialogue_tree_script = ExtResource("20_fayim")
 
 [node name="sprite" type="Sprite2D" parent="npc/attendant"]
@@ -440,6 +465,7 @@ shape = SubResource("CircleShape2D_01ogc")
 position = Vector2(1390, 10)
 script = ExtResource("7_x2f58")
 character_name = "Lucy"
+character_image = ExtResource("24_ptwwg")
 dialogue_tree_script = ExtResource("21_7xi0l")
 
 [node name="sprite" type="Sprite2D" parent="npc/lucy"]
@@ -458,6 +484,7 @@ shape = SubResource("CircleShape2D_01ogc")
 position = Vector2(-1200, 120)
 script = ExtResource("7_x2f58")
 character_name = "Walter"
+character_image = ExtResource("26_j8biy")
 dialogue_tree_script = ExtResource("22_b24bu")
 movement_script = ExtResource("19_fld4r")
 
@@ -494,6 +521,7 @@ shape = SubResource("CircleShape2D_01ogc")
 position = Vector2(1650, 200)
 script = ExtResource("7_x2f58")
 character_name = "Amelia"
+character_image = ExtResource("12_2wkwq")
 dialogue_tree_script = ExtResource("24_4udyb")
 movement_script = ExtResource("22_6ysmg")
 
@@ -948,7 +976,12 @@ shape = SubResource("RectangleShape2D_oxbuo")
 scale = Vector2(100, 40)
 texture = SubResource("CanvasTexture_18old")
 
-[node name="minigamebox" type="Area2D" parent="car2/room3/doorreal"]
+[node name="minigamebox" type="Area2D" parent="car2/room3/doorreal" node_paths=PackedStringArray("minigame_node")]
+script = ExtResource("36_se64d")
+minigame_name = "lockpick"
+minigame_node = NodePath("../../../../minigame_lockpick")
+replay_mode = 1
+callback_on_minigame_end = ExtResource("37_widnv")
 
 [node name="collision" type="CollisionShape2D" parent="car2/room3/doorreal/minigamebox"]
 shape = SubResource("CircleShape2D_e2fs2")
