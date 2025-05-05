@@ -12,7 +12,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-    if input_system.is_key_just_pressed(KEY_M):
-        event_system.emit("game::minigame::start", {
-            "node": $/root/game_scene/minigame_lockpick,
-        })
+    pass
