@@ -234,9 +234,9 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 190.0
+offset_left = 240.0
 offset_top = -170.0
-offset_right = 1090.0
+offset_right = 1040.0
 offset_bottom = -20.0
 grow_vertical = 0
 
@@ -245,7 +245,7 @@ show_behind_parent = true
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
-offset_right = 910.0
+offset_right = 810.0
 offset_bottom = 160.0
 color = Color(0.509286, 0.509286, 0.509286, 0.745098)
 
@@ -262,10 +262,10 @@ text = "[CHARACTER NAME]"
 layout_mode = 0
 offset_left = 20.0
 offset_top = 40.0
-offset_right = 880.0
+offset_right = 780.0
 offset_bottom = 141.0
 theme_override_fonts/font = ExtResource("11_bmoss")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 18
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
 autowrap_mode = 3
 
@@ -287,20 +287,22 @@ alignment = 1
 
 [node name="main-character-image" type="TextureRect" parent="camera/hud/dialogue"]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 450.0
-offset_right = 320.0
-offset_bottom = 750.0
+offset_left = 10.0
+offset_top = 340.0
+offset_right = 310.0
+offset_bottom = 640.0
+scale = Vector2(1.4, 1.4)
 texture = ExtResource("11_xq84h")
 expand_mode = 2
 stretch_mode = 4
 
 [node name="npc-image" type="TextureRect" parent="camera/hud/dialogue"]
 layout_mode = 0
-offset_left = 960.0
-offset_top = 450.0
-offset_right = 1260.0
-offset_bottom = 750.0
+offset_left = 850.0
+offset_top = 340.0
+offset_right = 1150.0
+offset_bottom = 640.0
+scale = Vector2(1.4, 1.4)
 expand_mode = 2
 stretch_mode = 4
 
