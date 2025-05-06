@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://dm21nbrg6aclu"]
+[gd_scene load_steps=89 format=3 uid="uid://dm21nbrg6aclu"]
 
 [ext_resource type="Script" path="res://scripts/controllers/player_controller.gd" id="1_0bvfg"]
 [ext_resource type="Script" path="res://scripts/systems/input_system.gd" id="1_nh1b4"]
@@ -16,12 +16,14 @@
 [ext_resource type="StyleBox" uid="uid://bwwcxqxroxego" path="res://styleboxes/sus-meter-fill.tres" id="9_r3q3p"]
 [ext_resource type="PackedScene" uid="uid://d1gtcvhspy8ya" path="res://prefabs/ui/action_label.tscn" id="9_wm34p"]
 [ext_resource type="Script" path="res://scripts/controllers/ui_sus_meter_controller.gd" id="10_u7f2y"]
+[ext_resource type="FontFile" uid="uid://bm5nfnlcmuv7r" path="res://resources/fonts/VCR_OSD_MONO_1.001.ttf" id="11_bmoss"]
 [ext_resource type="Script" path="res://scripts/controllers/welcome_mat_controller.gd" id="11_k3sqm"]
 [ext_resource type="Texture2D" uid="uid://cct0w0qhp8pa2" path="res://resources/images/otto.png" id="11_xq84h"]
 [ext_resource type="Texture2D" uid="uid://dhmlx0rjmpc0d" path="res://resources/images/amelia.png" id="12_2wkwq"]
 [ext_resource type="Shape2D" uid="uid://c7aojc7q6al28" path="res://shapes/mat.tres" id="12_hpof6"]
 [ext_resource type="Script" path="res://scripts/controllers/minigames/lockpick.gd" id="13_ncycx"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_alfred.gd" id="16_tdev3"]
+[ext_resource type="Texture2D" uid="uid://b3vugboa0ykqj" path="res://resources/images/miler.png" id="18_5ligr"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_will.gd" id="18_bgcwb"]
 [ext_resource type="Texture2D" uid="uid://c3on3b3ljc5sx" path="res://resources/images/willDalton.png" id="19_5a7pe"]
 [ext_resource type="Script" path="res://scripts/behaviors/movement/movement_walter.gd" id="19_fld4r"]
@@ -32,10 +34,12 @@
 [ext_resource type="Script" path="res://scripts/behaviors/movement/movement_victoria.gd" id="22_8psrm"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_walter.gd" id="22_b24bu"]
 [ext_resource type="Texture2D" uid="uid://oej3l0kyfn35" path="res://resources/images/attendant.png" id="22_bth0l"]
+[ext_resource type="Texture2D" uid="uid://c886w7bca7hih" path="res://resources/images/clark.png" id="23_0eh7c"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_amelia.gd" id="24_4udyb"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_victoria.gd" id="24_46r2n"]
 [ext_resource type="Texture2D" uid="uid://chs254a054atg" path="res://resources/images/lucy.png" id="24_ptwwg"]
 [ext_resource type="Texture2D" uid="uid://dy58isv7c7t0b" path="res://resources/images/WalterGrimm.png" id="26_j8biy"]
+[ext_resource type="Texture2D" uid="uid://plirqylj6euv" path="res://resources/images/watson.png" id="32_kxttf"]
 [ext_resource type="Script" path="res://scripts/controllers/minigame_trigger_controller.gd" id="36_se64d"]
 [ext_resource type="Script" path="res://scripts/behaviors/minigame_trigger_callbacks/door_lock_in_third_car.gd" id="37_widnv"]
 
@@ -74,22 +78,52 @@ radius = 27.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xsyxf"]
 size = Vector2(700, 60)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_m8dqi"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_kas4r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_avum2"]
 size = Vector2(50, 720)
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_2u81i"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kyfkv"]
 size = Vector2(50, 320)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ubppb"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_7krjs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bw75c"]
 size = Vector2(1100, 50)
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_0r6l8"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ysf1"]
 size = Vector2(1100, 50)
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_gja1o"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_qqjr1"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_y73ug"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_b7b3n"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_h13al"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_t5axt"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_w4o6x"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8w3m"]
 size = Vector2(100, 30)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_cw8ls"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_g74gl"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_57sk2"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_m8dqi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2l2je"]
 size = Vector2(120, 100)
@@ -103,6 +137,18 @@ size = Vector2(360, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_akvqt"]
 size = Vector2(50, 140)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_bxb3h"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_hrc8c"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ux8mn"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_224fi"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_xiox7"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_tjuws"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bdvkj"]
 size = Vector2(40, 400)
@@ -189,9 +235,19 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 190.0
-offset_top = -150.0
+offset_top = -170.0
 offset_right = 1090.0
+offset_bottom = -20.0
 grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="camera/hud/dialogue/speech_panel"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 910.0
+offset_bottom = 160.0
+color = Color(0.509286, 0.509286, 0.509286, 0.745098)
 
 [node name="character_name" type="Label" parent="camera/hud/dialogue/speech_panel"]
 layout_mode = 0
@@ -199,6 +255,7 @@ offset_left = 20.0
 offset_top = 10.0
 offset_right = 220.0
 offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("11_bmoss")
 text = "[CHARACTER NAME]"
 
 [node name="character_speech" type="Label" parent="camera/hud/dialogue/speech_panel"]
@@ -207,6 +264,8 @@ offset_left = 20.0
 offset_top = 40.0
 offset_right = 880.0
 offset_bottom = 141.0
+theme_override_fonts/font = ExtResource("11_bmoss")
+theme_override_font_sizes/font_size = 16
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
 autowrap_mode = 3
 
@@ -251,9 +310,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
-offset_top = -60.0
+offset_top = -70.0
 offset_right = 210.0
-offset_bottom = -10.0
+offset_bottom = -20.0
 grow_vertical = 0
 alignment = 2
 
@@ -262,20 +321,22 @@ layout_mode = 2
 
 [node name="timer" type="Label" parent="camera/hud"]
 layout_mode = 0
-offset_left = 70.0
-offset_top = 30.0
-offset_right = 140.0
-offset_bottom = 60.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 95.0
+offset_bottom = 50.0
+theme_override_fonts/font = ExtResource("11_bmoss")
 theme_override_font_sizes/font_size = 18
 text = "00 : 00"
 vertical_alignment = 1
 
 [node name="sus_meter" type="ProgressBar" parent="camera/hud"]
 layout_mode = 0
-offset_left = 140.0
-offset_top = 30.0
-offset_right = 340.0
-offset_bottom = 60.0
+offset_left = 110.0
+offset_top = 20.0
+offset_right = 310.0
+offset_bottom = 50.0
+theme_override_fonts/font = ExtResource("11_bmoss")
 theme_override_styles/fill = ExtResource("9_r3q3p")
 show_percentage = false
 script = ExtResource("10_u7f2y")
@@ -293,6 +354,7 @@ layout_mode = 0
 offset_left = 360.0
 offset_right = 400.0
 offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("11_bmoss")
 text = "Inv."
 
 [node name="panel" type="Panel" parent="camera/hud/inventory"]
@@ -395,6 +457,7 @@ shape = SubResource("CircleShape2D_cdq3x")
 position = Vector2(450, -250)
 script = ExtResource("7_x2f58")
 character_name = "Alfred"
+character_image = ExtResource("18_5ligr")
 dialogue_tree_script = ExtResource("16_tdev3")
 
 [node name="sprite" type="Sprite2D" parent="npc/alfred"]
@@ -430,6 +493,7 @@ shape = SubResource("CircleShape2D_01ogc")
 position = Vector2(200, 250)
 script = ExtResource("7_x2f58")
 character_name = "Thomas"
+character_image = ExtResource("23_0eh7c")
 dialogue_tree_script = ExtResource("20_gfysw")
 
 [node name="sprite" type="Sprite2D" parent="npc/thomas"]
@@ -503,6 +567,7 @@ shape = SubResource("CircleShape2D_01ogc")
 position = Vector2(-400, 250)
 script = ExtResource("7_x2f58")
 character_name = "Victoria"
+character_image = ExtResource("32_kxttf")
 dialogue_tree_script = ExtResource("24_46r2n")
 movement_script = ExtResource("22_8psrm")
 
@@ -542,6 +607,7 @@ shape = SubResource("CircleShape2D_01ogc")
 position = Vector2(-1375, -280)
 
 [node name="Sprite2D" type="Sprite2D" parent="car0/shelves"]
+modulate = Color(0.36969, 0.250232, 0.0939265, 1)
 scale = Vector2(700, 60)
 texture = SubResource("CanvasTexture_w5pfm")
 
@@ -552,8 +618,9 @@ shape = SubResource("RectangleShape2D_xsyxf")
 position = Vector2(-1750, 0)
 
 [node name="sprite" type="Sprite2D" parent="car0/westwall"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 scale = Vector2(50, 720)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_kas4r")
 
 [node name="edgewall" type="CollisionShape2D" parent="car0/westwall"]
 shape = SubResource("RectangleShape2D_avum2")
@@ -562,18 +629,20 @@ shape = SubResource("RectangleShape2D_avum2")
 position = Vector2(-650, 0)
 
 [node name="sprite" type="Sprite2D" parent="car0/ostwall"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 position = Vector2(0, -200)
 scale = Vector2(50, 320)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_2u81i")
 
 [node name="collision" type="CollisionShape2D" parent="car0/ostwall"]
 position = Vector2(0, -200)
 shape = SubResource("RectangleShape2D_kyfkv")
 
 [node name="sprite2" type="Sprite2D" parent="car0/ostwall"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 position = Vector2(0, 200)
 scale = Vector2(50, 320)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_ubppb")
 
 [node name="collision2" type="CollisionShape2D" parent="car0/ostwall"]
 position = Vector2(0, 200)
@@ -583,8 +652,9 @@ shape = SubResource("RectangleShape2D_kyfkv")
 position = Vector2(-1200, -335)
 
 [node name="sprite" type="Sprite2D" parent="car0/nordwall"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 scale = Vector2(1100, 50)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_7krjs")
 
 [node name="collision" type="CollisionShape2D" parent="car0/nordwall"]
 shape = SubResource("RectangleShape2D_bw75c")
@@ -593,8 +663,9 @@ shape = SubResource("RectangleShape2D_bw75c")
 position = Vector2(-1200, 335)
 
 [node name="sprite" type="Sprite2D" parent="car0/sudwall"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 scale = Vector2(1100, 50)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_0r6l8")
 
 [node name="collision" type="CollisionShape2D" parent="car0/sudwall"]
 shape = SubResource("RectangleShape2D_0ysf1")
@@ -613,18 +684,20 @@ shape = ExtResource("12_hpof6")
 position = Vector2(-550, 0)
 
 [node name="sprite" type="Sprite2D" parent="car1/westwall"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 position = Vector2(0, -200)
 scale = Vector2(50, 320)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_gja1o")
 
 [node name="collision" type="CollisionShape2D" parent="car1/westwall"]
 position = Vector2(0, -200)
 shape = SubResource("RectangleShape2D_kyfkv")
 
 [node name="sprite2" type="Sprite2D" parent="car1/westwall"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 position = Vector2(0, 200)
 scale = Vector2(50, 320)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_qqjr1")
 
 [node name="collision2" type="CollisionShape2D" parent="car1/westwall"]
 position = Vector2(0, 200)
@@ -634,18 +707,20 @@ shape = SubResource("RectangleShape2D_kyfkv")
 position = Vector2(550, 0)
 
 [node name="sprite" type="Sprite2D" parent="car1/ostwall"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 position = Vector2(0, -200)
 scale = Vector2(50, 320)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_y73ug")
 
 [node name="collision" type="CollisionShape2D" parent="car1/ostwall"]
 position = Vector2(0, -200)
 shape = SubResource("RectangleShape2D_kyfkv")
 
 [node name="sprite2" type="Sprite2D" parent="car1/ostwall"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 position = Vector2(0, 200)
 scale = Vector2(50, 320)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_b7b3n")
 
 [node name="collision2" type="CollisionShape2D" parent="car1/ostwall"]
 position = Vector2(0, 200)
@@ -655,8 +730,9 @@ shape = SubResource("RectangleShape2D_kyfkv")
 position = Vector2(0, -335)
 
 [node name="sprite" type="Sprite2D" parent="car1/nordwall"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 scale = Vector2(1100, 50)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_h13al")
 
 [node name="collision" type="CollisionShape2D" parent="car1/nordwall"]
 shape = SubResource("RectangleShape2D_bw75c")
@@ -665,8 +741,9 @@ shape = SubResource("RectangleShape2D_bw75c")
 position = Vector2(0, 335)
 
 [node name="sprite" type="Sprite2D" parent="car1/sudwall"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 scale = Vector2(1100, 50)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_t5axt")
 
 [node name="collision" type="CollisionShape2D" parent="car1/sudwall"]
 shape = SubResource("RectangleShape2D_0ysf1")
@@ -675,18 +752,20 @@ shape = SubResource("RectangleShape2D_0ysf1")
 position = Vector2(600, 0)
 
 [node name="sprite" type="Sprite2D" parent="car1/hall1"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 position = Vector2(0, 55)
 scale = Vector2(100, 30)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_w4o6x")
 
 [node name="collision" type="CollisionShape2D" parent="car1/hall1"]
 position = Vector2(0, 55)
 shape = SubResource("RectangleShape2D_t8w3m")
 
 [node name="sprite2" type="Sprite2D" parent="car1/hall1"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 position = Vector2(0, -55)
 scale = Vector2(100, 30)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_cw8ls")
 
 [node name="collision2" type="CollisionShape2D" parent="car1/hall1"]
 position = Vector2(0, -55)
@@ -696,18 +775,20 @@ shape = SubResource("RectangleShape2D_t8w3m")
 position = Vector2(-600, 0)
 
 [node name="sprite" type="Sprite2D" parent="car1/hall2"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 position = Vector2(0, 55)
 scale = Vector2(100, 30)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_g74gl")
 
 [node name="collision" type="CollisionShape2D" parent="car1/hall2"]
 position = Vector2(0, 55)
 shape = SubResource("RectangleShape2D_t8w3m")
 
 [node name="sprite2" type="Sprite2D" parent="car1/hall2"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 position = Vector2(0, -55)
 scale = Vector2(100, 30)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_57sk2")
 
 [node name="collision2" type="CollisionShape2D" parent="car1/hall2"]
 position = Vector2(0, -55)
@@ -717,6 +798,7 @@ shape = SubResource("RectangleShape2D_t8w3m")
 position = Vector2(50, -250)
 
 [node name="sprite" type="Sprite2D" parent="car1/table1"]
+modulate = Color(0.368627, 0.25098, 0.0941176, 1)
 scale = Vector2(120, 100)
 texture = SubResource("PlaceholderTexture2D_m8dqi")
 
@@ -727,6 +809,7 @@ shape = SubResource("RectangleShape2D_2l2je")
 position = Vector2(350, -250)
 
 [node name="sprite" type="Sprite2D" parent="car1/table2"]
+modulate = Color(0.368627, 0.25098, 0.0941176, 1)
 scale = Vector2(120, 100)
 texture = SubResource("PlaceholderTexture2D_m8dqi")
 
@@ -737,6 +820,7 @@ shape = SubResource("RectangleShape2D_2l2je")
 position = Vector2(300, 250)
 
 [node name="sprite" type="Sprite2D" parent="car1/table3"]
+modulate = Color(0.368627, 0.25098, 0.0941176, 1)
 scale = Vector2(120, 100)
 texture = SubResource("PlaceholderTexture2D_m8dqi")
 
@@ -747,6 +831,7 @@ shape = SubResource("RectangleShape2D_2l2je")
 position = Vector2(-300, 250)
 
 [node name="sprite" type="Sprite2D" parent="car1/table4"]
+modulate = Color(0.368627, 0.25098, 0.0941176, 1)
 scale = Vector2(120, 100)
 texture = SubResource("PlaceholderTexture2D_m8dqi")
 
@@ -757,6 +842,7 @@ shape = SubResource("RectangleShape2D_2l2je")
 position = Vector2(0, 250)
 
 [node name="sprite" type="Sprite2D" parent="car1/table5"]
+modulate = Color(0.368627, 0.25098, 0.0941176, 1)
 scale = Vector2(120, 100)
 texture = SubResource("PlaceholderTexture2D_m8dqi")
 
@@ -767,6 +853,7 @@ shape = SubResource("RectangleShape2D_2l2je")
 position = Vector2(-345, -150)
 
 [node name="sprite" type="Sprite2D" parent="car1/kitchen1"]
+modulate = Color(0.368627, 0.25098, 0.0941176, 1)
 scale = Vector2(360, 50)
 texture = SubResource("CanvasTexture_tce2b")
 
@@ -777,6 +864,7 @@ shape = SubResource("RectangleShape2D_2ejc6")
 position = Vector2(-190, -245)
 
 [node name="sprite" type="Sprite2D" parent="car1/kitchen2"]
+modulate = Color(0.368627, 0.25098, 0.0941176, 1)
 scale = Vector2(50, 140)
 texture = SubResource("CanvasTexture_a4lq2")
 
@@ -787,8 +875,9 @@ shape = SubResource("RectangleShape2D_akvqt")
 position = Vector2(0, -335)
 
 [node name="sprite" type="Sprite2D" parent="car1/nordwall2"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 scale = Vector2(1100, 50)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_bxb3h")
 
 [node name="collision" type="CollisionShape2D" parent="car1/nordwall2"]
 shape = SubResource("RectangleShape2D_bw75c")
@@ -813,18 +902,20 @@ shape = ExtResource("12_hpof6")
 position = Vector2(650, 0)
 
 [node name="sprite" type="Sprite2D" parent="car2/westwall"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 position = Vector2(0, -200)
 scale = Vector2(50, 320)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_hrc8c")
 
 [node name="collision" type="CollisionShape2D" parent="car2/westwall"]
 position = Vector2(0, -200)
 shape = SubResource("RectangleShape2D_kyfkv")
 
 [node name="sprite2" type="Sprite2D" parent="car2/westwall"]
+modulate = Color(0.162066, 0.162066, 0.162066, 1)
 position = Vector2(0, 200)
 scale = Vector2(50, 320)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_ux8mn")
 
 [node name="collision2" type="CollisionShape2D" parent="car2/westwall"]
 position = Vector2(0, 200)
@@ -834,8 +925,9 @@ shape = SubResource("RectangleShape2D_kyfkv")
 position = Vector2(1750, 0)
 
 [node name="sprite" type="Sprite2D" parent="car2/ostwall"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 scale = Vector2(50, 720)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_224fi")
 
 [node name="edgewall" type="CollisionShape2D" parent="car2/ostwall"]
 shape = SubResource("RectangleShape2D_avum2")
@@ -844,8 +936,9 @@ shape = SubResource("RectangleShape2D_avum2")
 position = Vector2(1200, -335)
 
 [node name="sprite" type="Sprite2D" parent="car2/nordwall"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 scale = Vector2(1100, 50)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_xiox7")
 
 [node name="collision" type="CollisionShape2D" parent="car2/nordwall"]
 shape = SubResource("RectangleShape2D_bw75c")
@@ -854,8 +947,9 @@ shape = SubResource("RectangleShape2D_bw75c")
 position = Vector2(1200, 335)
 
 [node name="sprite" type="Sprite2D" parent="car2/sudwall"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 scale = Vector2(1100, 50)
-texture = SubResource("PlaceholderTexture2D_m8dqi")
+texture = SubResource("CanvasTexture_tjuws")
 
 [node name="collision" type="CollisionShape2D" parent="car2/sudwall"]
 shape = SubResource("RectangleShape2D_0ysf1")
@@ -868,6 +962,7 @@ position = Vector2(-150, 0)
 shape = SubResource("RectangleShape2D_bdvkj")
 
 [node name="lwalltex" type="Sprite2D" parent="car2/room1/leftwall"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 scale = Vector2(40, 400)
 texture = SubResource("CanvasTexture_8apc3")
 
@@ -876,6 +971,7 @@ position = Vector2(150, 0)
 shape = SubResource("RectangleShape2D_nhh0p")
 
 [node name="lwalltex" type="Sprite2D" parent="car2/room1/rightwall"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 scale = Vector2(40, 400)
 texture = SubResource("CanvasTexture_8apc3")
 
@@ -884,10 +980,12 @@ position = Vector2(-90, 180)
 shape = SubResource("RectangleShape2D_jifwn")
 
 [node name="dltex" type="Sprite2D" parent="car2/room1/doorleft"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 scale = Vector2(80, 40)
 texture = SubResource("CanvasTexture_18old")
 
 [node name="doorreal" type="CollisionShape2D" parent="car2/room1"]
+modulate = Color(0.376471, 0.203922, 0.121569, 1)
 position = Vector2(0, 180)
 shape = SubResource("RectangleShape2D_oxbuo")
 
@@ -900,6 +998,7 @@ position = Vector2(90, 180)
 shape = SubResource("RectangleShape2D_5185o")
 
 [node name="drtex" type="Sprite2D" parent="car2/room1/doorright"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 scale = Vector2(80, 40)
 texture = SubResource("CanvasTexture_18old")
 
@@ -919,6 +1018,7 @@ position = Vector2(-90, 180)
 shape = SubResource("RectangleShape2D_jifwn")
 
 [node name="dltex" type="Sprite2D" parent="car2/room2/doorleft"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 scale = Vector2(80, 40)
 texture = SubResource("CanvasTexture_18old")
 
@@ -927,6 +1027,7 @@ position = Vector2(90, 180)
 shape = SubResource("RectangleShape2D_5185o")
 
 [node name="drtex" type="Sprite2D" parent="car2/room2/doorright"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 scale = Vector2(80, 40)
 texture = SubResource("CanvasTexture_18old")
 
@@ -935,6 +1036,7 @@ position = Vector2(0, 180)
 shape = SubResource("RectangleShape2D_oxbuo")
 
 [node name="drtex" type="Sprite2D" parent="car2/room2/doorreal"]
+modulate = Color(0.376471, 0.203922, 0.121569, 1)
 scale = Vector2(100, 40)
 texture = SubResource("CanvasTexture_18old")
 
@@ -946,6 +1048,7 @@ position = Vector2(-150, 0)
 shape = SubResource("RectangleShape2D_bdvkj")
 
 [node name="lwalltex" type="Sprite2D" parent="car2/room3/leftwall"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 scale = Vector2(40, 400)
 texture = SubResource("CanvasTexture_8apc3")
 
@@ -954,6 +1057,7 @@ position = Vector2(-90, 180)
 shape = SubResource("RectangleShape2D_jifwn")
 
 [node name="dltex" type="Sprite2D" parent="car2/room3/doorleft"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 scale = Vector2(80, 40)
 texture = SubResource("CanvasTexture_18old")
 
@@ -962,6 +1066,7 @@ position = Vector2(85, 180)
 shape = SubResource("RectangleShape2D_5185o")
 
 [node name="drtex" type="Sprite2D" parent="car2/room3/doorright"]
+modulate = Color(0.160784, 0.160784, 0.160784, 1)
 scale = Vector2(80, 40)
 texture = SubResource("CanvasTexture_18old")
 
@@ -973,6 +1078,7 @@ disable_mode = 1
 shape = SubResource("RectangleShape2D_oxbuo")
 
 [node name="drtex" type="Sprite2D" parent="car2/room3/doorreal"]
+modulate = Color(0.376685, 0.203831, 0.120721, 1)
 scale = Vector2(100, 40)
 texture = SubResource("CanvasTexture_18old")
 
