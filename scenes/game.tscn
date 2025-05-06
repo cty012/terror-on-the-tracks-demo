@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://dm21nbrg6aclu"]
+[gd_scene load_steps=68 format=3 uid="uid://dm21nbrg6aclu"]
 
 [ext_resource type="Script" path="res://scripts/controllers/player_controller.gd" id="1_0bvfg"]
 [ext_resource type="Script" path="res://scripts/systems/input_system.gd" id="1_nh1b4"]
@@ -22,10 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://dhmlx0rjmpc0d" path="res://resources/images/amelia.png" id="12_2wkwq"]
 [ext_resource type="Shape2D" uid="uid://c7aojc7q6al28" path="res://shapes/mat.tres" id="12_hpof6"]
 [ext_resource type="Script" path="res://scripts/controllers/minigames/lockpick.gd" id="13_ncycx"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_alfred.gd" id="16_tdev3"]
-[ext_resource type="Texture2D" uid="uid://b3vugboa0ykqj" path="res://resources/images/miler.png" id="18_5ligr"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_will.gd" id="18_bgcwb"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_alfred.gd" id="16_tdev3"]
+[ext_resource type="Texture2D" uid="uid://b3vugboa0ykqj" path="res://resources/images/miler.png" id="18_5ligr"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_will.gd" id="18_bgcwb"]
 [ext_resource type="Texture2D" uid="uid://c3on3b3ljc5sx" path="res://resources/images/willDalton.png" id="19_5a7pe"]
 [ext_resource type="Script" path="res://scripts/behaviors/movement/movement_walter.gd" id="19_fld4r"]
@@ -37,15 +35,11 @@
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_walter.gd" id="22_b24bu"]
 [ext_resource type="Texture2D" uid="uid://oej3l0kyfn35" path="res://resources/images/attendant.png" id="22_bth0l"]
 [ext_resource type="Texture2D" uid="uid://c886w7bca7hih" path="res://resources/images/clark.png" id="23_0eh7c"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_amelia.gd" id="24_4udyb"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_victoria.gd" id="24_46r2n"]
-[ext_resource type="Texture2D" uid="uid://chs254a054atg" path="res://resources/images/lucy.png" id="24_ptwwg"]
-[ext_resource type="Texture2D" uid="uid://dy58isv7c7t0b" path="res://resources/images/WalterGrimm.png" id="26_j8biy"]
-[ext_resource type="Texture2D" uid="uid://plirqylj6euv" path="res://resources/images/watson.png" id="32_kxttf"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_amelia.gd" id="24_4udyb"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_victoria.gd" id="24_46r2n"]
 [ext_resource type="Texture2D" uid="uid://chs254a054atg" path="res://resources/images/lucy.png" id="24_ptwwg"]
 [ext_resource type="Texture2D" uid="uid://dy58isv7c7t0b" path="res://resources/images/WalterGrimm.png" id="26_j8biy"]
+[ext_resource type="Texture2D" uid="uid://plirqylj6euv" path="res://resources/images/watson.png" id="32_kxttf"]
 [ext_resource type="Script" path="res://scripts/controllers/minigame_trigger_controller.gd" id="36_se64d"]
 [ext_resource type="Script" path="res://scripts/behaviors/minigame_trigger_callbacks/door_lock_in_third_car.gd" id="37_widnv"]
 
@@ -135,8 +129,6 @@ size = Vector2(80, 40)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e2fs2"]
 radius = 60.0
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_n5mkr"]
 
 [node name="game_scene" type="Node2D"]
 
@@ -1015,6 +1007,10 @@ minigame_node = NodePath("../../../../minigame_lockpick")
 replay_mode = 1
 callback_on_minigame_end = ExtResource("37_widnv")
 
+[node name="drtex" type="Sprite2D" parent="car2/room3/doorreal/minigamebox"]
+scale = Vector2(100, 40)
+texture = SubResource("CanvasTexture_18old")
+
 [node name="collision" type="CollisionShape2D" parent="car2/room3/doorreal/minigamebox"]
 shape = SubResource("CircleShape2D_e2fs2")
 
@@ -1073,8 +1069,3 @@ show_percentage = false
 
 [node name="camera" type="Camera2D" parent="minigame_lockpick"]
 position = Vector2(640, 360)
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(600, 215)
-scale = Vector2(50, 290)
-texture = SubResource("CanvasTexture_n5mkr")
