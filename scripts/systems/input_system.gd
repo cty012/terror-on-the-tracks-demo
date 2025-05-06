@@ -16,7 +16,7 @@ var key_bindings := {
         "right": KEY_D,
     },
     "interaction": {
-        "dialogue": KEY_E,
+        "interact": KEY_E,
         "collect": KEY_F,
         "cancel": KEY_ESCAPE,
     },
@@ -41,7 +41,43 @@ func is_key_just_released(keycode: Key) -> bool:
     return key_just_released.find(keycode) != -1
 
 
-func detect_movement() -> bool:
+func detect_minigame(actions: Array[String]) -> bool:
+    # Check if there is a minigame trigger nearby
+    var closest_minigame_trigger := minigame_system.get_closest_playable_minigame_trigger()
+    if closest_minigame_trigger == null:
+        return false
+    actions.push_back("[code]E[/code] Play minigame: " + closest_minigame_trigger.minigame_name)
+
+    # Check if user pressed the key to interact
+    if !is_key_just_pressed(key_bindings["interaction"]["interact"]):
+        return false
+
+    # Start the dialogue
+    event_system.emit("game::minigame-start", { "trigger": closest_minigame_trigger })
+    event_system.emit("game::movement", { "directions": [] })  # Stop movement if dialogue starts
+    return true
+
+
+func detect_dialogue_start(actions: Array[String]) -> bool:
+    # Check if there is an NPC nearby
+    var closest_npc := dialogue_system.get_closest_talkable_npc()
+    if closest_npc == null:
+        return false
+    actions.push_back("[code]E[/code] Talk to " + closest_npc.character_name)
+
+    # Check if user pressed the key to interact
+    if !is_key_just_pressed(key_bindings["interaction"]["interact"]):
+        return false
+
+    # Start the dialogue
+    event_system.emit("game::dialogue-start", {})
+    event_system.emit("game::movement", { "directions": [] })  # Stop movement if dialogue starts
+    return true
+
+
+func detect_movement(actions: Array[String]) -> bool:
+    actions.push_back("[code]WASD[/code] Walk")
+
     var directions := []
     for direction in key_bindings["movement"]:
         if Input.is_key_pressed(key_bindings["movement"][direction]):
@@ -59,18 +95,10 @@ func detect_movement() -> bool:
     return not directions.is_empty()
 
 
-func detect_dialogue_start() -> bool:
-    if is_key_just_pressed(key_bindings["interaction"]["dialogue"]):
-        event_system.emit("game::dialogue-start", {})
-        event_system.emit("game::movement", { "directions": [] })  # Stop movement if dialogue starts
-        return true
-    return false
-
-
 func detect_dialogue_action() -> bool:
     if is_key_just_pressed(key_bindings["interaction"]["cancel"]):
         event_system.emit("game::dialogue-end", {})
-    elif is_key_just_pressed(key_bindings["interaction"]["dialogue"]):
+    elif is_key_just_pressed(key_bindings["interaction"]["interact"]):
         event_system.emit("game::dialogue-next", {})
     elif is_key_just_pressed(key_bindings["temp"]["dialogue-op1"]):
         event_system.emit("game::dialogue-choose", { "choice": 0 })
@@ -97,7 +125,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-    var actions := []
+    var actions: Array[String] = []
+
     # If minigame is active, no actions are performed
     # Minigame actions are managed by the minigame script
     if minigame_system.current_minigame != null:
@@ -109,11 +138,7 @@ func _process(delta: float) -> void:
         actions.push_back("[code]E[/code] Continue conversation")
         detect_dialogue_action()
     else:
-        actions.push_back("[code]WASD[/code] Walk")
-        var closest_npc := dialogue_system.get_closest_talkable_npc()
-        if closest_npc != null:
-            actions.push_back("[code]E[/code] Talk to " + closest_npc.character_name)
-        detect_dialogue_start() or detect_movement()  # Detect movement iff dialogue doesn't start
+        detect_minigame(actions) or detect_dialogue_start(actions) or detect_movement(actions)
 
     actions_system.update_action_list(actions)
 

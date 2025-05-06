@@ -2,12 +2,15 @@ extends Area2D
 
 var data := preload("res://scripts/common/data.gd").new()
 var event_system: EventSystem
-var contact = false
+
 
 var npc: CharacterBody2D
+var contact := false
+
 
 func contact_state() -> bool:
     return contact
+
 
 func _on_body_entered(body: Node) -> void:
     if body.name == "player":

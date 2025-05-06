@@ -17,6 +17,7 @@ func has_ended() -> bool:
 func get_speech() -> String:
     return ""
 
+
 func get_sus() -> int:
     return 0
     

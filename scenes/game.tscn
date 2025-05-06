@@ -25,14 +25,16 @@
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_alfred.gd" id="16_tdev3"]
 [ext_resource type="Texture2D" uid="uid://b3vugboa0ykqj" path="res://resources/images/miler.png" id="18_5ligr"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_will.gd" id="18_bgcwb"]
+[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_alfred.gd" id="16_tdev3"]
+[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_will.gd" id="18_bgcwb"]
 [ext_resource type="Texture2D" uid="uid://c3on3b3ljc5sx" path="res://resources/images/willDalton.png" id="19_5a7pe"]
-[ext_resource type="Script" path="res://scripts/behaviors/movement_walter.gd" id="19_fld4r"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_attendant.gd" id="20_fayim"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_thomas.gd" id="20_gfysw"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_lucy.gd" id="21_7xi0l"]
-[ext_resource type="Script" path="res://scripts/behaviors/movement_amelia.gd" id="22_6ysmg"]
-[ext_resource type="Script" path="res://scripts/behaviors/movement_victoria.gd" id="22_8psrm"]
-[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_walter.gd" id="22_b24bu"]
+[ext_resource type="Script" path="res://scripts/behaviors/movement/movement_walter.gd" id="19_fld4r"]
+[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_attendant.gd" id="20_fayim"]
+[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_thomas.gd" id="20_gfysw"]
+[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_lucy.gd" id="21_7xi0l"]
+[ext_resource type="Script" path="res://scripts/behaviors/movement/movement_amelia.gd" id="22_6ysmg"]
+[ext_resource type="Script" path="res://scripts/behaviors/movement/movement_victoria.gd" id="22_8psrm"]
+[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_walter.gd" id="22_b24bu"]
 [ext_resource type="Texture2D" uid="uid://oej3l0kyfn35" path="res://resources/images/attendant.png" id="22_bth0l"]
 [ext_resource type="Texture2D" uid="uid://c886w7bca7hih" path="res://resources/images/clark.png" id="23_0eh7c"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree_amelia.gd" id="24_4udyb"]
@@ -40,6 +42,12 @@
 [ext_resource type="Texture2D" uid="uid://chs254a054atg" path="res://resources/images/lucy.png" id="24_ptwwg"]
 [ext_resource type="Texture2D" uid="uid://dy58isv7c7t0b" path="res://resources/images/WalterGrimm.png" id="26_j8biy"]
 [ext_resource type="Texture2D" uid="uid://plirqylj6euv" path="res://resources/images/watson.png" id="32_kxttf"]
+[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_amelia.gd" id="24_4udyb"]
+[ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_victoria.gd" id="24_46r2n"]
+[ext_resource type="Texture2D" uid="uid://chs254a054atg" path="res://resources/images/lucy.png" id="24_ptwwg"]
+[ext_resource type="Texture2D" uid="uid://dy58isv7c7t0b" path="res://resources/images/WalterGrimm.png" id="26_j8biy"]
+[ext_resource type="Script" path="res://scripts/controllers/minigame_trigger_controller.gd" id="36_se64d"]
+[ext_resource type="Script" path="res://scripts/behaviors/minigame_trigger_callbacks/door_lock_in_third_car.gd" id="37_widnv"]
 
 [sub_resource type="GDScript" id="GDScript_palwq"]
 script/source = "extends Control
@@ -1000,7 +1008,12 @@ shape = SubResource("RectangleShape2D_oxbuo")
 scale = Vector2(100, 40)
 texture = SubResource("CanvasTexture_18old")
 
-[node name="minigamebox" type="Area2D" parent="car2/room3/doorreal"]
+[node name="minigamebox" type="Area2D" parent="car2/room3/doorreal" node_paths=PackedStringArray("minigame_node")]
+script = ExtResource("36_se64d")
+minigame_name = "lockpick"
+minigame_node = NodePath("../../../../minigame_lockpick")
+replay_mode = 1
+callback_on_minigame_end = ExtResource("37_widnv")
 
 [node name="collision" type="CollisionShape2D" parent="car2/room3/doorreal/minigamebox"]
 shape = SubResource("CircleShape2D_e2fs2")
