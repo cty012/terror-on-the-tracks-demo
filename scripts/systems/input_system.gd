@@ -48,7 +48,11 @@ func detect_minigame(actions: Array[String]) -> bool:
     var closest_minigame_trigger := minigame_system.get_closest_playable_minigame_trigger()
     if closest_minigame_trigger == null:
         return false
-    actions.push_back("[color=green]E[/color] Play minigame: " + closest_minigame_trigger.minigame_name)
+    actions.push_back(
+        "[color=orange]E[/color] Play minigame: {name}".format({
+            "name": closest_minigame_trigger.minigame_name,
+        })
+    )
 
     # Check if user pressed the key to interact
     if !is_key_just_pressed(key_bindings["interaction"]["interact"]):
@@ -65,7 +69,11 @@ func detect_dialogue_start(actions: Array[String]) -> bool:
     var closest_npc := dialogue_system.get_closest_talkable_npc()
     if closest_npc == null:
         return false
-    actions.push_back("[color=green]E[/color] Talk to " + closest_npc.character_name)
+    actions.push_back(
+        "[color=orange]E[/color] Talk to [color=green]{name}[/color]".format({
+            "name": closest_npc.character_name,
+        })
+    )
 
     # Check if user pressed the key to interact
     if !is_key_just_pressed(key_bindings["interaction"]["interact"]):
@@ -82,7 +90,11 @@ func detect_item(actions: Array[String]) -> bool:
     var closest_item: Item = proximity_system.get_closest_node_with_condition("item", func (node): return node.collectible)
     if closest_item == null:
         return false
-    actions.push_back("[color=green]F[/color] Pick up " + closest_item.item_name)
+    actions.push_back(
+        "[color=orange]F[/color] Pick up [color=yellow]{name}[/color]".format({
+            "name": closest_item.item_name,
+        })
+    )
 
     # Check if user pressed the key to collect
     if !is_key_just_pressed(key_bindings["interaction"]["collect"]):
@@ -95,7 +107,7 @@ func detect_item(actions: Array[String]) -> bool:
 
 
 func detect_movement(actions: Array[String]) -> bool:
-    actions.push_back("[color=green]WASD[/color] Walk")
+    actions.push_back("[color=orange]WASD[/color] Walk")
 
     var directions := []
     for direction in key_bindings["movement"]:
@@ -156,7 +168,7 @@ func _process(delta: float) -> void:
         return
 
     if dialogue_system.in_dialogue():
-        actions.push_back("[code]E[/code] Continue conversation")
+        actions.push_back("[color=orange]E[/color] Continue conversation")
         detect_dialogue_action()
     else:
         var interacting = detect_minigame(actions) or detect_dialogue_start(actions)

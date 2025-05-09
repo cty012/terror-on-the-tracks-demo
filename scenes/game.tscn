@@ -216,7 +216,7 @@ script = ExtResource("1_nh1b4")
 script = ExtResource("4_57u3r")
 
 [node name="hud" type="Control" parent="camera"]
-z_index = 10
+z_index = 100
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -279,6 +279,29 @@ theme_override_font_sizes/font_size = 18
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
 autowrap_mode = 3
 
+[node name="main-character-image" type="TextureRect" parent="camera/hud/dialogue"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 340.0
+offset_right = 310.0
+offset_bottom = 640.0
+scale = Vector2(1.4, 1.4)
+mouse_filter = 2
+texture = ExtResource("11_xq84h")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="npc-image" type="TextureRect" parent="camera/hud/dialogue"]
+layout_mode = 0
+offset_left = 850.0
+offset_top = 340.0
+offset_right = 1150.0
+offset_bottom = 640.0
+scale = Vector2(1.4, 1.4)
+mouse_filter = 2
+expand_mode = 2
+stretch_mode = 4
+
 [node name="choice_list" type="VBoxContainer" parent="camera/hud/dialogue"]
 layout_mode = 1
 anchors_preset = 8
@@ -295,27 +318,6 @@ grow_vertical = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="main-character-image" type="TextureRect" parent="camera/hud/dialogue"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 340.0
-offset_right = 310.0
-offset_bottom = 640.0
-scale = Vector2(1.4, 1.4)
-texture = ExtResource("11_xq84h")
-expand_mode = 2
-stretch_mode = 4
-
-[node name="npc-image" type="TextureRect" parent="camera/hud/dialogue"]
-layout_mode = 0
-offset_left = 850.0
-offset_top = 340.0
-offset_right = 1150.0
-offset_bottom = 640.0
-scale = Vector2(1.4, 1.4)
-expand_mode = 2
-stretch_mode = 4
-
 [node name="action_list" type="VBoxContainer" parent="camera/hud"]
 layout_mode = 1
 anchors_preset = 2
@@ -326,6 +328,7 @@ offset_top = -70.0
 offset_right = 310.0
 offset_bottom = -20.0
 grow_vertical = 0
+mouse_filter = 2
 alignment = 2
 
 [node name="action_label" parent="camera/hud/action_list" instance=ExtResource("9_wm34p")]
@@ -348,6 +351,7 @@ offset_left = 110.0
 offset_top = 20.0
 offset_right = 310.0
 offset_bottom = 50.0
+mouse_filter = 2
 theme_override_fonts/font = ExtResource("11_bmoss")
 theme_override_styles/fill = ExtResource("9_r3q3p")
 show_percentage = false
