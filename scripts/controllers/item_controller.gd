@@ -13,4 +13,4 @@ var inventory_system: InventorySystem
 func _ready() -> void:
     proximity_system = $/root/game_scene/proximity_system
     inventory_system = $/root/game_scene/inventory_system
-    proximity_system.register_node("item", self)
+    proximity_system.register_node("item", self, self)

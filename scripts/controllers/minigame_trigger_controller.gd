@@ -1,6 +1,7 @@
 extends Area2D
 class_name MinigameTrigger
 
+var proximity_system: ProximitySystem
 var minigame_system: MinigameSystem
 
 
@@ -19,16 +20,6 @@ var playable: bool = true
 var callback: MinigameTriggerCallback = null
 
 
-func _on_body_entered(body: Node) -> void:
-    if body.name == "player":
-        minigame_system.on_minigame_trigger_entered(self)
-
-
-func _on_body_exited(body: Node) -> void:
-    if body.name == "player":
-        minigame_system.on_minigame_trigger_exited(self)
-
-
 func on_minigame_end(win: bool) -> void:
     match replay_mode:
         ReplayMode.ALWAYS_REPLAYABLE:
@@ -43,7 +34,7 @@ func on_minigame_end(win: bool) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    proximity_system = $/root/game_scene/proximity_system
     minigame_system = $/root/game_scene/minigame_system
     callback = callback_on_minigame_end.new()
-    body_entered.connect(_on_body_entered)
-    body_exited.connect(_on_body_exited)
+    proximity_system.register_node("minigame", self, self)

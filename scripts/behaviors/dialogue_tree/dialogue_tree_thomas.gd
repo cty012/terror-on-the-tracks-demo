@@ -3,7 +3,7 @@ extends DialogueTree
 var talked = false
 var current = "welcome"
 var tree = {
-   "welcome": {
+    "welcome": {
         "speech": "You encounter an antsy scientist, Thomas Clark, sitting in the dining car.",
         "choices": [],
         "result": "intro",
@@ -42,7 +42,7 @@ var tree = {
         "result": "shaken",
     },
     "shaken": {
-        "speech": "\"Thomas starts fidgeting even more and is clearly visibly shaken by your accusation.\"",
+        "speech": "Thomas starts fidgeting even more and is clearly visibly shaken by your accusation.",
         "choices": [],
         "result": "end",
         "sus":25

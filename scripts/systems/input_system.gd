@@ -10,7 +10,7 @@ var actions_system: ActionsSystem
 
 
 # Dictionary storing custom key bindings
-var key_bindings := {
+const KEY_BINDINGS := {
     "movement": {
         "up": KEY_W,
         "left": KEY_A,
@@ -22,14 +22,12 @@ var key_bindings := {
         "collect": KEY_F,
         "cancel": KEY_ESCAPE,
     },
-    "temp": {
-        "dialogue-op1": KEY_1,
-        "dialogue-op2": KEY_2,
-        "dialogue-op3": KEY_3,
-        "dialogue-op4": KEY_4,
-        "dialogue-op5": KEY_5,
-    }
 }
+const ACTION_WALK := "[color=orange]WASD[/color] Walk"
+const ACTION_START_DIALOGUE := "[color=orange]E[/color] Talk to [color=green]{name}[/color]"
+const ACTION_CONTINUE_DIALOGUE := "[color=orange]E[/color] Continue conversation"
+const ACTION_PICK_UP_ITEM := "[color=orange]F[/color] Pick up [color=yellow]{name}[/color]"
+const ACTION_PLAY_MINIGAME := "[color=orange]E[/color] Play minigame: {name}"
 
 var key_just_pressed := []
 var key_just_released := []
@@ -45,42 +43,34 @@ func is_key_just_released(keycode: Key) -> bool:
 
 func detect_minigame(actions: Array[String]) -> bool:
     # Check if there is a minigame trigger nearby
-    var closest_minigame_trigger := minigame_system.get_closest_playable_minigame_trigger()
+    var closest_minigame_trigger := proximity_system.get_closest_node_with_condition("minigame-trigger", func (minigame_trigger): return minigame_trigger.playable)
     if closest_minigame_trigger == null:
         return false
-    actions.push_back(
-        "[color=orange]E[/color] Play minigame: {name}".format({
-            "name": closest_minigame_trigger.minigame_name,
-        })
-    )
+    actions.push_back(ACTION_PLAY_MINIGAME.format({ "name": closest_minigame_trigger.minigame_name }))
 
     # Check if user pressed the key to interact
-    if !is_key_just_pressed(key_bindings["interaction"]["interact"]):
+    if !is_key_just_pressed(KEY_BINDINGS["interaction"]["interact"]):
         return false
 
     # Start the dialogue
-    event_system.emit("game::minigame-start", { "trigger": closest_minigame_trigger })
+    minigame_system.start_minigame_with_trigger(closest_minigame_trigger)
     event_system.emit("game::movement", { "directions": [] })  # Stop movement if dialogue starts
     return true
 
 
 func detect_dialogue_start(actions: Array[String]) -> bool:
     # Check if there is an NPC nearby
-    var closest_npc := dialogue_system.get_closest_talkable_npc()
+    var closest_npc := proximity_system.get_closest_node_with_condition("npc", func (npc): return npc.dialogue_tree != null)
     if closest_npc == null:
         return false
-    actions.push_back(
-        "[color=orange]E[/color] Talk to [color=green]{name}[/color]".format({
-            "name": closest_npc.character_name,
-        })
-    )
+    actions.push_back(ACTION_START_DIALOGUE.format({ "name": closest_npc.character_name }))
 
     # Check if user pressed the key to interact
-    if !is_key_just_pressed(key_bindings["interaction"]["interact"]):
+    if !is_key_just_pressed(KEY_BINDINGS["interaction"]["interact"]):
         return false
 
     # Start the dialogue
-    event_system.emit("game::dialogue-start", {})
+    dialogue_system.start_dialogue(closest_npc)
     event_system.emit("game::movement", { "directions": [] })  # Stop movement if dialogue starts
     return true
 
@@ -91,13 +81,13 @@ func detect_item(actions: Array[String]) -> bool:
     if closest_item == null:
         return false
     actions.push_back(
-        "[color=orange]F[/color] Pick up [color=yellow]{name}[/color]".format({
+        ACTION_PICK_UP_ITEM.format({
             "name": closest_item.item_name,
         })
     )
 
     # Check if user pressed the key to collect
-    if !is_key_just_pressed(key_bindings["interaction"]["collect"]):
+    if !is_key_just_pressed(KEY_BINDINGS["interaction"]["collect"]):
         return false
 
     # Pick up the item
@@ -107,11 +97,11 @@ func detect_item(actions: Array[String]) -> bool:
 
 
 func detect_movement(actions: Array[String]) -> bool:
-    actions.push_back("[color=orange]WASD[/color] Walk")
+    actions.push_back(ACTION_WALK)
 
     var directions := []
-    for direction in key_bindings["movement"]:
-        if Input.is_key_pressed(key_bindings["movement"][direction]):
+    for direction in KEY_BINDINGS["movement"]:
+        if Input.is_key_pressed(KEY_BINDINGS["movement"][direction]):
             directions.append(direction)
 
     ## Cannot move in opposite directions
@@ -127,20 +117,10 @@ func detect_movement(actions: Array[String]) -> bool:
 
 
 func detect_dialogue_action() -> bool:
-    if is_key_just_pressed(key_bindings["interaction"]["cancel"]):
-        event_system.emit("game::dialogue-end", {})
-    elif is_key_just_pressed(key_bindings["interaction"]["interact"]):
-        event_system.emit("game::dialogue-next", {})
-    elif is_key_just_pressed(key_bindings["temp"]["dialogue-op1"]):
-        event_system.emit("game::dialogue-choose", { "choice": 0 })
-    elif is_key_just_pressed(key_bindings["temp"]["dialogue-op2"]):
-        event_system.emit("game::dialogue-choose", { "choice": 1 })
-    elif is_key_just_pressed(key_bindings["temp"]["dialogue-op3"]):
-        event_system.emit("game::dialogue-choose", { "choice": 2 })
-    elif is_key_just_pressed(key_bindings["temp"]["dialogue-op4"]):
-        event_system.emit("game::dialogue-choose", { "choice": 3 })
-    elif is_key_just_pressed(key_bindings["temp"]["dialogue-op5"]):
-        event_system.emit("game::dialogue-choose", { "choice": 4 })
+    if is_key_just_pressed(KEY_BINDINGS["interaction"]["cancel"]):
+        dialogue_system.end_dialogue()
+    elif is_key_just_pressed(KEY_BINDINGS["interaction"]["interact"]):
+        dialogue_system.next_dialogue()
     else:
         return false
     return true
@@ -168,7 +148,7 @@ func _process(delta: float) -> void:
         return
 
     if dialogue_system.in_dialogue():
-        actions.push_back("[color=orange]E[/color] Continue conversation")
+        actions.push_back(ACTION_CONTINUE_DIALOGUE)
         detect_dialogue_action()
     else:
         var interacting = detect_minigame(actions) or detect_dialogue_start(actions)

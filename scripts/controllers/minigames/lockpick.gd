@@ -18,7 +18,6 @@ extends Minigame
 ## Press N to give up and return to the main game.
 
 
-var event_system: EventSystem
 var input_system: InputSystem
 
 
@@ -56,9 +55,9 @@ func start():
 func run(delta: float):
     # Debug
     if input_system.is_key_just_pressed(KEY_M):
-        event_system.emit("game::minigame-end", { "win": true })
-    if input_system.is_key_just_pressed(KEY_N):
-        event_system.emit("game::minigame-end", { "win": false })
+        end_minigame(true)
+    elif input_system.is_key_just_pressed(KEY_N):
+        end_minigame(false)
 
     # Push the pins
     var previous_locks_correct = true
@@ -80,11 +79,10 @@ func run(delta: float):
     # Check if SPACE is pressed
     if input_system.is_key_just_pressed(KEY_SPACE):
         if previous_locks_correct:
-            event_system.emit("game::minigame-end", { "win": true })
+            end_minigame(true)
 
 
 func _ready() -> void:
-    event_system = $/root/game_scene/event_system
     input_system = $/root/game_scene/input_system
     pins.append($pin1)
     pins.append($pin2)
