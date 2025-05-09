@@ -37,4 +37,4 @@ func _ready() -> void:
     proximity_system = $/root/game_scene/proximity_system
     minigame_system = $/root/game_scene/minigame_system
     callback = callback_on_minigame_end.new()
-    proximity_system.register_node("minigame", self, self)
+    proximity_system.register_node("minigame-trigger", self, self)
