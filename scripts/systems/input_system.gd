@@ -2,7 +2,9 @@ extends Node
 class_name InputSystem
 
 var event_system: EventSystem
+var proximity_system: ProximitySystem
 var dialogue_system: DialogueSystem
+var inventory_system: InventorySystem
 var minigame_system: MinigameSystem
 var actions_system: ActionsSystem
 
@@ -46,7 +48,7 @@ func detect_minigame(actions: Array[String]) -> bool:
     var closest_minigame_trigger := minigame_system.get_closest_playable_minigame_trigger()
     if closest_minigame_trigger == null:
         return false
-    actions.push_back("[code]E[/code] Play minigame: " + closest_minigame_trigger.minigame_name)
+    actions.push_back("[color=green]E[/color] Play minigame: " + closest_minigame_trigger.minigame_name)
 
     # Check if user pressed the key to interact
     if !is_key_just_pressed(key_bindings["interaction"]["interact"]):
@@ -63,7 +65,7 @@ func detect_dialogue_start(actions: Array[String]) -> bool:
     var closest_npc := dialogue_system.get_closest_talkable_npc()
     if closest_npc == null:
         return false
-    actions.push_back("[code]E[/code] Talk to " + closest_npc.character_name)
+    actions.push_back("[color=green]E[/color] Talk to " + closest_npc.character_name)
 
     # Check if user pressed the key to interact
     if !is_key_just_pressed(key_bindings["interaction"]["interact"]):
@@ -75,8 +77,25 @@ func detect_dialogue_start(actions: Array[String]) -> bool:
     return true
 
 
+func detect_item(actions: Array[String]) -> bool:
+    # Check if there is an item nearby
+    var closest_item: Item = proximity_system.get_closest_node_with_condition("item", func (node): return node.collectible)
+    if closest_item == null:
+        return false
+    actions.push_back("[color=green]F[/color] Pick up " + closest_item.item_name)
+
+    # Check if user pressed the key to collect
+    if !is_key_just_pressed(key_bindings["interaction"]["collect"]):
+        return false
+
+    # Pick up the item
+    inventory_system.add_item(closest_item.item_name)
+    closest_item.queue_free()
+    return true
+
+
 func detect_movement(actions: Array[String]) -> bool:
-    actions.push_back("[code]WASD[/code] Walk")
+    actions.push_back("[color=green]WASD[/color] Walk")
 
     var directions := []
     for direction in key_bindings["movement"]:
@@ -118,7 +137,9 @@ func detect_dialogue_action() -> bool:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     event_system = $/root/game_scene/event_system
+    proximity_system = $/root/game_scene/proximity_system
     dialogue_system = $/root/game_scene/dialogue_system
+    inventory_system = $/root/game_scene/inventory_system
     minigame_system = $/root/game_scene/minigame_system
     actions_system = $/root/game_scene/actions_system
 
@@ -138,7 +159,10 @@ func _process(delta: float) -> void:
         actions.push_back("[code]E[/code] Continue conversation")
         detect_dialogue_action()
     else:
-        detect_minigame(actions) or detect_dialogue_start(actions) or detect_movement(actions)
+        var interacting = detect_minigame(actions) or detect_dialogue_start(actions)
+        detect_item(actions)
+        if !interacting:
+            detect_movement(actions)
 
     actions_system.update_action_list(actions)
 

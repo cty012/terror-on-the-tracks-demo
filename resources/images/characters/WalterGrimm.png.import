@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dy58isv7c7t0b"
-path="res://.godot/imported/WalterGrimm.png-59e0cad23939bfcbc5e4da37f8c58051.ctex"
+path="res://.godot/imported/WalterGrimm.png-fdf7600f9b9d57f6c8e08f85df62e157.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/images/WalterGrimm.png"
-dest_files=["res://.godot/imported/WalterGrimm.png-59e0cad23939bfcbc5e4da37f8c58051.ctex"]
+source_file="res://resources/images/characters/WalterGrimm.png"
+dest_files=["res://.godot/imported/WalterGrimm.png-fdf7600f9b9d57f6c8e08f85df62e157.ctex"]
 
 [params]
 

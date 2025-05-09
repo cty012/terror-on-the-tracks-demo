@@ -1,7 +1,8 @@
-[gd_scene load_steps=89 format=3 uid="uid://dm21nbrg6aclu"]
+[gd_scene load_steps=93 format=3 uid="uid://dm21nbrg6aclu"]
 
 [ext_resource type="Script" path="res://scripts/controllers/player_controller.gd" id="1_0bvfg"]
 [ext_resource type="Script" path="res://scripts/systems/input_system.gd" id="1_nh1b4"]
+[ext_resource type="Script" path="res://scripts/systems/proximity_system.gd" id="2_3tvrt"]
 [ext_resource type="Script" path="res://scripts/systems/timer_system.gd" id="2_20y6c"]
 [ext_resource type="Script" path="res://scripts/systems/event_system.gd" id="2_c3i0d"]
 [ext_resource type="Script" path="res://scripts/systems/minigame_system.gd" id="3_7al2g"]
@@ -18,14 +19,16 @@
 [ext_resource type="Script" path="res://scripts/controllers/ui_sus_meter_controller.gd" id="10_u7f2y"]
 [ext_resource type="FontFile" uid="uid://bm5nfnlcmuv7r" path="res://resources/fonts/VCR_OSD_MONO_1.001.ttf" id="11_bmoss"]
 [ext_resource type="Script" path="res://scripts/controllers/welcome_mat_controller.gd" id="11_k3sqm"]
-[ext_resource type="Texture2D" uid="uid://cct0w0qhp8pa2" path="res://resources/images/otto.png" id="11_xq84h"]
-[ext_resource type="Texture2D" uid="uid://dhmlx0rjmpc0d" path="res://resources/images/amelia.png" id="12_2wkwq"]
+[ext_resource type="Texture2D" uid="uid://cct0w0qhp8pa2" path="res://resources/images/characters/otto.png" id="11_xq84h"]
+[ext_resource type="Texture2D" uid="uid://dhmlx0rjmpc0d" path="res://resources/images/characters/amelia.png" id="12_2wkwq"]
 [ext_resource type="Shape2D" uid="uid://c7aojc7q6al28" path="res://shapes/mat.tres" id="12_hpof6"]
 [ext_resource type="Script" path="res://scripts/controllers/minigames/lockpick.gd" id="13_ncycx"]
+[ext_resource type="Texture2D" uid="uid://bn1re7fkq5xh6" path="res://resources/images/items/scissor.png" id="16_pmqo8"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_alfred.gd" id="16_tdev3"]
-[ext_resource type="Texture2D" uid="uid://b3vugboa0ykqj" path="res://resources/images/miler.png" id="18_5ligr"]
+[ext_resource type="Shape2D" uid="uid://x3qobnkwyakl" path="res://shapes/items.tres" id="17_jqyam"]
+[ext_resource type="Texture2D" uid="uid://b3vugboa0ykqj" path="res://resources/images/characters/miler.png" id="18_5ligr"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_will.gd" id="18_bgcwb"]
-[ext_resource type="Texture2D" uid="uid://c3on3b3ljc5sx" path="res://resources/images/willDalton.png" id="19_5a7pe"]
+[ext_resource type="Texture2D" uid="uid://c3on3b3ljc5sx" path="res://resources/images/characters/willDalton.png" id="19_5a7pe"]
 [ext_resource type="Script" path="res://scripts/behaviors/movement/movement_walter.gd" id="19_fld4r"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_attendant.gd" id="20_fayim"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_thomas.gd" id="20_gfysw"]
@@ -33,15 +36,16 @@
 [ext_resource type="Script" path="res://scripts/behaviors/movement/movement_amelia.gd" id="22_6ysmg"]
 [ext_resource type="Script" path="res://scripts/behaviors/movement/movement_victoria.gd" id="22_8psrm"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_walter.gd" id="22_b24bu"]
-[ext_resource type="Texture2D" uid="uid://oej3l0kyfn35" path="res://resources/images/attendant.png" id="22_bth0l"]
-[ext_resource type="Texture2D" uid="uid://c886w7bca7hih" path="res://resources/images/clark.png" id="23_0eh7c"]
+[ext_resource type="Texture2D" uid="uid://oej3l0kyfn35" path="res://resources/images/characters/attendant.png" id="22_bth0l"]
+[ext_resource type="Texture2D" uid="uid://c886w7bca7hih" path="res://resources/images/characters/clark.png" id="23_0eh7c"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_amelia.gd" id="24_4udyb"]
 [ext_resource type="Script" path="res://scripts/behaviors/dialogue_tree/dialogue_tree_victoria.gd" id="24_46r2n"]
-[ext_resource type="Texture2D" uid="uid://chs254a054atg" path="res://resources/images/lucy.png" id="24_ptwwg"]
-[ext_resource type="Texture2D" uid="uid://dy58isv7c7t0b" path="res://resources/images/WalterGrimm.png" id="26_j8biy"]
-[ext_resource type="Texture2D" uid="uid://plirqylj6euv" path="res://resources/images/watson.png" id="32_kxttf"]
+[ext_resource type="Texture2D" uid="uid://chs254a054atg" path="res://resources/images/characters/lucy.png" id="24_ptwwg"]
+[ext_resource type="Texture2D" uid="uid://dy58isv7c7t0b" path="res://resources/images/characters/WalterGrimm.png" id="26_j8biy"]
+[ext_resource type="Texture2D" uid="uid://plirqylj6euv" path="res://resources/images/characters/watson.png" id="32_kxttf"]
 [ext_resource type="Script" path="res://scripts/controllers/minigame_trigger_controller.gd" id="36_se64d"]
 [ext_resource type="Script" path="res://scripts/behaviors/minigame_trigger_callbacks/door_lock_in_third_car.gd" id="37_widnv"]
+[ext_resource type="Script" path="res://scripts/controllers/item_controller.gd" id="39_sbbpi"]
 
 [sub_resource type="GDScript" id="GDScript_palwq"]
 script/source = "extends Control
@@ -177,6 +181,9 @@ radius = 60.0
 [node name="event_system" type="Node" parent="."]
 script = ExtResource("2_c3i0d")
 
+[node name="proximity_system" type="Node" parent="."]
+script = ExtResource("2_3tvrt")
+
 [node name="game_state_system" type="Node" parent="."]
 script = ExtResource("3_s2ld2")
 
@@ -189,6 +196,9 @@ script = ExtResource("4_ghhox")
 
 [node name="inventory_system" type="Node" parent="."]
 script = ExtResource("3_ebimh")
+ALL_ITEMS = {
+"scissors": ExtResource("16_pmqo8")
+}
 
 [node name="minigame_system" type="Node" parent="."]
 script = ExtResource("3_7al2g")
@@ -370,7 +380,7 @@ offset_top = -180.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="item-list" type="GridContainer" parent="camera/hud/inventory/panel"]
+[node name="item_list" type="GridContainer" parent="camera/hud/inventory/panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -385,67 +395,8 @@ theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 5
 columns = 7
 
-[node name="Panel" type="Panel" parent="camera/hud/inventory/panel/item-list"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="Panel2" type="Panel" parent="camera/hud/inventory/panel/item-list"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="Panel3" type="Panel" parent="camera/hud/inventory/panel/item-list"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="Panel4" type="Panel" parent="camera/hud/inventory/panel/item-list"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="Panel5" type="Panel" parent="camera/hud/inventory/panel/item-list"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="Panel6" type="Panel" parent="camera/hud/inventory/panel/item-list"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="Panel7" type="Panel" parent="camera/hud/inventory/panel/item-list"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="Panel8" type="Panel" parent="camera/hud/inventory/panel/item-list"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="Panel9" type="Panel" parent="camera/hud/inventory/panel/item-list"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="Panel10" type="Panel" parent="camera/hud/inventory/panel/item-list"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="Panel11" type="Panel" parent="camera/hud/inventory/panel/item-list"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="Panel12" type="Panel" parent="camera/hud/inventory/panel/item-list"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="Panel13" type="Panel" parent="camera/hud/inventory/panel/item-list"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="Panel14" type="Panel" parent="camera/hud/inventory/panel/item-list"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="Panel15" type="Panel" parent="camera/hud/inventory/panel/item-list"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
 [node name="player" type="CharacterBody2D" parent="."]
+z_index = 10
 script = ExtResource("1_0bvfg")
 
 [node name="sprite" type="Sprite2D" parent="player"]
@@ -456,6 +407,7 @@ shape = SubResource("CircleShape2D_cdq3x")
 [node name="npc" type="Node" parent="."]
 
 [node name="alfred" type="CharacterBody2D" parent="npc"]
+z_index = 9
 position = Vector2(450, -250)
 script = ExtResource("7_x2f58")
 character_name = "Alfred"
@@ -474,6 +426,7 @@ script = ExtResource("9_6tywj")
 shape = SubResource("CircleShape2D_01ogc")
 
 [node name="will" type="CharacterBody2D" parent="npc"]
+z_index = 9
 position = Vector2(400, 250)
 script = ExtResource("7_x2f58")
 character_name = "Will"
@@ -492,6 +445,7 @@ script = ExtResource("9_6tywj")
 shape = SubResource("CircleShape2D_01ogc")
 
 [node name="thomas" type="CharacterBody2D" parent="npc"]
+z_index = 9
 position = Vector2(200, 250)
 script = ExtResource("7_x2f58")
 character_name = "Thomas"
@@ -510,6 +464,7 @@ script = ExtResource("9_6tywj")
 shape = SubResource("CircleShape2D_01ogc")
 
 [node name="attendant" type="CharacterBody2D" parent="npc"]
+z_index = 9
 position = Vector2(750, -250)
 script = ExtResource("7_x2f58")
 character_name = "Train Attendant"
@@ -528,6 +483,7 @@ script = ExtResource("9_6tywj")
 shape = SubResource("CircleShape2D_01ogc")
 
 [node name="lucy" type="CharacterBody2D" parent="npc"]
+z_index = 9
 position = Vector2(1390, 10)
 script = ExtResource("7_x2f58")
 character_name = "Lucy"
@@ -547,6 +503,7 @@ position = Vector2(-90, 80)
 shape = SubResource("CircleShape2D_01ogc")
 
 [node name="walter" type="CharacterBody2D" parent="npc"]
+z_index = 9
 position = Vector2(-1200, 120)
 script = ExtResource("7_x2f58")
 character_name = "Walter"
@@ -566,6 +523,7 @@ script = ExtResource("9_6tywj")
 shape = SubResource("CircleShape2D_01ogc")
 
 [node name="victoria" type="CharacterBody2D" parent="npc"]
+z_index = 9
 position = Vector2(-400, 250)
 script = ExtResource("7_x2f58")
 character_name = "Victoria"
@@ -585,6 +543,7 @@ script = ExtResource("9_6tywj")
 shape = SubResource("CircleShape2D_01ogc")
 
 [node name="amelia" type="CharacterBody2D" parent="npc"]
+z_index = 9
 position = Vector2(1650, 200)
 script = ExtResource("7_x2f58")
 character_name = "Amelia"
@@ -602,6 +561,20 @@ script = ExtResource("9_6tywj")
 
 [node name="collision" type="CollisionShape2D" parent="npc/amelia/dialogue_range"]
 shape = SubResource("CircleShape2D_01ogc")
+
+[node name="items" type="Node" parent="."]
+
+[node name="scissors" type="Area2D" parent="items"]
+position = Vector2(1680, -250)
+script = ExtResource("39_sbbpi")
+item_name = "scissors"
+
+[node name="sprite" type="Sprite2D" parent="items/scissors"]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("16_pmqo8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="items/scissors"]
+shape = ExtResource("17_jqyam")
 
 [node name="car0" type="Node" parent="."]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chs254a054atg"
-path="res://.godot/imported/lucy.png-cde32b2eda5f7c76d9b0b0326f76528f.ctex"
+uid="uid://c3on3b3ljc5sx"
+path="res://.godot/imported/willDalton.png-4f2f63dac0b3cd673f57b383e0e1c1df.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/images/lucy.png"
-dest_files=["res://.godot/imported/lucy.png-cde32b2eda5f7c76d9b0b0326f76528f.ctex"]
+source_file="res://resources/images/characters/willDalton.png"
+dest_files=["res://.godot/imported/willDalton.png-4f2f63dac0b3cd673f57b383e0e1c1df.ctex"]
 
 [params]
 

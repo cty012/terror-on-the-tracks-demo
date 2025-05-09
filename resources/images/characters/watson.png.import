@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3vugboa0ykqj"
-path="res://.godot/imported/miler.png-a9424927502b4db12bb18c919e492105.ctex"
+uid="uid://plirqylj6euv"
+path="res://.godot/imported/watson.png-7484dff8467c416e7879eb9b7d2965d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/images/miler.png"
-dest_files=["res://.godot/imported/miler.png-a9424927502b4db12bb18c919e492105.ctex"]
+source_file="res://resources/images/characters/watson.png"
+dest_files=["res://.godot/imported/watson.png-7484dff8467c416e7879eb9b7d2965d7.ctex"]
 
 [params]
 

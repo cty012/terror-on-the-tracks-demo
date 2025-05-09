@@ -30,7 +30,7 @@ func get_closest_playable_minigame_trigger() -> MinigameTrigger:
     return closest_minigame_trigger
 
 
-func on_minigame_start(event):
+func on_minigame_started(event):
     # Must not have a currently active minigame
     if current_minigame != null:
         return
@@ -54,18 +54,18 @@ func on_minigame_start(event):
         current_minigame.start()
 
 
-func on_minigame_end(event):
+func on_minigame_ended(event):
     current_minigame = null
     if current_minigame_trigger != null:
         current_minigame_trigger.on_minigame_end(event["win"])
     default_camera.make_current()
 
 
-func on_minigame_trigger_enter(minigame_trigger: Area2D):
+func on_minigame_trigger_entered(minigame_trigger: Area2D):
     minigame_triggers_in_range.append(minigame_trigger)
 
 
-func on_minigame_trigger_exit(minigame_trigger: Area2D):
+func on_minigame_trigger_exited(minigame_trigger: Area2D):
     minigame_triggers_in_range.erase(minigame_trigger)
 
 
@@ -74,8 +74,8 @@ func _ready() -> void:
     event_system = $/root/game_scene/event_system
     player = $/root/game_scene/player
     default_camera = $/root/game_scene/camera
-    lsid_minigame_start = event_system.add_listener("game::minigame-start", on_minigame_start)
-    lsid_minigame_end = event_system.add_listener("game::minigame-end", on_minigame_end)
+    lsid_minigame_start = event_system.add_listener("game::minigame-start", on_minigame_started)
+    lsid_minigame_end = event_system.add_listener("game::minigame-end", on_minigame_ended)
 
 
 func _exit_tree() -> void:

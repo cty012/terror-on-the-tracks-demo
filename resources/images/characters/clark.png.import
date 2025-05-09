@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cct0w0qhp8pa2"
-path="res://.godot/imported/otto.png-f62f99986c213310ac98e78266d28414.ctex"
+uid="uid://c886w7bca7hih"
+path="res://.godot/imported/clark.png-eb35d794e6bb5627367bd7146cba514f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/images/otto.png"
-dest_files=["res://.godot/imported/otto.png-f62f99986c213310ac98e78266d28414.ctex"]
+source_file="res://resources/images/characters/clark.png"
+dest_files=["res://.godot/imported/clark.png-eb35d794e6bb5627367bd7146cba514f.ctex"]
 
 [params]
 

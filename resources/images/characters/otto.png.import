@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3on3b3ljc5sx"
-path="res://.godot/imported/willDalton.png-556b9d2c7b7124c071f567a984fc7892.ctex"
+uid="uid://cct0w0qhp8pa2"
+path="res://.godot/imported/otto.png-c73f4519462305498fe6b114d9997bf1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/images/willDalton.png"
-dest_files=["res://.godot/imported/willDalton.png-556b9d2c7b7124c071f567a984fc7892.ctex"]
+source_file="res://resources/images/characters/otto.png"
+dest_files=["res://.godot/imported/otto.png-c73f4519462305498fe6b114d9997bf1.ctex"]
 
 [params]
 

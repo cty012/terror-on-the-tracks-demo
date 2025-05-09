@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c886w7bca7hih"
-path="res://.godot/imported/clark.png-67066726bee36bddc180f9eba332f50d.ctex"
+uid="uid://chs254a054atg"
+path="res://.godot/imported/lucy.png-62b6b31f901cd11dcd4486dea7ae48a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/images/clark.png"
-dest_files=["res://.godot/imported/clark.png-67066726bee36bddc180f9eba332f50d.ctex"]
+source_file="res://resources/images/characters/lucy.png"
+dest_files=["res://.godot/imported/lucy.png-62b6b31f901cd11dcd4486dea7ae48a9.ctex"]
 
 [params]
 

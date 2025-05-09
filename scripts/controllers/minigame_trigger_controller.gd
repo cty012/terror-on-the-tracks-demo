@@ -21,12 +21,12 @@ var callback: MinigameTriggerCallback = null
 
 func _on_body_entered(body: Node) -> void:
     if body.name == "player":
-        minigame_system.on_minigame_trigger_enter(self)
+        minigame_system.on_minigame_trigger_entered(self)
 
 
 func _on_body_exited(body: Node) -> void:
     if body.name == "player":
-        minigame_system.on_minigame_trigger_exit(self)
+        minigame_system.on_minigame_trigger_exited(self)
 
 
 func on_minigame_end(win: bool) -> void:

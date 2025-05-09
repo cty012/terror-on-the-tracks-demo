@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://plirqylj6euv"
-path="res://.godot/imported/watson.png-f3d7aae43038975ca4ee67e4d89ed02e.ctex"
+uid="uid://bn1re7fkq5xh6"
+path="res://.godot/imported/scissor.png-e6bad2e5c86d5996b397625e34997717.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/images/watson.png"
-dest_files=["res://.godot/imported/watson.png-f3d7aae43038975ca4ee67e4d89ed02e.ctex"]
+source_file="res://resources/images/items/scissor.png"
+dest_files=["res://.godot/imported/scissor.png-e6bad2e5c86d5996b397625e34997717.ctex"]
 
 [params]
 
